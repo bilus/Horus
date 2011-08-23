@@ -1,0 +1,56 @@
+%html
+	%head
+		%title Echo SSE demo
+		%script{:type => "text/javascript", :src => "javascripts/jquery-1.6.2.min.js"}
+		%script{:type => "text/javascript", :src => "javascripts/EventSource.js"}
+		:javascript
+		
+			// DO NOT USE IN PRODUCTION!
+			function receiveMessages(url, onmessage) {
+				// Global object -- this function cannot be used with multiple feeds.
+				this.es = new EventSource(url);
+				this.es.onmessage = function (event) {
+					  onmessage(event.data);
+					};		
+			};
+			
+			function addTile() {
+				var s = $('input#tile').val();
+				$.post("/add_tile", {tile: s});
+			};
+			
+			$(document).ready(function() {
+				$('#tile').bind('keypress', function(e) {
+				        if (e.which == 13)
+							addTile();
+				});
+			
+				$('#add').bind('click', function() {
+					addTile();
+				});
+
+				receiveMessages('/story_events', function(message) {
+					$('#board').html(message);
+				});
+			});
+			
+		%style{:type => "text/css", :media => "screen"}
+			:plain
+				#board {
+					text-transform: uppercase;
+					border: 1px solid green;
+					padding: 10px;
+					margin-bottom: 10px;
+				}
+				#add {
+					height: 25px;
+				}
+				#tile {
+					height: 25px;
+				}
+			
+	%body
+		#board
+		%span Type a word:
+		%input{:id => "tile", :name => "tile", :type => "text"}
+		%button{:id => "add", :name => "add"}Add to board

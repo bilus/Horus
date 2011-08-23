@@ -1,0 +1,8 @@
+1. First, create cucumber scenario.
+2. Second, implement in cramp as if the objects were there.
+3. Third, write specs for the objects.
+4. Fourth, make specs pass.
+5. Fifth, make cucumber pass.
+
+----
+

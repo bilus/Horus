@@ -1,0 +1,556 @@
+>> Writing PID to tmp/pids/thin.3000.pid
+>> Using rack adapter
+>> Thin web server (v1.2.11 codename Bat-Shit Crazy)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+127.0.0.1 - - [23/Aug/2011 20:36:56] "GET  HTTP/1.1" 200 - 0.0559
+127.0.0.1 - - [23/Aug/2011 20:36:56] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0206
+127.0.0.1 - - [23/Aug/2011 20:36:56] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0092
+127.0.0.1 - - [23/Aug/2011 20:36:56] "GET /favicon.ico HTTP/1.1" 404 30 0.0259
+127.0.0.1 - - [23/Aug/2011 20:36:56] "GET  HTTP/1.1" 200 - 0.0377
+127.0.0.1 - - [23/Aug/2011 20:36:59] "GET /favicon.ico HTTP/1.1" 404 30 0.0082
+>> Writing PID to tmp/pids/thin.3000.pid
+>> Using rack adapter
+>> Thin web server (v1.2.11 codename Bat-Shit Crazy)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+127.0.0.1 - - [23/Aug/2011 21:11:26] "GET  HTTP/1.1" 200 - 0.0790
+SyntaxError: app/views/index.haml:51: syntax error, unexpected ')', expecting tSTRING_CONTENT or tSTRING_DBEG or tSTRING_DVAR or tSTRING_END
+...ibutes({"id"=>"board"}, nil, :)}></div>\n    <p>Type a word<...
+...                               ^
+app/views/index.haml:51: unknown regexp option - p
+app/views/index.haml:51: syntax error, unexpected $undefined
+...</div>\n    <p>Type a word</p>\n    <input id='tile' name='t...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+...>Type a word</p>\n    <input id='tile' name='tile' type='tex...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...</p>\n    <input id='tile' name='tile' type='text' />\n    <...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...nput id='tile' name='tile' type='text' />\n    <button id='a...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected '>'
+...ile' name='tile' type='text' />\n    <button id='add' name='...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+... type='text' />\n    <button id='add' name='add'>Add</button...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...' />\n    <button id='add' name='add'>Add</button>\n  </body...
+...                               ^
+app/views/index.haml:51: unknown regexp options - bdy
+app/views/index.haml:51: syntax error, unexpected $undefined
+...='add'>Add</button>\n  </body>\n</html>\n", -2, false);
+...                               ^
+app/views/index.haml:51: unterminated regexp meets end of file
+app/views/index.haml:51: syntax error, unexpected $end, expecting '}'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `instance_eval'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `evaluate_source'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:144:in `cached_evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:127:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/haml.rb:24:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:76:in `render'
+	/Users/martinb/dev/horus/app/actions/frontend/home_action.rb:9:in `render_home'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:45:in `block (2 levels) in on_start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:58:in `block in callback_wrapper'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `call'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `block in run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `each'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run_machine'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/backends/base.rb:61:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/server.rb:159:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:185:in `run_command'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:151:in `run!'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/bin/thin:6:in `<top (required)>'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `load'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `<main>'
+127.0.0.1 - - [23/Aug/2011 21:11:26] "GET /favicon.ico HTTP/1.1" 404 30 0.0484
+127.0.0.1 - - [23/Aug/2011 21:11:31] "GET  HTTP/1.1" 200 - 0.0178
+SyntaxError: app/views/index.haml:51: syntax error, unexpected ')', expecting tSTRING_CONTENT or tSTRING_DBEG or tSTRING_DVAR or tSTRING_END
+...ibutes({"id"=>"board"}, nil, :)}></div>\n    <p>Type a word<...
+...                               ^
+app/views/index.haml:51: unknown regexp option - p
+app/views/index.haml:51: syntax error, unexpected $undefined
+...</div>\n    <p>Type a word</p>\n    <input id='tile' name='t...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+...>Type a word</p>\n    <input id='tile' name='tile' type='tex...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...</p>\n    <input id='tile' name='tile' type='text' />\n    <...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...nput id='tile' name='tile' type='text' />\n    <button id='a...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected '>'
+...ile' name='tile' type='text' />\n    <button id='add' name='...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+... type='text' />\n    <button id='add' name='add'>Add</button...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...' />\n    <button id='add' name='add'>Add</button>\n  </body...
+...                               ^
+app/views/index.haml:51: unknown regexp options - bdy
+app/views/index.haml:51: syntax error, unexpected $undefined
+...='add'>Add</button>\n  </body>\n</html>\n", -2, false);
+...                               ^
+app/views/index.haml:51: unterminated regexp meets end of file
+app/views/index.haml:51: syntax error, unexpected $end, expecting '}'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `instance_eval'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `evaluate_source'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:144:in `cached_evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:127:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/haml.rb:24:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:76:in `render'
+	/Users/martinb/dev/horus/app/actions/frontend/home_action.rb:9:in `render_home'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:45:in `block (2 levels) in on_start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:58:in `block in callback_wrapper'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `call'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `block in run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `each'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run_machine'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/backends/base.rb:61:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/server.rb:159:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:185:in `run_command'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:151:in `run!'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/bin/thin:6:in `<top (required)>'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `load'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `<main>'
+127.0.0.1 - - [23/Aug/2011 21:11:31] "GET /favicon.ico HTTP/1.1" 404 30 0.0110
+127.0.0.1 - - [23/Aug/2011 21:11:38] "GET  HTTP/1.1" 200 - 0.0475
+SyntaxError: app/views/index.haml:51: syntax error, unexpected ')', expecting tSTRING_CONTENT or tSTRING_DBEG or tSTRING_DVAR or tSTRING_END
+...ibutes({"id"=>"board"}, nil, :)}></div>\n    <p>Type a word<...
+...                               ^
+app/views/index.haml:51: unknown regexp option - p
+app/views/index.haml:51: syntax error, unexpected $undefined
+...</div>\n    <p>Type a word</p>\n    <input id='tile' name='t...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+...>Type a word</p>\n    <input id='tile' name='tile' type='tex...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...</p>\n    <input id='tile' name='tile' type='text' />\n    <...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...nput id='tile' name='tile' type='text' />\n    <button id='a...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected '>'
+...ile' name='tile' type='text' />\n    <button id='add' name='...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+... type='text' />\n    <button id='add' name='add'>Add</button...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...' />\n    <button id='add' name='add'>Add</button>\n  </body...
+...                               ^
+app/views/index.haml:51: unknown regexp options - bdy
+app/views/index.haml:51: syntax error, unexpected $undefined
+...='add'>Add</button>\n  </body>\n</html>\n", -2, false);
+...                               ^
+app/views/index.haml:51: unterminated regexp meets end of file
+app/views/index.haml:51: syntax error, unexpected $end, expecting '}'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `instance_eval'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `evaluate_source'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:144:in `cached_evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:127:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/haml.rb:24:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:76:in `render'
+	/Users/martinb/dev/horus/app/actions/frontend/home_action.rb:9:in `render_home'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:45:in `block (2 levels) in on_start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:58:in `block in callback_wrapper'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `call'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `block in run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `each'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run_machine'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/backends/base.rb:61:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/server.rb:159:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:185:in `run_command'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:151:in `run!'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/bin/thin:6:in `<top (required)>'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `load'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `<main>'
+127.0.0.1 - - [23/Aug/2011 21:11:38] "GET /favicon.ico HTTP/1.1" 404 30 0.0104
+127.0.0.1 - - [23/Aug/2011 21:11:48] "GET  HTTP/1.1" 200 - 0.0113
+SyntaxError: app/views/index.haml:51: syntax error, unexpected ')', expecting tSTRING_CONTENT or tSTRING_DBEG or tSTRING_DVAR or tSTRING_END
+...ibutes({"id"=>"board"}, nil, :)}></div>\n    <p>Type a word<...
+...                               ^
+app/views/index.haml:51: unknown regexp option - p
+app/views/index.haml:51: syntax error, unexpected $undefined
+...</div>\n    <p>Type a word</p>\n    <input id='tile' name='t...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+...>Type a word</p>\n    <input id='tile' name='tile' type='tex...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...</p>\n    <input id='tile' name='tile' type='text' />\n    <...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...nput id='tile' name='tile' type='text' />\n    <button id='a...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected '>'
+...ile' name='tile' type='text' />\n    <button id='add' name='...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+... type='text' />\n    <button id='add' name='add'>Add</button...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...' />\n    <button id='add' name='add'>Add</button>\n  </body...
+...                               ^
+app/views/index.haml:51: unknown regexp options - bdy
+app/views/index.haml:51: syntax error, unexpected $undefined
+...='add'>Add</button>\n  </body>\n</html>\n", -2, false);
+...                               ^
+app/views/index.haml:51: unterminated regexp meets end of file
+app/views/index.haml:51: syntax error, unexpected $end, expecting '}'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `instance_eval'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `evaluate_source'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:144:in `cached_evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:127:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/haml.rb:24:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:76:in `render'
+	/Users/martinb/dev/horus/app/actions/frontend/home_action.rb:9:in `render_home'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:45:in `block (2 levels) in on_start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:58:in `block in callback_wrapper'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `call'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `block in run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `each'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run_machine'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/backends/base.rb:61:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/server.rb:159:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:185:in `run_command'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:151:in `run!'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/bin/thin:6:in `<top (required)>'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `load'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `<main>'
+127.0.0.1 - - [23/Aug/2011 21:11:48] "GET /favicon.ico HTTP/1.1" 404 30 0.0104
+127.0.0.1 - - [23/Aug/2011 21:12:02] "GET  HTTP/1.1" 200 - 0.0097
+SyntaxError: app/views/index.haml:51: syntax error, unexpected ')', expecting tSTRING_CONTENT or tSTRING_DBEG or tSTRING_DVAR or tSTRING_END
+...ibutes({"id"=>"board"}, nil, :)}></div>\n    <p>Type a word<...
+...                               ^
+app/views/index.haml:51: unknown regexp option - p
+app/views/index.haml:51: syntax error, unexpected $undefined
+...</div>\n    <p>Type a word</p>\n    <input id='tile' name='t...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+...>Type a word</p>\n    <input id='tile' name='tile' type='tex...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...</p>\n    <input id='tile' name='tile' type='text' />\n    <...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...nput id='tile' name='tile' type='text' />\n    <button id='a...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected '>'
+...ile' name='tile' type='text' />\n    <button id='add' name='...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+... type='text' />\n    <button id='add' name='add'>Add</button...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...' />\n    <button id='add' name='add'>Add</button>\n  </body...
+...                               ^
+app/views/index.haml:51: unknown regexp options - bdy
+app/views/index.haml:51: syntax error, unexpected $undefined
+...='add'>Add</button>\n  </body>\n</html>\n", -2, false);
+...                               ^
+app/views/index.haml:51: unterminated regexp meets end of file
+app/views/index.haml:51: syntax error, unexpected $end, expecting '}'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `instance_eval'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `evaluate_source'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:144:in `cached_evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:127:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/haml.rb:24:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:76:in `render'
+	/Users/martinb/dev/horus/app/actions/frontend/home_action.rb:9:in `render_home'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:45:in `block (2 levels) in on_start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:58:in `block in callback_wrapper'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `call'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `block in run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `each'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run_machine'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/backends/base.rb:61:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/server.rb:159:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:185:in `run_command'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:151:in `run!'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/bin/thin:6:in `<top (required)>'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `load'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `<main>'
+127.0.0.1 - - [23/Aug/2011 21:12:02] "GET /favicon.ico HTTP/1.1" 404 30 0.0157
+127.0.0.1 - - [23/Aug/2011 21:12:05] "GET  HTTP/1.1" 200 - 0.0111
+SyntaxError: app/views/index.haml:51: syntax error, unexpected ')', expecting tSTRING_CONTENT or tSTRING_DBEG or tSTRING_DVAR or tSTRING_END
+...ibutes({"id"=>"board"}, nil, :)}></div>\n    <p>Type a word<...
+...                               ^
+app/views/index.haml:51: unknown regexp option - p
+app/views/index.haml:51: syntax error, unexpected $undefined
+...</div>\n    <p>Type a word</p>\n    <input id='tile' name='t...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+...>Type a word</p>\n    <input id='tile' name='tile' type='tex...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...</p>\n    <input id='tile' name='tile' type='text' />\n    <...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...nput id='tile' name='tile' type='text' />\n    <button id='a...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected '>'
+...ile' name='tile' type='text' />\n    <button id='add' name='...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+... type='text' />\n    <button id='add' name='add'>Add</button...
+...                               ^
+app/views/index.haml:51: syntax error, unexpected tIDENTIFIER, expecting '}'
+...' />\n    <button id='add' name='add'>Add</button>\n  </body...
+...                               ^
+app/views/index.haml:51: unknown regexp options - bdy
+app/views/index.haml:51: syntax error, unexpected $undefined
+...='add'>Add</button>\n  </body>\n</html>\n", -2, false);
+...                               ^
+app/views/index.haml:51: unterminated regexp meets end of file
+app/views/index.haml:51: syntax error, unexpected $end, expecting '}'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `instance_eval'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:209:in `evaluate_source'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:144:in `cached_evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:127:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/haml.rb:24:in `evaluate'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/tilt-1.3.2/lib/tilt/template.rb:76:in `render'
+	/Users/martinb/dev/horus/app/actions/frontend/home_action.rb:9:in `render_home'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:45:in `block (2 levels) in on_start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:58:in `block in callback_wrapper'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `call'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `block in run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `each'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run_machine'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/backends/base.rb:61:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/server.rb:159:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:185:in `run_command'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:151:in `run!'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/bin/thin:6:in `<top (required)>'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `load'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `<main>'
+127.0.0.1 - - [23/Aug/2011 21:12:05] "GET /favicon.ico HTTP/1.1" 404 30 0.0120
+127.0.0.1 - - [23/Aug/2011 21:12:08] "GET /favicon.ico HTTP/1.1" 404 30 0.0086
+127.0.0.1 - - [23/Aug/2011 21:12:43] "GET  HTTP/1.1" 200 - 0.0268
+127.0.0.1 - - [23/Aug/2011 21:12:43] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.1167
+127.0.0.1 - - [23/Aug/2011 21:12:43] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0836
+127.0.0.1 - - [23/Aug/2011 21:12:43] "GET  HTTP/1.1" 200 - 0.0122
+127.0.0.1 - - [23/Aug/2011 21:12:55] "GET  HTTP/1.1" 200 - 0.0100
+127.0.0.1 - - [23/Aug/2011 21:12:55] "GET /favicon.ico HTTP/1.1" 404 30 0.0170
+127.0.0.1 - - [23/Aug/2011 21:12:56] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.9464
+127.0.0.1 - - [23/Aug/2011 21:12:56] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0353
+127.0.0.1 - - [23/Aug/2011 21:12:56] "GET  HTTP/1.1" 200 - 0.0104
+127.0.0.1 - - [23/Aug/2011 21:13:11] "GET  HTTP/1.1" 200 - 0.0124
+127.0.0.1 - - [23/Aug/2011 21:13:13] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 1.2615
+127.0.0.1 - - [23/Aug/2011 21:13:13] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.2793
+127.0.0.1 - - [23/Aug/2011 21:13:13] "GET  HTTP/1.1" 200 - 0.0084
+127.0.0.1 - - [23/Aug/2011 21:13:41] "GET  HTTP/1.1" 200 - 0.0099
+127.0.0.1 - - [23/Aug/2011 21:13:41] "GET /favicon.ico HTTP/1.1" 404 30 0.0270
+127.0.0.1 - - [23/Aug/2011 21:13:42] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0226
+127.0.0.1 - - [23/Aug/2011 21:13:42] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0550
+127.0.0.1 - - [23/Aug/2011 21:13:42] "GET  HTTP/1.1" 200 - 0.0141
+127.0.0.1 - - [23/Aug/2011 21:13:54] "GET  HTTP/1.1" 200 - 0.0316
+127.0.0.1 - - [23/Aug/2011 21:13:54] "GET /favicon.ico HTTP/1.1" 404 30 0.0124
+127.0.0.1 - - [23/Aug/2011 21:13:54] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0338
+127.0.0.1 - - [23/Aug/2011 21:13:54] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0149
+127.0.0.1 - - [23/Aug/2011 21:13:54] "GET  HTTP/1.1" 200 - 0.0219
+127.0.0.1 - - [23/Aug/2011 21:14:00] "POST  HTTP/1.1" 200 - 0.0103
+> 
+Rack::Reloader: reloaded `/Users/martinb/dev/horus/app/actions/api/add_tile_action.rb'
+127.0.0.1 - - [23/Aug/2011 21:14:47] "POST  HTTP/1.1" 200 - 0.0095
+NameError: undefined local variable or method `msg' for #<AddTileAction:0x000001018b4078>
+	/Users/martinb/dev/horus/app/actions/api/add_tile_action.rb:7:in `queue_received_message'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:45:in `block (2 levels) in on_start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:58:in `block in callback_wrapper'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `call'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `block in run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `each'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run_machine'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/backends/base.rb:61:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/server.rb:159:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:185:in `run_command'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:151:in `run!'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/bin/thin:6:in `<top (required)>'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `load'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `<main>'
+127.0.0.1 - - [23/Aug/2011 21:14:55] "POST  HTTP/1.1" 200 - 0.0075
+NameError: undefined local variable or method `msg' for #<AddTileAction:0x00000100c35928>
+	/Users/martinb/dev/horus/app/actions/api/add_tile_action.rb:7:in `queue_received_message'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:45:in `block (2 levels) in on_start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:58:in `block in callback_wrapper'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `call'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `block in run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `each'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run_machine'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/backends/base.rb:61:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/server.rb:159:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:185:in `run_command'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:151:in `run!'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/bin/thin:6:in `<top (required)>'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `load'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `<main>'
+>> Waiting for 1 connection(s) to finish, can take up to 30 sec, CTRL+C to stop now
+>> Writing PID to tmp/pids/thin.3000.pid
+>> Thin web server (v1.2.11 codename Bat-Shit Crazy)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:3000, CTRL+C to stop
+127.0.0.1 - - [23/Aug/2011 21:16:05] "POST  HTTP/1.1" 200 - 0.0453
+NameError: undefined local variable or method `msg' for #<AddTileAction:0x0000010116d828>
+	/Users/martinb/dev/horus/app/actions/api/add_tile_action.rb:7:in `queue_received_message'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:45:in `block (2 levels) in on_start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/cramp-0.15/lib/cramp/callbacks.rb:58:in `block in callback_wrapper'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `call'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:944:in `block in run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `each'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:941:in `run_deferred_callbacks'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run_machine'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/eventmachine-1.0.0.beta.3/lib/eventmachine.rb:199:in `run'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/backends/base.rb:61:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/server.rb:159:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/controllers/controller.rb:86:in `start'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:185:in `run_command'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/lib/thin/runner.rb:151:in `run!'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/gems/thin-1.2.11/bin/thin:6:in `<top (required)>'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `load'
+	/Users/martinb/.rvm/gems/ruby-1.9.2-p290/bin/thin:19:in `<main>'
+Rack::Reloader: reloaded `/Users/martinb/dev/horus/app/actions/api/add_tile_action.rb'
+127.0.0.1 - - [23/Aug/2011 21:16:21] "POST  HTTP/1.1" 200 - 0.0089
+> eu
+127.0.0.1 - - [23/Aug/2011 21:16:30] "GET  HTTP/1.1" 200 - 0.0076
+127.0.0.1 - - [23/Aug/2011 21:16:30] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0108
+127.0.0.1 - - [23/Aug/2011 21:16:30] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0082
+127.0.0.1 - - [23/Aug/2011 21:16:30] "GET  HTTP/1.1" 200 - 0.0334
+101 117 < eu
+127.0.0.1 - - [23/Aug/2011 21:16:33] "POST  HTTP/1.1" 200 - 0.0077
+> uu
+117 117 < uu
+127.0.0.1 - - [23/Aug/2011 21:16:37] "POST  HTTP/1.1" 200 - 0.0073
+> Kocham 
+75 111 99 104 97 109 32 < Kocham 
+127.0.0.1 - - [23/Aug/2011 21:16:42] "POST  HTTP/1.1" 200 - 0.0075
+> Kocham ewelinkę
+75 111 99 104 97 109 32 101 119 101 108 105 110 107 196 153 < Kocham ewelinkę
+127.0.0.1 - - [23/Aug/2011 21:17:18] "GET  HTTP/1.1" 200 - 0.0074
+127.0.0.1 - - [23/Aug/2011 21:17:18] "GET /favicon.ico HTTP/1.1" 404 30 0.0190
+127.0.0.1 - - [23/Aug/2011 21:17:18] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0121
+127.0.0.1 - - [23/Aug/2011 21:17:18] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0085
+127.0.0.1 - - [23/Aug/2011 21:17:18] "GET  HTTP/1.1" 200 - 0.0083
+127.0.0.1 - - [23/Aug/2011 21:17:31] "GET  HTTP/1.1" 200 - 0.0080
+127.0.0.1 - - [23/Aug/2011 21:17:31] "GET /favicon.ico HTTP/1.1" 404 30 0.0081
+127.0.0.1 - - [23/Aug/2011 21:17:31] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0090
+127.0.0.1 - - [23/Aug/2011 21:17:31] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0078
+127.0.0.1 - - [23/Aug/2011 21:17:31] "GET  HTTP/1.1" 200 - 0.0082
+127.0.0.1 - - [23/Aug/2011 21:17:49] "GET  HTTP/1.1" 200 - 0.0075
+127.0.0.1 - - [23/Aug/2011 21:17:49] "GET /favicon.ico HTTP/1.1" 404 30 0.0141
+127.0.0.1 - - [23/Aug/2011 21:17:49] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0135
+127.0.0.1 - - [23/Aug/2011 21:17:49] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0096
+127.0.0.1 - - [23/Aug/2011 21:17:49] "GET  HTTP/1.1" 200 - 0.0346
+127.0.0.1 - - [23/Aug/2011 21:17:53] "GET  HTTP/1.1" 200 - 0.0159
+127.0.0.1 - - [23/Aug/2011 21:17:53] "GET /favicon.ico HTTP/1.1" 404 30 0.0152
+127.0.0.1 - - [23/Aug/2011 21:17:53] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0182
+127.0.0.1 - - [23/Aug/2011 21:17:53] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0091
+127.0.0.1 - - [23/Aug/2011 21:17:53] "GET  HTTP/1.1" 200 - 0.0097
+127.0.0.1 - - [23/Aug/2011 21:17:54] "GET  HTTP/1.1" 200 - 0.0081
+127.0.0.1 - - [23/Aug/2011 21:17:54] "GET /favicon.ico HTTP/1.1" 404 30 0.0102
+127.0.0.1 - - [23/Aug/2011 21:17:54] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0175
+127.0.0.1 - - [23/Aug/2011 21:17:54] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0338
+127.0.0.1 - - [23/Aug/2011 21:17:54] "GET  HTTP/1.1" 200 - 0.0094
+127.0.0.1 - - [23/Aug/2011 21:17:58] "GET  HTTP/1.1" 200 - 0.0076
+127.0.0.1 - - [23/Aug/2011 21:17:58] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0100
+127.0.0.1 - - [23/Aug/2011 21:17:58] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0082
+127.0.0.1 - - [23/Aug/2011 21:17:58] "GET /favicon.ico HTTP/1.1" 404 30 0.0185
+127.0.0.1 - - [23/Aug/2011 21:17:58] "GET  HTTP/1.1" 200 - 0.0101
+127.0.0.1 - - [23/Aug/2011 21:18:01] "GET  HTTP/1.1" 200 - 0.0077
+127.0.0.1 - - [23/Aug/2011 21:18:01] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0105
+127.0.0.1 - - [23/Aug/2011 21:18:02] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0299
+127.0.0.1 - - [23/Aug/2011 21:18:02] "GET /favicon.ico HTTP/1.1" 404 30 0.0112
+127.0.0.1 - - [23/Aug/2011 21:18:02] "GET  HTTP/1.1" 200 - 0.0205
+127.0.0.1 - - [23/Aug/2011 21:18:05] "GET  HTTP/1.1" 200 - 0.0073
+127.0.0.1 - - [23/Aug/2011 21:18:05] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0085
+127.0.0.1 - - [23/Aug/2011 21:18:05] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0105
+127.0.0.1 - - [23/Aug/2011 21:18:05] "GET /favicon.ico HTTP/1.1" 404 30 0.0142
+127.0.0.1 - - [23/Aug/2011 21:18:05] "GET  HTTP/1.1" 200 - 0.0085
+127.0.0.1 - - [23/Aug/2011 21:18:22] "GET  HTTP/1.1" 200 - 0.0075
+127.0.0.1 - - [23/Aug/2011 21:18:22] "GET /favicon.ico HTTP/1.1" 404 30 0.0080
+127.0.0.1 - - [23/Aug/2011 21:18:22] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0081
+127.0.0.1 - - [23/Aug/2011 21:18:22] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0089
+127.0.0.1 - - [23/Aug/2011 21:18:22] "GET  HTTP/1.1" 200 - 0.0125
+127.0.0.1 - - [23/Aug/2011 21:18:42] "GET  HTTP/1.1" 200 - 0.0083
+127.0.0.1 - - [23/Aug/2011 21:18:42] "GET /favicon.ico HTTP/1.1" 404 30 0.0091
+127.0.0.1 - - [23/Aug/2011 21:18:42] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0082
+127.0.0.1 - - [23/Aug/2011 21:18:42] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0149
+127.0.0.1 - - [23/Aug/2011 21:18:42] "GET  HTTP/1.1" 200 - 0.0104
+127.0.0.1 - - [23/Aug/2011 21:18:45] "GET  HTTP/1.1" 200 - 0.0075
+127.0.0.1 - - [23/Aug/2011 21:18:45] "GET /favicon.ico HTTP/1.1" 404 30 0.0076
+127.0.0.1 - - [23/Aug/2011 21:18:45] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0100
+127.0.0.1 - - [23/Aug/2011 21:18:45] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0075
+127.0.0.1 - - [23/Aug/2011 21:18:45] "GET  HTTP/1.1" 200 - 0.0195
+127.0.0.1 - - [23/Aug/2011 21:19:16] "GET  HTTP/1.1" 200 - 0.0075
+127.0.0.1 - - [23/Aug/2011 21:19:16] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0096
+127.0.0.1 - - [23/Aug/2011 21:19:16] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0210
+127.0.0.1 - - [23/Aug/2011 21:19:16] "GET /favicon.ico HTTP/1.1" 404 30 0.0088
+127.0.0.1 - - [23/Aug/2011 21:19:17] "GET  HTTP/1.1" 200 - 0.0382
+127.0.0.1 - - [23/Aug/2011 21:19:26] "POST  HTTP/1.1" 200 - 0.0075
+> eueu
+101 117 101 117 < eueu
+127.0.0.1 - - [23/Aug/2011 21:20:42] "GET  HTTP/1.1" 200 - 0.0137
+127.0.0.1 - - [23/Aug/2011 21:20:42] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0108
+127.0.0.1 - - [23/Aug/2011 21:20:42] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0141
+127.0.0.1 - - [23/Aug/2011 21:20:42] "GET /favicon.ico HTTP/1.1" 404 30 0.0097
+127.0.0.1 - - [23/Aug/2011 21:20:42] "GET  HTTP/1.1" 200 - 0.0201
+127.0.0.1 - - [23/Aug/2011 21:20:43] "POST  HTTP/1.1" 200 - 0.0131
+> Lorem
+76 111 114 101 109 < Lorem
+127.0.0.1 - - [23/Aug/2011 21:20:45] "GET /favicon.ico HTTP/1.1" 404 30 0.0123
+127.0.0.1 - - [23/Aug/2011 21:21:58] "GET  HTTP/1.1" 200 - 0.0138
+127.0.0.1 - - [23/Aug/2011 21:21:58] "GET /javascripts/jquery-1.6.2.min.js HTTP/1.1" 200 91555 0.0206
+127.0.0.1 - - [23/Aug/2011 21:21:58] "GET /javascripts/EventSource.js HTTP/1.1" 200 4911 0.0136
+127.0.0.1 - - [23/Aug/2011 21:21:58] "GET /favicon.ico HTTP/1.1" 404 30 0.0111
+127.0.0.1 - - [23/Aug/2011 21:21:58] "GET  HTTP/1.1" 200 - 0.0312
+127.0.0.1 - - [23/Aug/2011 21:21:59] "POST  HTTP/1.1" 200 - 0.0094
+> Lorem
+76 111 114 101 109 < Lorem
+127.0.0.1 - - [23/Aug/2011 21:22:01] "GET /favicon.ico HTTP/1.1" 404 30 0.0110
+127.0.0.1 - - [23/Aug/2011 21:22:49] "GET  HTTP/1.1" 200 - 0.0107
+127.0.0.1 - - [23/Aug/2011 21:23:39] "GET  HTTP/1.1" 200 - 0.0075
+127.0.0.1 - - [23/Aug/2011 21:24:30] "GET  HTTP/1.1" 200 - 0.0167
+127.0.0.1 - - [23/Aug/2011 21:25:21] "GET  HTTP/1.1" 200 - 0.9083
+127.0.0.1 - - [23/Aug/2011 21:26:13] "GET  HTTP/1.1" 200 - 1.4832
+127.0.0.1 - - [23/Aug/2011 21:27:01] "GET  HTTP/1.1" 200 - 0.0230
+127.0.0.1 - - [23/Aug/2011 21:27:52] "GET  HTTP/1.1" 200 - 0.0479
+127.0.0.1 - - [23/Aug/2011 21:28:42] "GET  HTTP/1.1" 200 - 0.0098
+127.0.0.1 - - [23/Aug/2011 21:29:33] "GET  HTTP/1.1" 200 - 0.0300
+127.0.0.1 - - [23/Aug/2011 21:30:23] "GET  HTTP/1.1" 200 - 0.0241
+127.0.0.1 - - [23/Aug/2011 21:31:14] "GET  HTTP/1.1" 200 - 0.0980
+127.0.0.1 - - [23/Aug/2011 21:32:04] "GET  HTTP/1.1" 200 - 0.0254
+127.0.0.1 - - [23/Aug/2011 21:32:55] "GET  HTTP/1.1" 200 - 0.0204
+127.0.0.1 - - [23/Aug/2011 21:33:45] "GET  HTTP/1.1" 200 - 0.0179
+127.0.0.1 - - [23/Aug/2011 21:34:36] "GET  HTTP/1.1" 200 - 0.0526
+127.0.0.1 - - [23/Aug/2011 21:35:27] "GET  HTTP/1.1" 200 - 0.0940
+127.0.0.1 - - [23/Aug/2011 21:36:17] "GET  HTTP/1.1" 200 - 0.0376

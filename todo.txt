@@ -1,0 +1,33 @@
++ Echo
+	+ Install cucumber.
+	+ Generate an empty cucumber story and make it run.
+	+ Cucumber doesn't work. Make a simplest possible rspec test pass through selenium.
+	+ Write a rspec story to check echo functionality and make it fail.
+	+ Make the echo work on Heroku and EC2.
+
+- Story 1
+	+ Create a remote cucumber test and see if it works at all.
+	+ Make cucumber start/stop thin server.
+	+ Write scenario for story 1 using low-level Capybara.
+	+ Make it fail.
+	- Make it pass.
+	
+- Story 2 - Two players can simultaneously play two separate games.
+
+- Story 3 - Player starting a new game can type up to 7 words to give the story a beginning.
+
+- Story 4 - Players can join games in progress.
+
+- Story 5 - A game can have a maximum of 2 players.
+
+- Story 6 - A player may skip his turn (pass). 
+
+- Story 7 - When both players pass in a row, the game is over.
+
+- Story 8 - Finished stories are listed.
+
+- Story 9 - Users can rank stories (both finished and being written).
+
+- Story 10 - Two lists of finished stories: recent-first and rank-based.
+
+- Story 11 - User cannot join 

@@ -1,15 +1,15 @@
 source :rubygems
 
-gem 'cramp'    #, :git => "git://github.com/lifo/cramp.git"
+gem 'cramp', '0.15'
 
 # Async webserver for running a cramp application
-gem 'thin'
+gem 'thin', '1.2.11'
 
 # Rack based routing
-gem 'http_router'
+gem 'http_router', '0.10.2'
 
 # Collection of async-proof rack middlewares - https://github.com/rkh/async-rack.git
-gem 'async-rack'
+gem 'async-rack', '0.5.1'
 
 # For async Active Record models
 # gem 'mysql2', '~> 0.2.11'
@@ -19,12 +19,12 @@ gem 'async-rack'
 # gem 'em-synchrony'
 
 # Generic interface to multiple Ruby template engines - https://github.com/rtomayko/tilt
-gem 'tilt'
-gem 'haml'
+gem 'tilt', '1.3.2'
+gem 'haml', '3.1.2'
 
 group :test do
-  gem 'rspec'
-  gem 'capybara'
-	# Development gems
+  gem 'rspec', '~>2.6.0'
+  gem 'capybara', '~>1.0.1'
+# Development gems
   # gem 'ruby-debug19'
 end
