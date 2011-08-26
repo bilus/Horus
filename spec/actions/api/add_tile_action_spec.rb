@@ -1,10 +1,5 @@
 require File.join(File.dirname(__FILE__), "../actions_helper.rb")
 require File.join(File.dirname(__FILE__), "../../../application")
-# require "em-synchrony"
-# require "rack"
-# require "rack/test"
-
-require 'pp'
 
 describe "/add_tile" do
 
