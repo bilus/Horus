@@ -1,0 +1,2 @@
+git config core.editor "mate -w"
+git commit -a
