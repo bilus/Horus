@@ -11,11 +11,12 @@
 	+ Write scenario for story 1 using low-level Capybara.
 	+ Make it fail.
 	- Make it pass.
-		- add_tile_action_spec
-			- Create rspec compatible with cramp based on cramp/test_case.
-			- Make test 'get' work.
-			- Only POST should be supported.
-			- Should add tile to the game.
+		+ add_tile_action_spec
+			FAIL - Create rspec compatible with cramp based on cramp/test_case.
+			+ Create support for running cramp-based asyncronous server specs.
+			+ Make test 'get' work.
+			+ Only POST should be supported.
+			+ Should add tile to the game.
 		- game_events_spec
 			- Read https://github.com/lifo/cramp/blob/master/test/controller/sse_test.rb
 			- Should respond with empty story for a new game.
