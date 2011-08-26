@@ -18,8 +18,7 @@
 			+ Only POST should be supported.
 			+ Should add tile to the game.
 		- game_events_spec
-			- Read https://github.com/lifo/cramp/blob/master/test/controller/sse_test.rb
-			- Should respond with empty story for a new game.
+			+ Should respond with empty story for a new game.
 			- Should respond with a story after adding tiles.
 			- Should respond with a story if different since the last time.
 	

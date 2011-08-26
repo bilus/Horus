@@ -1,3 +1,5 @@
+require File.join(File.dirname(__FILE__), "../../../lib/game_event_renderer")
+
 class GameEventsAction < Cramp::Action
   self.transport = :sse
   before_start :find_game
@@ -9,7 +11,6 @@ class GameEventsAction < Cramp::Action
   end
   
   def relay_events
-    # TODO GameEventRenderer
-    @game.render_events(GameEventRenderer.new(self)) 
+    @game.render(GameEventRenderer.new(self)) 
   end
 end

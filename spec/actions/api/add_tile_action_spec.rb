@@ -32,9 +32,11 @@ describe "/add_tile" do
     
       it "should add tile to the game" do
         renderer = mock("renderer").as_null_object
-        renderer.should_receive(:render_tiles).with(['Lorem', 'Ipsum'])
-        post "/add_tile", :tile => "Lorem"
-        post "/add_tile", :tile => "Ipsum"
+        lorem_tile, ipsum_tile = %w{Lorem ipsum}
+
+        renderer.should_receive(:render_tiles).with([lorem_tile, ipsum_tile])
+        post "/add_tile", :tile => lorem_tile
+        post "/add_tile", :tile => ipsum_tile
         game.render(renderer)
       end
     end
