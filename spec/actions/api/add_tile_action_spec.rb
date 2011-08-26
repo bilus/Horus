@@ -10,11 +10,7 @@ describe "/add_tile" do
       # CrampApp::Application.routes
       # nil or not override at all -> will use config.ru in the root dir.
     end
-    
-    before(:each) do
-      CrampApp::Application.clear!
-    end
-    
+
     context "routes" do
       it "should work as POST method" do
         result = post "/add_tile", :tile => "Lorem"
@@ -29,6 +25,10 @@ describe "/add_tile" do
     
     context "game" do
       let(:game) { CrampApp::Application.find_game }
+
+      before(:each) do
+        CrampApp::Application.clear!
+      end
     
       it "should add tile to the game" do
         renderer = mock("renderer").as_null_object
