@@ -25,6 +25,11 @@ module CrampApp
       @game ||= Game.new
       @game
     end
+    
+    # Clear entire application state -- testing only!
+    def self.clear!
+      @game = Game.new
+    end
 
   end
 end

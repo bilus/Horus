@@ -20,9 +20,7 @@ module ThreadStdOut
   
   private
   
-  def self.stream
-    raise "error" unless Thread.current[:stdout]
-    
+  def self.stream    
     Thread.current[:stdout] || STDOUT
   end
 
@@ -47,9 +45,7 @@ module ThreadStdErr
   
   private
   
-  def self.stream
-    raise "error" unless Thread.current[:stderr]
-    
+  def self.stream    
     Thread.current[:stderr] || STDERR
   end
 
@@ -90,10 +86,12 @@ module RSpec::Core::Formatters
   class HtmlFormatter
     alias_method :base_format_backtrace, :format_backtrace
     def format_backtrace(backtrace, example)
+      cramp_log = example.execution_result[:cramp_log]
       base_format_backtrace(backtrace, example) + 
+        (cramp_log ? 
         ["-- START SERVER LOG DUMP --"] +
-        example.execution_result[:cramp_log].split("\n") +
-        ["-- END SERVER LOG DUMP --"]
+        cramp_log.split("\n") +
+        ["-- END SERVER LOG DUMP --"] : [])
     end
   end
 end
@@ -170,6 +168,8 @@ def context_for_cramp_app(&example_group_block)
     end
     
     def start_server
+      # TODO Still logs some stuff to stdout/stderr, e.g.
+      # 127.0.0.1 - - [26/Aug/2011 14:33:32] "GET  HTTP/1.1" 200 - 0.0336
       $stdout = ThreadStdOut
       $stderr = ThreadStdErr
       @server_output_stream = StringIO.new
