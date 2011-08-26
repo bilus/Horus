@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), "../lib/game.rb")
+require File.join(File.dirname(__FILE__), "../../lib/game.rb")
 
 describe Game do
   describe "should render events using provided rendering method" do
@@ -21,6 +21,7 @@ describe Game do
       end
       it "should render all tiles" do
         @renderer.should_receive(:render_tiles).with([@tile1, @tile2])
+        @game.render(@renderer)
       end
     end
   end

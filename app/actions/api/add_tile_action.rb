@@ -3,7 +3,8 @@ class AddTileAction < Cramp::Action
   on_start :add_tile_to_game
   
   def find_game
-    @game = CrampApp::Application.find_game
+    # @game = CrampApp::Application.find_game
+    yield
   end
   
   def add_tile_to_game

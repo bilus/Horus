@@ -16,15 +16,19 @@ gem 'async-rack', '0.5.1'
 # gem 'activerecord'
 
 # Using Fibers + async callbacks to emulate synchronous programming
-# gem 'em-synchrony'
 
 # Generic interface to multiple Ruby template engines - https://github.com/rtomayko/tilt
 gem 'tilt', '1.3.2'
 gem 'haml', '3.1.2'
+gem 'em-synchrony'
+gem 'em-http-request'
 
-group :test do
-  gem 'rspec', '~>2.6.0'
-  gem 'capybara', '~>1.0.1'
-# Development gems
-  # gem 'ruby-debug19'
+group :test do	
+	gem 'syntax'
+	gem 'rspec', '~>2.6.0'
+	gem 'capybara', '~>1.0.1'
+	gem 'rack-test'
+	# gem 'async_sinatra'
+	# Development gems
+	gem 'ruby-debug19'
 end

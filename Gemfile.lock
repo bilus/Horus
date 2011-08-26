@@ -2,6 +2,8 @@ GEM
   remote: http://rubygems.org/
   specs:
     activesupport (3.0.10)
+    addressable (2.2.6)
+    archive-tar-minitar (0.5.2)
     async-rack (0.5.1)
       rack (~> 1.1)
     capybara (1.0.1)
@@ -13,6 +15,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.2.1)
       ffi (~> 1.0.6)
+    columnize (0.3.4)
     cramp (0.15)
       activesupport (~> 3.0.9)
       eventmachine (~> 1.0.0.beta.3)
@@ -20,6 +23,13 @@ GEM
       thor (~> 0.14.6)
     daemons (1.1.4)
     diff-lcs (1.1.2)
+    em-http-request (0.3.0)
+      addressable (>= 2.0.0)
+      escape_utils
+      eventmachine (>= 0.12.9)
+    em-synchrony (0.2.0)
+      eventmachine (>= 0.12.9)
+    escape_utils (0.2.3)
     eventmachine (1.0.0.beta.3)
     ffi (1.0.9)
     haml (3.1.2)
@@ -27,6 +37,8 @@ GEM
       rack (>= 1.0.0)
       url_mount (~> 0.2.1)
     json_pure (1.5.3)
+    linecache19 (0.5.12)
+      ruby_core_source (>= 0.1.4)
     mime-types (1.16)
     nokogiri (1.5.0)
     rack (1.3.2)
@@ -40,12 +52,23 @@ GEM
     rspec-expectations (2.6.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.6.0)
+    ruby-debug-base19 (0.11.25)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug19 (0.11.6)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby-debug-base19 (>= 0.11.19)
+    ruby_core_source (0.1.5)
+      archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.4)
     selenium-webdriver (2.4.0)
       childprocess (>= 0.2.1)
       ffi (>= 1.0.7)
       json_pure
       rubyzip
+    syntax (1.0.0)
     thin (1.2.11)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -64,8 +87,13 @@ DEPENDENCIES
   async-rack (= 0.5.1)
   capybara (~> 1.0.1)
   cramp (= 0.15)
+  em-http-request
+  em-synchrony
   haml (= 3.1.2)
   http_router (= 0.10.2)
+  rack-test
   rspec (~> 2.6.0)
+  ruby-debug19
+  syntax
   thin (= 1.2.11)
   tilt (= 1.3.2)

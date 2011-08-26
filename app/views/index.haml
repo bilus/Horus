@@ -6,7 +6,7 @@
 		:javascript
 		
 			// DO NOT USE IN PRODUCTION!
-			function receiveMessages(url, onmessage) {
+			function receiveEvents(url, onmessage) {
 				// Global object -- this function cannot be used with multiple feeds.
 				this.es = new EventSource(url);
 				this.es.onmessage = function (event) {
@@ -29,7 +29,7 @@
 					addTile();
 				});
 
-				receiveMessages('/story_events', function(message) {
+				receiveEvents('/game_events', function(message) {
 					$('#board').html(message);
 				});
 			});
