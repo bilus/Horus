@@ -19,7 +19,6 @@ describe "/add_tile" do
       it "should work as POST method" do
         result = post "/add_tile", :tile => "Lorem"
         result.should be_ok
-        result.body.should == "ok"
       end
     
       it "should not work as GET method" do
