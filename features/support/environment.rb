@@ -20,6 +20,10 @@ print "Starting thin..."
 start_thin
 puts "OK"
 
+trap("INT") do
+  exit
+end
+
 at_exit do
   print "Stopping thin..."
   stop_thin

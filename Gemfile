@@ -34,4 +34,5 @@ group :test do
 	# gem 'async_sinatra'
 	# Development gems
 	gem 'ruby-debug19'
+	gem 'cucumber'
 end

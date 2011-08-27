@@ -1,18 +1,27 @@
 # TODO Start thin in a separate thread? 
+#
+# Currently it triggers "Illegal instruction"
 # 
-# @server_thread = Thread.new do
-#   begin
-#     # Dir.chdir(File.join(File.dirname(__FILE__), "../../"))
-#     options = {:server => 'thin', :Port => 3000, :config => 'config.ru'}
-#     Rack::Server.start(options)
-#   rescue => e
-#     puts "Error in server thread: #{e}\n#{e.backtrace.join("\n")}"
-#     throw
+# def start_thin
+#   @server_thread = Thread.new do
+#     begin
+#       # Dir.chdir(File.join(File.dirname(__FILE__), "../../"))
+#       options = {:server => 'thin', :Port => 3000, :config => 'config.ru'}
+#       Rack::Server.start(options)
+#     rescue => e
+#       puts "Error in server thread: #{e}\n#{e.backtrace.join("\n")}"
+#       throw
+#     end
 #   end
-# end
-# @server_thread.run
+#   @server_thread.run
 # 
-# sleep(2) # TODO Ugly: simply sleep for some time.
+#   sleep(2) # TODO Ugly: simply sleep for some time.
+# end
+# 
+# def stop_thin
+#   @server_thread.kill if @server_thread
+# end
+
 
 def start_thin
   _in_root_dir do
@@ -22,7 +31,7 @@ end
 
 def stop_thin
   _in_root_dir do
-    `bundle exec thin -s 1stop`
+    `bundle exec thin -s1 stop`
   end
 end
 
