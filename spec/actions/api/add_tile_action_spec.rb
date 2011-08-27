@@ -1,29 +1,18 @@
 require File.join(File.dirname(__FILE__), "../actions_helper.rb")
 require File.join(File.dirname(__FILE__), "../../../application")
 
-describe "/add_tile" do
+describe "Api for adding tiles to game" do
 
   context_for_cramp_app do
     def app
       CrampApp::Application.routes
     end
-
+    
     context "routes" do
-      it "should work as POST method" do
-        post "/add_tile", {}, :params => {:tile => "Lorem"} do |response|
-          response[0].should == 200
-          stop
-        end
-      end
-    
-      it "should not work as GET method" do
-        get "/add_tile", {}, :params => {:tile => "Lorem"} do |response|
-          response[0].should_not == 200
-          stop
-        end
-      end
+      specify { "/add_tile".should_not respond_to :get, :params => {:tile => "Lorem"} } 
+      specify { "/add_tile".should respond_to :post, :params => {:tile => "Lorem"} } 
     end
-    
+        
     context "game" do
       let(:game) { CrampApp::Application.find_game }
 

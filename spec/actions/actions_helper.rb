@@ -83,6 +83,38 @@ def context_for_cramp_app(&example_group_block)
   example_group_class.class_eval &example_group_block
 end
 
+# Matcher for get requeste
+#
+RSpec::Matchers.define :respond_to do |method, options = {}|
+  raise "Only :get and :post are supported methods" unless [:get, :post].include?(method)
+  @method = method.to_sym
+  @code = options.delete(:with_code) || /^2[0-9][0-9]$/
+  match do |path|
+    @path = path
+    @result = false
+    send(@method, path, {}, options) do |res|
+      @actual_code = res[0]
+      if @code.is_a? Regexp
+        @result = @actual_code.to_s =~ @code
+        @code_str = @code.source
+      elsif @code.is_a? String
+        @result = @actual_code.to_s == @code
+        @code_str = @code
+      else
+        @result = @actual_code.to_i == @code.to_i
+        @code_str = @code.to_s
+      end
+      stop
+    end
+    @result
+  end
+  failure_message_for_should do
+    "expected #{@path} to respond to '#{@method.to_s.upcase}' with code #{@code_str} but it responded with #{@actual_code}"
+  end
+  failure_message_for_should_not do
+    "expected #{@path} not to respond to '#{@method.to_s.upcase}' with code #{@code_str} but it responded with #{@actual_code}"
+  end
+end
 
 
 # Matcher for SSE requeste

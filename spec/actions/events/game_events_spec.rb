@@ -9,19 +9,8 @@ describe "/game_events" do
     end
     
     context "routes" do
-      it "should work as GET method" do
-        get "/game_events" do |res|
-          res[0].should == 200
-          stop
-        end
-      end
-    
-      it "should not work as POST method" do
-        post "/game_events" do |res|
-          res[0].should_not == 200
-          stop
-        end
-      end
+      specify { "/game_events".should respond_to :get } 
+      specify { "/game_events".should_not respond_to :post }
     end
     
     context "game" do
@@ -34,21 +23,16 @@ describe "/game_events" do
       it "should respond with added tiles" do
         game.add_tile("Lorem")
         game.add_tile("ipsum")
-
         "/game_events".should respond_with_events(["Lorem", "ipsum"])
       end
 
       it "should respond with a story if different since the last time" do
-        
         game.add_tile("Lorem")
         game.add_tile("ipsum")
-
         "/game_events".should respond_with_events(["Lorem", "ipsum"])
-        
         game.add_tile("dolor")
         game.add_tile("sit")
         game.add_tile("amet")
-        
         "/game_events".should respond_with_events(["dolor", "sit", "amet"])        
       end
     end
