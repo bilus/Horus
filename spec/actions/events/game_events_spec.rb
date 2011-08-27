@@ -39,6 +39,17 @@ describe "/game_events" do
       end
 
       it "should respond with a story if different since the last time" do
+        
+        game.add_tile("Lorem")
+        game.add_tile("ipsum")
+
+        "/game_events".should respond_with_events(["Lorem", "ipsum"])
+        
+        game.add_tile("dolor")
+        game.add_tile("sit")
+        game.add_tile("amet")
+        
+        "/game_events".should respond_with_events(["dolor", "sit", "amet"])        
       end
     end
   end
