@@ -8,7 +8,7 @@ class HelloWorld
   end
 end
 # 
-# @server_thread = Thread.new do
+# @server_thread = Thread.new 
 #   begin
 #     # Dir.chdir(File.join(File.dirname(__FILE__), "../../"))
 #     options = {:server => 'thin', :Port => 3000, :config => 'config.ru'}
@@ -20,7 +20,6 @@ end
 #   end
 # end
 # @server_thread.run
-# # TODO Ugly: simply sleep for some time.
 # sleep(2)
 # 
 # $stdout.sync = true
@@ -75,19 +74,6 @@ def get(path, options = {}, headers = {}, &block)
     }
   end
 end
-
-# TODO get function should pull the body and return the result. 
-# TODO get function should optionally timeout after some time (options = {:timeout => 5}).
-# TODO get function should handle sync results.
-
-# TODO post method
-# TODO post method works with params
-
-# TODO get_chunks method for SSE
-# TODO get_chunks method yields for every chunk.
-# TODO get_chunks - optional timeout
-# TODO get_chunks - properly report routing errors.
-# TODO get_chunks - way to specify maxmimum chunks.
   
 def post(path, options = {}, headers = {}, &block)
   callback = options.delete(:callback) || block

@@ -12,7 +12,7 @@ class AddTileAction < Cramp::Action
   def add_tile_to_game
     tile = params[:tile]
     @game.add_tile(tile)
-    render "ok" # TODO Exception handling
+    render "ok" # FIXME Exception handling
     finish
   end
 

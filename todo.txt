@@ -5,39 +5,40 @@
 	+ Write a rspec story to check echo functionality and make it fail.
 	+ Make the echo work on Heroku and EC2.
 
-- Story 1
++ Story 1
 	+ Create a remote cucumber test and see if it works at all.
 	+ Make cucumber start/stop thin server.
 	+ Write scenario for story 1 using low-level Capybara.
 	+ Make it fail.
-	- Make it pass.
+	+ Make it pass.
 		+ add_tile_action_spec
 			FAIL - Create rspec compatible with cramp based on cramp/test_case.
 			+ Create support for running cramp-based asyncronous server specs.
 			+ Make test 'get' work.
 			+ Only POST should be supported.
 			+ Should add tile to the game.
-		- game_events_spec
+		+ game_events_spec
 			+ Should respond with empty story for a new game.
-			- Should respond with a story after adding tiles.
-			- Should respond with a story if different since the last time.
+			+ Should respond with a story after adding tiles once.
+
+- Story 2
 	
-- Story 2 - Two players can simultaneously play two separate games.
+- Story - Two players can simultaneously play two separate games.
 
-- Story 3 - Player starting a new game can type up to 7 words to give the story a beginning.
+- Story - Player starting a new game can type up to 7 words to give the story a beginning.
 
-- Story 4 - Players can join games in progress.
+- Story - Players can join games in progress.
 
-- Story 5 - A game can have a maximum of 2 players.
+- Story - A game can have a maximum of 2 players.
 
-- Story 6 - A player may skip his turn (pass). 
+- Story - A player may skip his turn (pass). 
 
-- Story 7 - When both players pass in a row, the game is over.
+- Story - When both players pass in a row, the game is over.
 
-- Story 8 - Finished stories are listed.
+- Story - Finished stories are listed.
 
-- Story 9 - Users can rank stories (both finished and being written).
+- Story - Users can rank stories (both finished and being written).
 
-- Story 10 - Two lists of finished stories: recent-first and rank-based.
+- Story - Two lists of finished stories: recent-first and rank-based.
 
-- Story 11 - User cannot join 
+- Story - User cannot join 

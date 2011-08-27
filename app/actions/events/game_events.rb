@@ -1,6 +1,6 @@
 require File.join(File.dirname(__FILE__), "../../../lib/game_event_renderer")
 
-# TODO Rename this file to game_events_action
+# FIXME Rename this file to game_events_action
 class GameEventsAction < Cramp::Action
   self.transport = :sse
   before_start :find_game

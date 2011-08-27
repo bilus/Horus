@@ -10,12 +10,14 @@ Feature: Story composition game
 		When the player adds tile "Lorem"
 		Then the board should display "Lorem"
 
-	# Scenario: One player starts game, adds two tiles
-	# 	Given a new game
-	# 	And one player
-	# 	When the player adds tile "Lorem"
-	# 	And the player adds tile "ipsum"
-	# 	Then the board should display "Lorem ipsum"
+	Scenario: Story #2 - one player starts game, adds four tiles
+		Given a new game
+		And one player
+		When the player adds tile "Lorem"
+		And the player adds tile "ipsum"
+		And the player adds tile "sit"
+		And the player adds tile "amet"
+		Then the board should display "Lorem ipsum sit amet"
 
 	# TODO After game ends adding new tiles is impossible
 	

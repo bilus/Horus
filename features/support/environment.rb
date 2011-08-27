@@ -1,5 +1,3 @@
-# require File.join(File.dirname(__FILE__), '..', '..', 'front_end/application')
-
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec/expectations'
@@ -7,25 +5,7 @@ require 'rspec/matchers'
 require "selenium-webdriver"
 require File.join(File.dirname(__FILE__), "thin_support")
 
-# root = File.join(File.dirname(__FILE__), "..")
-# 
-# 
-# config.before(:all) do
-#   `bash #{root}/start`
-# end
-# 
-# config.after(:all) do
-#   `bash #{root}/stop`
-# end
-
-# require 'ruby-debug19'
-
-Before do
-    # breakpoint; 0
-end
-
 World do
-  # Capybara.app = FrontEnd::Application
   Capybara.app_host = "http://localhost:3000"
   Capybara.default_driver = :selenium
 
