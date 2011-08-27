@@ -6,22 +6,18 @@ describe "/add_tile" do
   context_for_cramp_app do
     def app
       CrampApp::Application.routes
-      # What's possible:
-      # HomeAction
-      # CrampApp::Application.routes
-      # nil or not override at all -> will use config.ru in the root dir.
     end
 
     context "routes" do
       it "should work as POST method" do
-        result = post "/add_tile", {}, :params => {:tile => "Lorem"} do |response|
+        post "/add_tile", {}, :params => {:tile => "Lorem"} do |response|
           response[0].should == 200
           stop
         end
       end
     
       it "should not work as GET method" do
-        result = get "/add_tile", {}, :params => {:tile => "Lorem"} do |response|
+        get "/add_tile", {}, :params => {:tile => "Lorem"} do |response|
           response[0].should_not == 200
           stop
         end

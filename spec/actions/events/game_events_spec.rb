@@ -1,4 +1,3 @@
-# require File.join(File.dirname(__FILE__), "../../spec_helper.rb")
 require File.join(File.dirname(__FILE__), "../actions_helper.rb")
 require File.join(File.dirname(__FILE__), "../../../application")
 
@@ -36,10 +35,11 @@ describe "/game_events" do
         game.add_tile("Lorem")
         game.add_tile("ipsum")
 
-        action("/game_events").should respond_with_events(["Lorem", "ipsum"])
+        "/game_events".should respond_with_events(["Lorem", "ipsum"])
       end
 
-      it "should respond with a story if different since the last time"
+      it "should respond with a story if different since the last time" do
+      end
     end
   end
 end
