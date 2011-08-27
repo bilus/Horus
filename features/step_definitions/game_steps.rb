@@ -10,7 +10,7 @@ When /^the player adds tile "([^"]*)"$/ do |s|
   find("#add").click
 end
 
-Then /^the board should display "([^"]*)"$/ do |arg1|
+Then /^the board should display "([^"]*)"$/ do |s|
   find("#board").should have_content(s)
 end
 
