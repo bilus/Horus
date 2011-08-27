@@ -21,9 +21,12 @@ gem 'async-rack', '0.5.1'
 gem 'tilt', '1.3.2'
 gem 'haml', '3.1.2'
 gem 'em-synchrony'
-gem 'em-http-request'
+
+gem 'em-http-request', '0.3.0' 
+# gem 'em-http-request', '>=1.0.0.beta.4' # Because of em-eventsource gem below
 
 group :test do	
+	# gem 'em-eventsource'
 	gem 'syntax'
 	gem 'rspec', '~>2.6.0'
 	gem 'capybara', '~>1.0.1'

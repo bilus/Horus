@@ -1,3 +1,4 @@
+require File.join(File.dirname(__FILE__), "../spec_helper.rb")
 require File.join(File.dirname(__FILE__), "../../lib/game.rb")
 
 describe Game do
@@ -22,6 +23,12 @@ describe Game do
         game.add_tile(ipsum)
         renderer.should_receive(:render_tiles).with([lorem, ipsum])
         game.render(renderer)
+      end
+      
+      it "eu" do
+        for_at_most(1) do
+          sleep(20)
+        end
       end
     end
   end

@@ -1,3 +1,4 @@
+# require File.join(File.dirname(__FILE__), "../../spec_helper.rb")
 require File.join(File.dirname(__FILE__), "../actions_helper.rb")
 require File.join(File.dirname(__FILE__), "../../../application")
 
@@ -5,23 +6,22 @@ describe "/game_events" do
 
   context_for_cramp_app do
     def app
-      # What's possible:
-      # HomeAction
-      # CrampApp::Application.routes
-      # nil or not override at all -> will use config.ru in the root dir.
+      CrampApp::Application.routes
     end
-    
-
     
     context "routes" do
       it "should work as GET method" do
-        result = get "/game_events"
-        result.should be_ok
+        get "/game_events" do |res|
+          res[0].should == 200
+          stop
+        end
       end
     
       it "should not work as POST method" do
-        result = post "/game_events"
-        result.should_not be_ok
+        post "/game_events" do |res|
+          res[0].should_not == 200
+          stop
+        end
       end
     end
     
@@ -32,18 +32,13 @@ describe "/game_events" do
       
       let(:game) { CrampApp::Application.find_game }
       
-      it "should respond with empty story for a new game" do
-        result = get "/game_events"
-        result.body.should == ""
-      end
-      
-      it "should respond with a story after adding tiles" do
+      it "should respond with added tiles" do
         game.add_tile("Lorem")
         game.add_tile("ipsum")
-        result = get "/game_events"
-        result.body.should == "Lorem ipsum"
+
+        action("/game_events").should respond_with_events(["Lorem", "ipsum"])
       end
-      
+
       it "should respond with a story if different since the last time"
     end
   end

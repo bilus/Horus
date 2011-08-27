@@ -3,7 +3,7 @@ class GameEventRenderer
     @surface = surface
   end
   
-  def render(tiles)
+  def render_tiles(tiles)
     tiles.each {|t| @surface.render(t)}
   end
 end

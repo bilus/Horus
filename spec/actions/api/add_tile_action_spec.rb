@@ -5,6 +5,7 @@ describe "/add_tile" do
 
   context_for_cramp_app do
     def app
+      CrampApp::Application.routes
       # What's possible:
       # HomeAction
       # CrampApp::Application.routes
@@ -13,13 +14,17 @@ describe "/add_tile" do
 
     context "routes" do
       it "should work as POST method" do
-        result = post "/add_tile", :tile => "Lorem"
-        result.should be_ok
+        result = post "/add_tile", {}, :params => {:tile => "Lorem"} do |response|
+          response[0].should == 200
+          stop
+        end
       end
     
       it "should not work as GET method" do
-        result = get "/add_tile", :tile => "Lorem"
-        result.should_not be_ok
+        result = get "/add_tile", {}, :params => {:tile => "Lorem"} do |response|
+          response[0].should_not == 200
+          stop
+        end
       end
     end
     
@@ -35,8 +40,8 @@ describe "/add_tile" do
         lorem_tile, ipsum_tile = %w{Lorem ipsum}
 
         renderer.should_receive(:render_tiles).with([lorem_tile, ipsum_tile])
-        post "/add_tile", :tile => lorem_tile
-        post "/add_tile", :tile => ipsum_tile
+        post "/add_tile", {}, :params => {:tile => lorem_tile}
+        post "/add_tile", {}, :params => {:tile => ipsum_tile}
         game.render(renderer)
       end
     end
