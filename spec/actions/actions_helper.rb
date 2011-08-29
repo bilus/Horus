@@ -44,6 +44,7 @@ def context_for_cramp_app(&example_group_block)
       chunks = []
 
       get_body(path, options, headers) do |body_chunk|
+        # pp body_chunk
         chunks << body_chunk unless stopping
 
         if chunks.count >= count
@@ -119,14 +120,35 @@ end
 
 # Matcher for SSE requeste
 #
-RSpec::Matchers.define :respond_with_events do |expected_chunks|
+RSpec::Matchers.define :respond_with_events do |expected_chunks, options = {}|;
+  
+  def match_data(actual, expected)
+    if actual.nil?
+      false
+    elsif expected.is_a? Regexp
+      actual.match(expected)
+    else
+      actual == expected
+    end
+  end
+  
+  def parse_response(chunk)
+    data = (chunk =~ /^data: (.*)$/).nil? ? "" : $1
+    event_id = (chunk =~ /^id: (.*)$/).nil? ? "" : $1
+    [data, event_id]
+  end
+  
+  on_each = options.delete(:on_each)
+  headers = (last_event_id = options.delete(:last_event_id)) ? {"HTTP_LAST_EVENT_ID" => last_event_id} : {}
   match do |path|
     @result = false
-    get_body_chunks path, :count => expected_chunks.size do |actual_chunks|
+    get_body_chunks path, {:count => expected_chunks.size}, headers do |actual_chunks|
       @expected_chunks = expected_chunks
       @actual_chunks = actual_chunks
       @result = expected_chunks.zip(actual_chunks).find do |expected, actual|
-        (actual =~ /^data: (.*)$/).nil? || $1 != expected
+        data, event_id = parse_response(actual)
+        on_each.call(data, event_id) unless on_each.nil?
+        !match_data(data, expected)
       end.nil? ? true : false
     end
     @result

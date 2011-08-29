@@ -21,7 +21,7 @@
 			+ Should respond with empty story for a new game.
 			+ Should respond with a story after adding tiles once.
 
-- Story 2
++ Story 2 - one player starts game, adds four tiles
 	
 - Story - Two players can simultaneously play two separate games.
 
@@ -42,3 +42,5 @@
 - Story - Two lists of finished stories: recent-first and rank-based.
 
 - Story - User cannot join 
+
+- Story - User can click a suggested word instead of typing (markov chains)

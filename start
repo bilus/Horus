@@ -1,1 +1,1 @@
-bundle exec thin -d -s 1 --timeout 0 -R config.ru start  
+bundle exec thin -s 1 --timeout 0 -R config.ru start  

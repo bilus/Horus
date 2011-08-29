@@ -30,7 +30,7 @@
 				});
 
 				receiveEvents('/game_events', function(message) {
-					$('#board').html(message);
+					$('#board').append(message + ' ');
 				});
 			});
 			

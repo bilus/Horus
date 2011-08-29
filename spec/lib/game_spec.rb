@@ -11,6 +11,9 @@ describe Game do
         renderer.should_not_receive(:render_tiles)
         game.render(renderer)
       end
+      it "should return nil" do
+        game.render(renderer).should be_nil
+      end
     end
 
     context "with some tiles" do
@@ -18,17 +21,19 @@ describe Game do
       let(:lorem) {"Lorem"}
       let(:ipsum) {"ipsum"}
 
-      it "should render all tiles" do
+      before(:each) do
         game.add_tile(lorem)
         game.add_tile(ipsum)
+      end
+      
+      it "should render all tiles" do
         renderer.should_receive(:render_tiles).with([lorem, ipsum])
         game.render(renderer)
       end
       
-      it "eu" do
-        for_at_most(1) do
-          sleep(20)
-        end
+      it "should pass on the return value from renderer" do
+        renderer.stub!(:render_tiles).and_return("return value")
+        game.render(renderer).should == "return value"
       end
     end
   end

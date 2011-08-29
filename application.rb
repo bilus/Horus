@@ -37,5 +37,4 @@ end
 Bundler.require(:default, CrampApp::Application.env)
 
 # Preload application classes
-# puts File.join(File.dirname(__FILE__), 'app/**/*.rb')
 Dir[File.join(File.dirname(__FILE__), 'app/**/*.rb')].each {|f| require f}

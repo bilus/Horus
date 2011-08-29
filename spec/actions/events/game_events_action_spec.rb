@@ -23,17 +23,18 @@ describe "/game_events" do
       it "should respond with added tiles" do
         game.add_tile("Lorem")
         game.add_tile("ipsum")
-        "/game_events".should respond_with_events(["Lorem", "ipsum"])
+        "/game_events".should respond_with_events([/.*Lorem.*/, /.*ipsum.*/], {})
       end
 
-      it "should respond with a story if different since the last time" do
+      it "should respond with a story if different since the last time based on last event id" do
         game.add_tile("Lorem")
         game.add_tile("ipsum")
-        "/game_events".should respond_with_events(["Lorem", "ipsum"])
+        last_event_id = ""
+        "/game_events".should respond_with_events([/.*Lorem.*/, /.*ipsum.*/], :on_each => proc { |data, event_id| last_event_id = event_id})
         game.add_tile("dolor")
         game.add_tile("sit")
         game.add_tile("amet")
-        "/game_events".should respond_with_events(["dolor", "sit", "amet"])        
+        "/game_events".should respond_with_events([/.*dolor.*/, /.*sit.*/, /.*amet.*/], :last_event_id => last_event_id)
       end
     end
   end
