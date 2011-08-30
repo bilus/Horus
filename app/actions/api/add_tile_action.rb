@@ -9,7 +9,11 @@ class AddTileAction < Cramp::Action
     yield
   end
   
+  # FIXME nil or empty tiles should not be accepted.
+  # FIXME only single words should be accepted.
+  # Use a separate TilePolicy class.
   def add_tile_to_game
+    pp params
     tile = params[:tile]
     @game.add_tile(tile)
     render "ok" # FIXME Exception handling

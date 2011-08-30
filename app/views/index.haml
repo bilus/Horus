@@ -16,7 +16,12 @@
 			
 			function addTile() {
 				var s = $('input#tile').val();
-				$.post("/add_tile", {tile: s});
+				$.ajax({
+					url: '/game',
+					type: 'PUT',
+					data: {tile: s}
+					
+				});
 				$('#tile').val('');
 			};
 			
@@ -31,7 +36,7 @@
 					addTile();
 				});
 
-				receiveEvents('/game_events', function(message) {
+				receiveEvents('/game', function(message) {
 					$('#board').append(message + ' ');
 				});
 				
