@@ -1,7 +1,7 @@
 require 'haml'
 require 'tilt'
 
-class HomeAction < Cramp::Action
+class HomePageAction < Cramp::Action
   before_start :find_game
   on_start :start_game
   on_start :render_home
@@ -16,7 +16,7 @@ class HomeAction < Cramp::Action
   end
   
   def render_home
-    render Tilt::HamlTemplate.new('app/views/index.haml').render
+    render Tilt::HamlTemplate.new('app/views/index.html.haml').render
     finish
   end
 

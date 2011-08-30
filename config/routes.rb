@@ -1,6 +1,7 @@
 # Check out https://github.com/joshbuddy/http_router for more information on HttpRouter
 HttpRouter.new do
-  add('/').to(HomeAction)
+  add('/').to(HomePageAction)
+  add('/index.html').to(HomePageAction)
   
 # Legacy interface
   add('/add_tile').request_method('POST').to(AddTileAction)
