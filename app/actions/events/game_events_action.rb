@@ -5,25 +5,26 @@ require "pp";
 class GameEventsAction < Cramp::Action
   self.transport = :sse
   before_start :find_game
-  periodic_timer :relay_events, :every => 1
+  periodic_timer :relay_events, :every => 0.5
   
   def initialize(env)
     super
-    preserve_last_event_id(env, :default => GameEventRenderer.initial_state)
+    preserve_last_event_id(@env, :default => GameEventRenderer.initial_state)
     # puts "initialize = #{sse_event_id}"
   end
   
   def find_game
     # puts "find_game = #{sse_event_id}"
-    @game = CrampApp::Application.find_game
+    @game = Horus::Application.find_game
     yield
   end
   
   def relay_events
+    # pp @sse_event_id
     # TODO Remove in production -->
     # Test code to terminate the action every 5 seconds.
-    @repeats ||= 0
-    finish if (@repeats += 1) >= 2
+    # @repeats ||= 0
+    # finish if (@repeats += 1) >= 2
     # <--
     @game.render(GameEventRenderer.new(self, @sse_event_id.to_i)) 
   end

@@ -5,20 +5,32 @@ Feature: Story composition game
 
 	@acceptance @story1
 	Scenario: Story #1 - one player starts game, adds one tile
-		Given a new game
-		And one player
-		When the player adds tile "Lorem"
+		Given one player
+		When the player starts a new game
+		And the player adds tile "Lorem"
 		Then the board should display "Lorem"
 
 	@acceptance @story2 
 	Scenario: Story #2 - one player starts game, adds four tiles
-		Given a new game
-		And one player
-		When the player adds tile "Lorem"
+		Given one player
+		When the player starts a new game
+		And the player adds tile "Lorem"
 		And the player adds tile "ipsum"
 		And the player adds tile "sit"
 		And the player adds tile "amet"
 		Then the board should display "Lorem ipsum sit amet"
+		
+	@acceptance @story3
+	Scenario: Story #3 - after playing a game, a player can start a new game
+		Given one player
+		When the player starts a new game
+		And the player adds tile "Lorem"
+		And the player adds tile "ipsum"
+		And the player starts a new game
+		And the player adds tile "Hello"
+		And the player adds tile "world"
+		Then the board should display "Hello world"
+		And the board should not display "Lorem ipsum"
 
 	# TODO After game ends adding new tiles is impossible.
 	# TODO Adding a blank tile has no effect and doesn't end the player's turn.

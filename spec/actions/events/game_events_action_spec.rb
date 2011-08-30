@@ -5,7 +5,7 @@ describe "/game_events" do
 
   context_for_cramp_app do
     def app
-      CrampApp::Application.routes
+      Horus::Application.routes
     end
     
     context "routes" do
@@ -15,10 +15,10 @@ describe "/game_events" do
     
     context "game" do
       before(:each) do
-        CrampApp::Application.clear!
+        Horus::Application.clear!
       end
       
-      let(:game) { CrampApp::Application.find_game }
+      let(:game) { Horus::Application.find_game }
       
       it "should respond with added tiles" do
         game.add_tile("Lorem")

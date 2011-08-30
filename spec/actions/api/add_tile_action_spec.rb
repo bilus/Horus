@@ -5,7 +5,7 @@ describe "Api for adding tiles to game" do
 
   context_for_cramp_app do
     def app
-      CrampApp::Application.routes
+      Horus::Application.routes
     end
     
     context "routes" do
@@ -14,10 +14,10 @@ describe "Api for adding tiles to game" do
     end
         
     context "game" do
-      let(:game) { CrampApp::Application.find_game }
+      let(:game) { Horus::Application.find_game }
 
       before(:each) do
-        CrampApp::Application.clear!
+        Horus::Application.clear!
       end
     
       it "should add tile to the game" do

@@ -17,9 +17,11 @@
 			function addTile() {
 				var s = $('input#tile').val();
 				$.post("/add_tile", {tile: s});
+				$('#tile').val('');
 			};
 			
 			$(document).ready(function() {
+			
 				$('#tile').bind('keypress', function(e) {
 				        if (e.which == 13)
 							addTile();
@@ -32,6 +34,8 @@
 				receiveEvents('/game_events', function(message) {
 					$('#board').append(message + ' ');
 				});
+				
+				$('#tile').focus();
 			});
 			
 		%style{:type => "text/css", :media => "screen"}

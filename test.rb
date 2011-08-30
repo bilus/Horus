@@ -49,7 +49,7 @@ end
 # headers = {'async.callback' => callback, 'SCRIPT_NAME' => ''}
 # 
 # 
-# action = CrampApp::Application.routes
+# action = Horus::Application.routes
 # EM.run do
 #   catch(:async) { action.call(headers) }
 # end
@@ -58,7 +58,7 @@ end
 
 require 'pp'
 
-@request = Rack::MockRequest.new(CrampApp::Application.routes)
+@request = Rack::MockRequest.new(Horus::Application.routes)
 # @request = Rack::MockRequest.new(HelloWorld.new)
 
 def get(path, options = {}, headers = {}, &block)

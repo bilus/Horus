@@ -1,7 +1,7 @@
 require "rubygems"
 require "bundler"
 
-module CrampApp
+module Horus
   class Application
 
     def self.root(path = nil)
@@ -34,7 +34,7 @@ module CrampApp
   end
 end
 
-Bundler.require(:default, CrampApp::Application.env)
+Bundler.require(:default, Horus::Application.env)
 
 # Preload application classes
 Dir[File.join(File.dirname(__FILE__), 'app/**/*.rb')].each {|f| require f}

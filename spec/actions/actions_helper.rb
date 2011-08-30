@@ -13,31 +13,55 @@ def context_for_cramp_app(&example_group_block)
     
     def get(path, options = {}, headers = {}, &block)
       callback = options.delete(:callback) || block || read_one_body_chunk_and_stop
-      headers = headers.merge('async.callback' => callback)
+      wrapped_callback = proc do |r|
+        begin
+          callback.call(r)
+        rescue 
+          stop
+          raise $!
+        end
+      end
+      headers = headers.merge('async.callback' => wrapped_callback)
 
       EM.run do
         catch(:async) do
           result = @request.get(path, headers)
-          callback.call([result.status, result.header, result.body])
+          wrapped_callback.call([result.status, result.header, result.body])
         end
       end
     end
 
     def get_body(path, options = {}, headers = {}, &block)
       callback = options.delete(:callback) || block || read_one_body_chunk_and_stop
-      response_callback = proc {|response| response[-1].each {|chunk| callback.call(chunk) } }
+      wrapped_callback = proc do |r|
+        begin
+          callback.call(r)
+        rescue 
+          stop
+          raise $!
+        end
+      end    
+      response_callback = proc {|response| response[-1].each {|chunk| wrapped_callback.call(chunk) } }
       headers = headers.merge('async.callback' => response_callback)
 
       EM.run do
         catch(:async) do 
           result = @request.get(path, headers) 
-          callback.call([result.status, result.header, result.body])
+          wrapped_callback.call([result.status, result.header, result.body]) # TODO This isn't necessarily perfect.
         end
       end
     end
 
     def get_body_chunks(path, options = {}, headers = {}, &block)
-      callback = options.delete(:callback) || block || read_one_body_chunk_and_stop
+      callback = options.delete(:callback) || block
+      wrapped_callback = proc do |r|
+        begin
+          callback.call(r) if callback
+        rescue 
+          stop
+          raise $!
+        end
+      end
       count = options.delete(:count) || 1
 
       stopping = false
@@ -49,7 +73,7 @@ def context_for_cramp_app(&example_group_block)
 
         if chunks.count >= count
           stopping = true
-          callback.call(chunks) if callback
+          wrapped_callback.call(chunks)
           EM.next_tick { EM.stop }
         end
       end
@@ -57,12 +81,20 @@ def context_for_cramp_app(&example_group_block)
     
     def post(path, options = {}, headers = {}, &block)
       callback = options.delete(:callback) || block || read_one_body_chunk_and_stop
-      headers = headers.merge('async.callback' => callback)
-
+      wrapped_callback = proc do |r|
+        begin
+          callback.call(r)
+        rescue 
+          stop
+          raise $!
+        end
+      end      
+      headers = headers.merge('async.callback' => wrapped_callback)
+      
       EM.run do
         catch(:async) do 
           result = @request.post(path, headers) 
-          callback.call([result.status, result.header, result.body])
+          wrapped_callback.call([result.status, result.header, result.body])
         end
       end
     end

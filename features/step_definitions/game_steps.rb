@@ -1,8 +1,8 @@
-Given /^a new game$/ do
-  visit("/")
+Given /^one player$/ do
 end
 
-Given /^one player$/ do
+When /^the player starts a new game$/ do
+  visit("/")
 end
 
 When /^the player adds tile "([^"]*)"$/ do |s|
@@ -16,5 +16,9 @@ Then /^the board should display "([^"]*)"$/ do |s|
   # See environment.rb (:resynchronize option).
   wait_until { find("#board").has_content?(s) }
   find("#board").should have_content(s)
+end
+
+Then /^the board should not display "([^"]*)"$/ do |s|
+  find("#board").should_not have_content(s)
 end
 

@@ -1,8 +1,8 @@
 require './application'
-CrampApp::Application.initialize!
+Horus::Application.initialize!
 
 # Development middlewares
-if CrampApp::Application.env == 'development'
+if Horus::Application.env == 'development'
   use AsyncRack::CommonLogger
 
   # Enable code reloading on every request
@@ -10,7 +10,7 @@ if CrampApp::Application.env == 'development'
 end
 
 # Serve assets from /public
-use Rack::Static, :urls => ["/javascripts"], :root => CrampApp::Application.root(:public)
+use Rack::Static, :urls => ["/javascripts"], :root => Horus::Application.root(:public)
 
 # Running thin :
 #
@@ -22,5 +22,5 @@ use Rack::Static, :urls => ["/javascripts"], :root => CrampApp::Application.root
 #
 #   bundle exec thin --max-persistent-conns 1024 --timeout 0 -V -R config.ru start
 #
-run CrampApp::Application.routes
+run Horus::Application.routes
 
