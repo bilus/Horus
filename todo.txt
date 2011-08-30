@@ -20,16 +20,18 @@
 		+ game_events_spec
 			+ Should respond with empty story for a new game.
 			+ Should respond with a story after adding tiles once.
-
 + Story 2 - one player starts game, adds four tiles
-	
-- Story 3 - after playing a game, a player can start a new game.	
-	
-- Story - Two players can simultaneously play two separate games.
-
-- Story - Player starting a new game can type up to 7 words to give the story a beginning.
++ Story 3 - after playing a game, a player can start a new game.	
+- Go through T O D O and F I X M E in code.
+- Story 4 - Two players can simultaneously play two separate games.
 
 - Story - Players can join games in progress.
+
+- Push to heroku.
+
+- Story - A player may only type single words.
+
+- Story - Player starting a new game can type up to 7 words to give the story a beginning.
 
 - Story - A game can have a maximum of 2 players.
 

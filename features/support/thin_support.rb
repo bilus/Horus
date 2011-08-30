@@ -26,7 +26,6 @@
 def start_thin
   _in_root_dir do
     `bundle exec thin -s1 -d start`
-    sleep(2)
   end
 end
 
