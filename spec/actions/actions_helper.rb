@@ -140,16 +140,25 @@ RSpec::Matchers.define :respond_with_events do |expected_chunks, options = {}|;
   
   on_each = options.delete(:on_each)
   headers = (last_event_id = options.delete(:last_event_id)) ? {"HTTP_LAST_EVENT_ID" => last_event_id} : {}
+  timeout = options.delete(:timeout) || 5
+  
   match do |path|
     @result = false
-    get_body_chunks path, {:count => expected_chunks.size}, headers do |actual_chunks|
-      @expected_chunks = expected_chunks
-      @actual_chunks = actual_chunks
-      @result = expected_chunks.zip(actual_chunks).find do |expected, actual|
-        data, event_id = parse_response(actual)
-        on_each.call(data, event_id) unless on_each.nil?
-        !match_data(data, expected)
-      end.nil? ? true : false
+    @expected_chunks = expected_chunks
+
+    begin
+      timeout(timeout) do
+        get_body_chunks path, {:count => expected_chunks.size}, headers do |actual_chunks|
+          @actual_chunks = actual_chunks
+          @result = expected_chunks.zip(actual_chunks).find do |expected, actual|
+            data, event_id = parse_response(actual)
+            on_each.call(data, event_id) unless on_each.nil?
+            !match_data(data, expected)
+          end.nil? ? true : false
+        end
+      end
+    rescue Timeout::Error
+      @actual_chunks = "Timeout"
     end
     @result
   end

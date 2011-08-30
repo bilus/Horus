@@ -4,7 +4,7 @@ describe GameEventRenderer do
   let(:surface) { mock("surface").as_null_object }
   
   context "renderer with no previous state" do
-    let(:renderer) { GameEventRenderer.new(surface, GameEventRenderer.initial_state) }
+    let(:renderer) { GameEventRenderer.new(surface) }
   
     it "should not call render if no tiles" do
       surface.should_not_receive(:render_tile)

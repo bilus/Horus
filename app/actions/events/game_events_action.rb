@@ -20,9 +20,11 @@ class GameEventsAction < Cramp::Action
   end
   
   def relay_events
+    # TODO Remove in production -->
     # Test code to terminate the action every 5 seconds.
     @repeats ||= 0
     finish if (@repeats += 1) >= 2
+    # <--
     @game.render(GameEventRenderer.new(self, @sse_event_id.to_i)) 
   end
   
@@ -30,7 +32,7 @@ class GameEventsAction < Cramp::Action
   # destroyed and re-created at any point, we cannot use an instance variable to preserve state.
   # But event id is ideal for this as long as the state is a number.
   def render_tile(tile, state)
-    raise "State can only be a number" unless state.kind_of? Integer
+    raise "State must be a number" unless state.kind_of? Integer
     @sse_event_id = state
     render(tile)
   end

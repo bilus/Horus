@@ -3,13 +3,14 @@ Feature: Story composition game
   As a player
   I want to add tiles with other players in turns until game ends 
 
-	@acceptance_test
+	@acceptance @story1
 	Scenario: Story #1 - one player starts game, adds one tile
 		Given a new game
 		And one player
 		When the player adds tile "Lorem"
 		Then the board should display "Lorem"
 
+	@acceptance @story2 
 	Scenario: Story #2 - one player starts game, adds four tiles
 		Given a new game
 		And one player

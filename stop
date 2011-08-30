@@ -1,1 +1,1 @@
-thin -s1 stop
+thin -s1 --force stop

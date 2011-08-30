@@ -11,6 +11,10 @@ When /^the player adds tile "([^"]*)"$/ do |s|
 end
 
 Then /^the board should display "([^"]*)"$/ do |s|
+  # We need to wait here because I turned off resynchronization because there's always
+  # at least one outstanding connection (EventSource).
+  # See environment.rb (:resynchronize option).
+  wait_until { find("#board").has_content?(s) }
   find("#board").should have_content(s)
 end
 

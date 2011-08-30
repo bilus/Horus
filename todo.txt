@@ -23,6 +23,8 @@
 
 + Story 2 - one player starts game, adds four tiles
 	
+- Story 3 - after playing a game, a player can start a new game.	
+	
 - Story - Two players can simultaneously play two separate games.
 
 - Story - Player starting a new game can type up to 7 words to give the story a beginning.
@@ -44,3 +46,9 @@
 - Story - User cannot join 
 
 - Story - User can click a suggested word instead of typing (markov chains)
+
+You may distribute, publicly display, publicly perform,
+between the English and any other form
+The Planet an amount equal to all
+possess a valid serial number to install
+use of the Software, provided you inform
