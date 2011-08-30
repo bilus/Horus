@@ -20,37 +20,16 @@ end
 
 # Start/stop thin for remote tests on localhost.
 
-# print "Starting thin..."
-# start_thin
-# puts "OK"
-# 
-# trap("INT") do
-#   exit
-# end
-# 
-# at_exit do
-#   print "Stopping thin..."
-#   stop_thin
-#   puts "OK"
-# end
-
-# FIXME For this commit only I'm having cucumber start/stop thin for every scenario
-# to clear the game state. From Story #3 on, games can be started from scratch using the browser.
-# FIXME Remove the sleep in start_thin.
-Before do
-  print "Starting thin..."
-  start_thin
-  puts "OK"
-end
-
-After do
-  print "Stopping thin..."
-  stop_thin
-  puts "OK"  
-end
+print "Starting thin..."
+start_thin
+puts "OK"
 
 trap("INT") do
-  print "Ctrl-C: stopping thin..."
+  exit
+end
+
+at_exit do
+  print "Stopping thin..."
   stop_thin
   puts "OK"
 end
