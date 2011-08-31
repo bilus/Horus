@@ -31,6 +31,20 @@ Feature: Story composition game
 		And the player adds tile "world"
 		Then the board should display "Hello world"
 		And the board should not display "Lorem ipsum"
+		
+	@acceptance @story4
+	Scenario: Story #4 - two players can simultaneously play two separate games
+		Given player "Joe"
+		And player "Tim"
+		When Joe starts a new game
+		And Tim starts a new game
+		And Joe adds tile "Lorem"
+		And Joe adds tile "ipsum"
+		And Tim adds tile "Hello"
+		And Tim adds tile "world"
+		Then Joe's board should display "Lorem ipsum"
+		And Tim's board should display "Hello world"
+	
 
 	# TODO After game ends adding new tiles is impossible.
 	# TODO Adding a blank tile has no effect and doesn't end the player's turn.

@@ -21,26 +21,41 @@
 			+ Should respond with a story after adding tiles once.
 + Story 2 - one player starts game, adds four tiles
 + Story 3 - after playing a game, a player can start a new game.
-- Tidy up a bit.	
++ Tidy up a bit.	
 	+ Go through T O D O and F I X M E in code.
-	- Create RESTful routes and use them in JavaScript.
+	+ Create RESTful routes and use them in JavaScript.
 		+ PUT game/ --> add_tile_action
 		+ GET game/ --> game_events_action
 		+ Use in JS.
-		+ Rename HomePageAction to HomePageAction (also the file).
-		+ Rename index.haml to index.htm.haml.
-		+ Make everything work.
-
+	+ Rename HomePageAction to HomePageAction (also the file).
+	+ Rename index.haml to index.htm.haml.
+	+ Make everything work.
 - Story 4 - Two players can simultaneously play two separate games.
 	+ Figure out how to do it.
-	  Here's how: add a button on the home page to start a game. Upon clicking the button, the browser
-	  calls /game with POST method and receives the ID of the new game. It then redirects to /game.htm?id=39423948 with GET which uses /game?id=39423948 via GET to receive events using EventSource.
+	+ Figure out how to write a cucumber test with two browser windows.
+	+ Write cucumber test and see it fail.
+	  	 Here's how: add a button on the home page to start a game. Upon clicking the button, the browser calls /game
+         with POST method and receives the ID of the new game. It then redirects to /game.htm?id=39423948 with GET which
+         uses /game?id=39423948 via GET to receive events using EventSource.
+		+ Write the scenario.
+		- Update the cucumber steps to use the button and wait for #board when creating new game.
 	- Make the old cucumber tests pass with the button.
 		- POST game/ --> new_game_action
+			- Use code from HomePageAction (Game.start!)
+			- Render id of the new game.
 		- GET game.htm --> game_page_action
-	- Figure out how to write a cucumber test with two browser windows.
-	- Write cucumber test and see it fail.
-	...
+			- Render the haml copied from index.html.haml
+			- Use the id from the url when creating EventSource.
+		- Home page
+			- Visiting home page should no longer start game.
+			- Add button.
+			- POST game/ to obtain game ID.
+			- Redirect using the returned ID.
+		- See the cucumber tests pass.
+		- Commit.
+		- Extract the JS api into a separate file.
+		- See the cucumber tests pass.
+		- Commit.
 - Story - Players can join games in progress.
 - Push to heroku.
 - Package my rspec support for cramp.

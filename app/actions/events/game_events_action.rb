@@ -22,9 +22,9 @@ class GameEventsAction < Cramp::Action
   def relay_events
     # pp @sse_event_id
     # TODO Remove in production -->
-    # Test code to terminate the action every 5 seconds.
+    # Test code to terminate the action every 5 relays.
     # @repeats ||= 0
-    # finish if (@repeats += 1) >= 2
+    # finish if (@repeats += 1) >= 5
     # <--
     @game.render(GameEventRenderer.new(self, @sse_event_id.to_i)) 
   end

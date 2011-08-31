@@ -1,5 +1,6 @@
 require 'capybara'
 require 'capybara/cucumber'
+require 'capybara/rspec'
 require 'rspec/expectations'
 require 'rspec/matchers'
 require "selenium-webdriver"
@@ -9,12 +10,12 @@ World do
   Capybara.app_host = "http://localhost:3000"
   Capybara.default_driver = :selenium
   Capybara.default_wait_time = 3
+  Capybara.run_server = false
   # I turned off resynchronization because there's always
   # at least one outstanding connection (EventSource).
   Capybara::Selenium::Driver::DEFAULT_OPTIONS[:resynchronize] = false
 
   include Capybara::DSL
-  include RSpec::Expectations
   include RSpec::Matchers
 end
 
