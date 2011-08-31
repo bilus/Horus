@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), "../actions_helper.rb")
 require File.join(File.dirname(__FILE__), "../../../application")
 
-describe "Home page" do
+describe "Game page" do
 
   context_for_cramp_app do
     def app
@@ -9,8 +9,9 @@ describe "Home page" do
     end
 
     context "routes" do
-      specify { "/".should respond_to :get } 
+      specify { "/game.html".should respond_to :get } 
     end
+    
   end
   
 end

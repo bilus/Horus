@@ -6,6 +6,8 @@ end
 
 When /^the player starts a new game$/ do
   visit("/")
+  find("#new-game").click
+  wait_until { find("#board") }
 end
 
 When /^the player adds tile "([^"]*)"$/ do |s|

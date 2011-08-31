@@ -1,64 +1,24 @@
 %html
 	%head
-		%title Echo SSE demo
+		%title Horus
 		%script{:type => "text/javascript", :src => "javascripts/jquery-1.6.2.min.js"}
-		%script{:type => "text/javascript", :src => "javascripts/EventSource.js"}
 		:javascript
-		
-			// DO NOT USE IN PRODUCTION!
-			function receiveEvents(url, onmessage) {
-				// Global object -- this function cannot be used with multiple feeds.
-				this.es = new EventSource(url);
-				this.es.onmessage = function (event) {
-					  onmessage(event.data);
-					};		
-			};
-			
-			function addTile() {
-				var s = $('input#tile').val();
-				$.ajax({
-					url: '/game',
-					type: 'PUT',
-					data: {tile: s}
-					
-				});
-				$('#tile').val('');
+			function startNewGame() {
+				window.location = '/game.html';
 			};
 			
 			$(document).ready(function() {
 			
-				$('#tile').bind('keypress', function(e) {
-				        if (e.which == 13)
-							addTile();
+				$('#new-game').bind('click', function() {
+					startNewGame();
 				});
-			
-				$('#add').bind('click', function() {
-					addTile();
-				});
-
-				receiveEvents('/game', function(message) {
-					$('#board').append(message + ' ');
-				});
-				
-				$('#tile').focus();
 			});
 			
 		%style{:type => "text/css", :media => "screen"}
 			:plain
-				#board {
-					border: 1px solid green;
-					padding: 10px;
-					margin-bottom: 10px;
-				}
-				#add {
-					height: 25px;
-				}
-				#tile {
+				#new-game {
 					height: 25px;
 				}
 			
 	%body
-		#board
-		%span Type a word:
-		%input{:id => "tile", :name => "tile", :type => "text"}
-		%button{:id => "add", :name => "add"}Add to board
+		%button{:id => "new-game", :name => "new-game"}Start

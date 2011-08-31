@@ -9,7 +9,7 @@ HttpRouter.new do
 
 # RESTful interface
   # add('/game').request_method('POST').to(NewGameAction)
-  # add('/game.htm').request_method('GET').to(GamePageAction)
+  add('/game.html').request_method('GET').to(GamePageAction)
   add('/game').request_method('PUT').to(AddTileAction)
   add('/game').request_method('GET').to(GameEventsAction)
   

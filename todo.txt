@@ -38,17 +38,19 @@
          with POST method and receives the ID of the new game. It then redirects to /game.htm?id=39423948 with GET which
          uses /game?id=39423948 via GET to receive events using EventSource.
 		+ Write the scenario.
-		- Update the cucumber steps to use the button and wait for #board when creating new game.
-	- Make the old cucumber tests pass with the button.
+		+ Update the cucumber steps to use the button and wait for #board when creating new game.
+	+ Make the old cucumber tests pass with the button.
+		+ Add button to homepage with redirect to /game.htm
+		+ GET game.htm --> game_page_action
+			+ Render the haml moved from index.html.haml		
+		+ See cucumber pass except for @story4.
+		+ Commit.
+	- Make story #4 cucumber test pass.
 		- POST game/ --> new_game_action
 			- Use code from HomePageAction (Game.start!)
 			- Render id of the new game.
-		- GET game.htm --> game_page_action
-			- Render the haml copied from index.html.haml
 			- Use the id from the url when creating EventSource.
 		- Home page
-			- Visiting home page should no longer start game.
-			- Add button.
 			- POST game/ to obtain game ID.
 			- Redirect using the returned ID.
 		- See the cucumber tests pass.
