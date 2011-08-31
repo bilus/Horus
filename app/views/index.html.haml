@@ -4,7 +4,9 @@
 		%script{:type => "text/javascript", :src => "javascripts/jquery-1.6.2.min.js"}
 		:javascript
 			function startNewGame() {
-				window.location = '/game.html';
+				$.post('/game', function(data) {
+					window.location = '/game.html?id=' + jQuery.parseJSON(data).id;
+				});
 			};
 			
 			$(document).ready(function() {
@@ -22,3 +24,4 @@
 			
 	%body
 		%button{:id => "new-game", :name => "new-game"}Start
+		%div{:id => "trace"}

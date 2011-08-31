@@ -30,7 +30,11 @@ module Horus
     def self.clear!
       @game = Game.new
     end
-
+    
+    def self.start_new_game
+      @game = Game.new
+      "dummy game id"
+    end
   end
 end
 

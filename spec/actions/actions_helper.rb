@@ -12,7 +12,7 @@ def context_for_cramp_app(&example_group_block)
     end
     
     def get(path, options = {}, headers = {}, &block)
-      callback = options.delete(:callback) || block || read_one_body_chunk_and_stop
+      callback = options.delete(:callback) || block
       wrapped_callback = proc do |r|
         begin
           callback.call(r)
@@ -32,24 +32,19 @@ def context_for_cramp_app(&example_group_block)
     end
 
     def get_body(path, options = {}, headers = {}, &block)
-      callback = options.delete(:callback) || block || read_one_body_chunk_and_stop
+      method = options.delete(:method) || :get
+      raise "Only :get and :post are supported methods" unless [:get, :post].include?(method)
+      callback = options.delete(:callback) || block
       wrapped_callback = proc do |r|
         begin
-          callback.call(r)
+          callback.call(r) if callback
         rescue 
           stop
           raise $!
         end
-      end    
-      response_callback = proc {|response| response[-1].each {|chunk| wrapped_callback.call(chunk) } }
-      headers = headers.merge('async.callback' => response_callback)
-
-      EM.run do
-        catch(:async) do 
-          result = @request.get(path, headers) 
-          wrapped_callback.call([result.status, result.header, result.body]) # TODO This isn't necessarily perfect.
-        end
       end
+      response_callback = proc {|response| response[-1].each {|chunk| wrapped_callback.call(chunk) } }
+      send(method, path, options, headers, &response_callback)
     end
 
     def get_body_chunks(path, options = {}, headers = {}, &block)
@@ -80,10 +75,15 @@ def context_for_cramp_app(&example_group_block)
     end
     
     def post(path, options = {}, headers = {}, &block)
-      callback = options.delete(:callback) || block || read_one_body_chunk_and_stop
+      callback = options.delete(:callback) || block
+      timeout_secs = options.delete(:timeout) || 5
       wrapped_callback = proc do |r|
         begin
-          callback.call(r)
+          if callback
+            callback.call(r) 
+          else
+            r[-1].each { stop } # For some reason w/o reading the body, post methods fail.
+          end
         rescue 
           stop
           raise $!
@@ -91,10 +91,12 @@ def context_for_cramp_app(&example_group_block)
       end      
       headers = headers.merge('async.callback' => wrapped_callback)
       
-      EM.run do
-        catch(:async) do 
-          result = @request.post(path, headers) 
-          wrapped_callback.call([result.status, result.header, result.body])
+      timeout(timeout_secs) do
+        EM.run do
+          catch(:async) do 
+            result = @request.post(path, headers) 
+            wrapped_callback.call([result.status, result.header, result.body])
+          end
         end
       end
     end
@@ -102,17 +104,8 @@ def context_for_cramp_app(&example_group_block)
     def stop
       EM.stop
     end
-    
-    private
-    
-    def read_one_body_chunk_and_stop
-      proc do |response|
-        response[-1].each do |chunk|
-          stop
-        end
-      end
-    end  
   end
+  
   example_group_class.class_eval &example_group_block
 end
 
@@ -149,6 +142,48 @@ RSpec::Matchers.define :respond_to do |method, options = {}|
   end
 end
 
+# Matcher for all requeste
+#
+RSpec::Matchers.define :respond_with_body do |expected_body, options = {}|;
+  on_each = options.delete(:on_each)
+  method = options.delete(:method)
+  headers = (last_event_id = options.delete(:last_event_id)) ? {"HTTP_LAST_EVENT_ID" => last_event_id} : {}
+  timeout = options.delete(:timeout) || 5
+  
+  def match_chunk(actual, expected)
+    if actual.nil?
+      false
+    elsif expected.is_a? Regexp
+      actual.match(expected)
+    else
+      actual == expected
+    end
+  end
+  
+  match do |path|
+    @result = false
+    @expected_body = expected_body
+    @expected_chunks = [expected_body]
+    
+    begin
+      timeout(timeout) do
+        get_body_chunks path, {:count => @expected_chunks.size, :method => method}, headers do |actual_chunks|
+          @actual_chunks = actual_chunks
+          @result = @expected_chunks.zip(actual_chunks).find do |expected, actual|
+            !match_chunk(actual, expected)
+          end.nil? ? true : false
+        end
+      end
+    rescue Timeout::Error
+      @actual_chunks = "Timeout"
+    end
+    @result
+  end
+  failure_message_for_should do
+    "expected #{@expected_body.inspect} in body but got the following response from server: #{@actual_chunks.inspect}"
+  end
+end
+
 
 # Matcher for SSE requeste
 #
@@ -177,7 +212,6 @@ RSpec::Matchers.define :respond_with_events do |expected_chunks, options = {}|;
   match do |path|
     @result = false
     @expected_chunks = expected_chunks
-
     begin
       timeout(timeout) do
         get_body_chunks path, {:count => expected_chunks.size}, headers do |actual_chunks|

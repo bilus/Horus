@@ -45,11 +45,19 @@
 			+ Render the haml moved from index.html.haml		
 		+ See cucumber pass except for @story4.
 		+ Commit.
-	- Make story #4 cucumber test pass.
-		- POST game/ --> new_game_action
-			- Use code from HomePageAction (Game.start!)
-			- Render id of the new game.
-			- Use the id from the url when creating EventSource.
+	- Let's now make the story #4 cucumber test pass.
+		+ When the user clicks button@new-game, it POSTs game/ to obtain the new game id
+		+ and redirects to game.htm?id=<new game id>.
+		+ POST game/ routes to NewGameAction.
+		+ The action accepts only POST requests
+		+ and when is invoked it starts a new game
+		+ and renders its unique id.
+		+ To make old cucumber tests pass, Application.start_new_game simply creates a new Game object and 
+		  returns a dummy id.
+		- All cucumber tests pass except for @story4
+		- COMMIT.
+		- Browser should pull events for the specific game so /game.htm uses the id from its url when creating
+          its EventSource.
 		- Home page
 			- POST game/ to obtain game ID.
 			- Redirect using the returned ID.
