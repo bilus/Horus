@@ -13,21 +13,28 @@ describe "Api for adding tiles to game" do
       specify { "/add_tile".should respond_to :post, :params => {:tile => "Lorem"} } 
     end
         
-    context "game" do
-      let(:game) { Horus::Application.find_game }
-
-      before(:each) do
-        Horus::Application.clear!
-      end
+    context "when POST request is sent" do
+      let!(:game1) { Horus::Application.start_new_game }
+      let!(:game2) { Horus::Application.start_new_game }
     
       it "should add tile to the game" do
         renderer = mock("renderer").as_null_object
         lorem_tile, ipsum_tile = %w{Lorem ipsum}
 
         renderer.should_receive(:render_tiles).with([lorem_tile, ipsum_tile])
-        post "/add_tile", {}, :params => {:tile => lorem_tile}
-        post "/add_tile", {}, :params => {:tile => ipsum_tile}
-        game.render(renderer)
+        post "/add_tile?id=#{game1.id}", {}, :params => {:tile => lorem_tile}
+        post "/add_tile?id=#{game1.id}", {}, :params => {:tile => ipsum_tile}
+        game1.render(renderer)
+      end
+
+      it "should add tile to the correct game game based on its id" do
+        renderer = mock("renderer").as_null_object
+        lorem_tile, ipsum_tile = %w{Lorem ipsum}
+
+        renderer.should_receive(:render_tiles).with([lorem_tile])
+        post "/add_tile?id=#{game1.id}", {}, :params => {:tile => lorem_tile}
+        post "/add_tile?id=#{game2.id}", {}, :params => {:tile => ipsum_tile}
+        game1.render(renderer)
       end
     end
   end

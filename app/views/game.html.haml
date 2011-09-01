@@ -3,41 +3,28 @@
 		%title Game
 		%script{:type => "text/javascript", :src => "javascripts/jquery-1.6.2.min.js"}
 		%script{:type => "text/javascript", :src => "javascripts/EventSource.js"}
+		%script{:type => "text/javascript", :src => "javascripts/helpers.js"}
+		%script{:type => "text/javascript", :src => "javascripts/horus_api.js"}
 		:javascript
-		
-			// DO NOT USE IN PRODUCTION!
-			function receiveEvents(url, onmessage) {
-				// Global object -- this function cannot be used with multiple feeds.
-				this.es = new EventSource(url);
-				this.es.onmessage = function (event) {
-					  onmessage(event.data);
-					};		
-			};
-			
-			function addTile() {
-				var s = $('input#tile').val();
-				$.ajax({
-					url: '/game',
-					type: 'PUT',
-					data: {tile: s}
-					
-				});
+
+			function onAddTile() {
+				var tile = $('input#tile').val();
+				addTile($.currentUrlParam('id'), tile);
 				$('#tile').val('');
 			};
 			
 			$(document).ready(function() {
-			
 				$('#tile').bind('keypress', function(e) {
 				        if (e.which == 13)
-							addTile();
+							onAddTile();
 				});
 			
 				$('#add').bind('click', function() {
-					addTile();
+					onAddTile();
 				});
 
-				receiveEvents('/game', function(message) {
-					$('#board').append(message + ' ');
+				receiveGameEvents($.currentUrlParam('id'), function(tile) {
+					$('#board').append(tile + ' ');
 				});
 				
 				$('#tile').focus();

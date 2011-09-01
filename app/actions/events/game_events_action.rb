@@ -13,9 +13,10 @@ class GameEventsAction < Cramp::Action
     # puts "initialize = #{sse_event_id}"
   end
   
+  # FIXME extract find_game into a base class for all game actions - GameAction.
   def find_game
     # puts "find_game = #{sse_event_id}"
-    @game = Horus::Application.find_game
+    @game = Horus::Application.find_game(params[:id])
     yield
   end
   

@@ -21,19 +21,12 @@ module Horus
     def self.initialize!
     end
     
-    def self.find_game
-      @game ||= Game.new
-      @game
-    end
-    
-    # Clear entire application state -- testing only!
-    def self.clear!
-      @game = Game.new
+    def self.find_game(id)
+      Game.find(id)
     end
     
     def self.start_new_game
-      @game = Game.new
-      "dummy game id"
+      Game.create
     end
   end
 end

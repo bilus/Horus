@@ -7,8 +7,8 @@ class NewGameAction < Cramp::Action
   def create_game
     response = 
       begin
-        new_game_id = Horus::Application.start_new_game
-        {:status => :ok, :id => new_game_id}
+        new_game = Horus::Application.start_new_game
+        {:status => :ok, :id => new_game.id}
       rescue => e
         {:status => :error, :message => e}
       end

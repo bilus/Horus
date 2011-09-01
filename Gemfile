@@ -20,7 +20,8 @@ gem 'async-rack', '0.5.1'
 # Generic interface to multiple Ruby template engines - https://github.com/rtomayko/tilt
 gem 'tilt', '1.3.2'
 gem 'haml', '3.1.2'
-gem 'em-synchrony'
+gem 'em-synchrony', '0.2.0'
+gem 'uuidtools', '2.1.2'
 
 gem 'em-http-request', '0.3.0' 
 # gem 'em-http-request', '>=1.0.0.beta.4' # Because of em-eventsource gem below

@@ -88,6 +88,7 @@ GEM
     tilt (1.3.2)
     url_mount (0.2.1)
       rack
+    uuidtools (2.1.2)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -100,7 +101,7 @@ DEPENDENCIES
   cramp (= 0.15)
   cucumber
   em-http-request (= 0.3.0)
-  em-synchrony
+  em-synchrony (= 0.2.0)
   haml (= 3.1.2)
   http_router (= 0.10.2)
   rack-test
@@ -109,3 +110,4 @@ DEPENDENCIES
   syntax
   thin (= 1.2.11)
   tilt (= 1.3.2)
+  uuidtools (= 2.1.2)

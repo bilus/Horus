@@ -3,18 +3,60 @@ require File.join(File.dirname(__FILE__), "../../lib/game.rb")
 
 describe Game do
   
-  describe "should report on its state" do
-    context "empty game" do
+  describe "when asked if it has tiles" do
+    context "when it's an empty game" do
       subject { Game.new }
       it { should_not have_tiles }
     end
-    context "non-empty game" do
+    context "when it's a non-empty game" do
       subject { g = Game.new; g.add_tile("Lorem"); g }
       it { should have_tiles }
     end
   end
   
-  describe "should render events using provided rendering method" do
+  describe "when asked for its id" do
+    let(:game1) { Game.new } 
+    let(:game2) { Game.new } 
+    it "should return a non-nil id" do
+      game1.id.should_not be_nil
+    end
+    it "should have a unique id" do
+      game1.id.should_not == game2.id
+    end
+  end
+  
+  describe "when asked to create a game" do
+    it "should create a new game" do
+      Game.create.should be_kind_of Game
+    end
+  end
+  
+  describe "when asked to find a game given its id" do
+    let(:game_create1) { Game.create } 
+    let(:game_create2) { Game.create } 
+    let(:game_new) { Game.new } 
+    it "should find games created using the create method" do
+      # Note: in a future version, chances are that Game objects will be pulled out of a database
+      # and may be different instances so the equality comparison below won't work.
+      Game.find(game_create1.id).should == game_create1
+      Game.find(game_create2.id).should == game_create2
+    end
+    it "should not find games created using the new method" do
+      Game.find(game_new).should be_nil
+    end
+  end
+  
+  describe "when asked to destroy all games" do
+    let!(:game_create1) { Game.create } 
+    let!(:game_create2) { Game.create }    
+    it "should be unable to find any games afterwards" do
+      Game.destroy_all!
+      Game.find(game_create1.id).should be_nil
+      Game.find(game_create2.id).should be_nil
+    end
+  end
+  
+  describe "when asked to render events" do
     let(:game) {Game.new}
     let(:renderer) {mock("renderer")}
 
@@ -43,17 +85,6 @@ describe Game do
         renderer.stub!(:render_tiles).and_return("return value")
         game.render(renderer).should == "return value"
       end
-    end
-  end
-  
-  describe "after a game is started" do
-    subject { g = Game.new; g.add_tile("Lorem"); g }
-    let(:renderer) {mock("renderer")}
-    before(:each) { subject.start! }
-    it { should_not have_tiles }
-    it "should render nothing" do
-      renderer.should_not_receive(:render_tiles)
-      subject.render(renderer)
     end
   end
   

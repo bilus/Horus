@@ -54,17 +54,24 @@
 		+ and renders its unique id.
 		+ To make old cucumber tests pass, Application.start_new_game simply creates a new Game object and 
 		  returns a dummy id.
-		- All cucumber tests pass except for @story4
-		- COMMIT.
-		- Browser should pull events for the specific game so /game.htm uses the id from its url when creating
+		+ All rspec specs pass. All cucumber tests pass except for @story4.
+		+ COMMIT.
+		+ Browser should pull events for the specific game so /game.htm uses the id from its url when creating
           its EventSource.
-		- Home page
-			- POST game/ to obtain game ID.
-			- Redirect using the returned ID.
-		- See the cucumber tests pass.
-		- Commit.
-		- Extract the JS api into a separate file.
-		- See the cucumber tests pass.
+	 	+ Write spec for GameEventsAction: it should render tiles for multiple games based on their id.
+		+ When user adds a tile it should be POSTed using the current game id
+		+ and added to the correct game.
+		+ Add application_spec 
+			+ when asked for a new game it should query the game class (Game.create) and return Game::id.
+			+ and also find_game method should be a simple mapping to Game.find(id).
+			+ The test method clear! is no longer necessary.
+		+ Game.create
+			- should return a new Game object.
+			- should create Games with different ids (note: use guids).
+		+ Game.find
+			- should find Game objects based on id.
+		+ I extracted the JavaScript Horus API into a separate file (horus_api.js).
+		- All cucumber and rspec tests pass.
 		- Commit.
 - Story - Players can join games in progress.
 - Push to heroku.
@@ -75,6 +82,9 @@
 	- Make them pass.
 	- Make specs in Horus pass.
 	- Send the draft to lifo.
+- Create rudimentary graphics and animations.
+
+- Story - Players may only add tiles during their rounds.
 - Story - A player may only type single words.
 
 - Story - Player starting a new game can type up to 7 words to give the story a beginning.

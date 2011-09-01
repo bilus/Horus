@@ -5,13 +5,13 @@ class AddTileAction < Cramp::Action
   on_start :add_tile_to_game
   
   def find_game
-    @game = Horus::Application.find_game
+    @game = Horus::Application.find_game(params[:id])
     yield
   end
   
   # FIXME nil or empty tiles should not be accepted.
   # FIXME only single words should be accepted.
-  # Use a separate TilePolicy class.
+  # NOTE: Use a separate TilePolicy class.
   def add_tile_to_game
     tile = params[:tile]
     @game.add_tile(tile)
