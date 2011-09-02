@@ -44,6 +44,18 @@ Feature: Story composition game
 		And Tim adds tile "world"
 		Then Joe's board should display "Lorem ipsum"
 		And Tim's board should display "Hello world"
+		
+	@acceptance @story5
+	Scenario: Story $5 - players can join games in progress
+		Given player "Joe"
+		And player "Tim"
+		When Joe starts a new game
+		And Joe adds tile "Lorem"
+		And Tim joins Joe's game
+		And Tim adds tile "ipsum"
+		And Joe adds tile "sit"
+		Then Joe's board should display "Lorem ipsum sit"
+		And Tim's board should display "Lorem ipsum sit"
 	
 
 	# TODO After game ends adding new tiles is impossible.

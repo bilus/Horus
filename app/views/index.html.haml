@@ -23,5 +23,10 @@
 				}
 			
 	%body
-		%button{:id => "new-game", :name => "new-game"}Start
-		%div{:id => "trace"}
+		%button{:id => "new-game", :name => "new-game"}Start new game
+		%div
+			%p Current games:
+			%ul
+			- @games.each do |game|
+				%li
+					%a{:href => "/game.html?id=#{game.id}"}= game.id

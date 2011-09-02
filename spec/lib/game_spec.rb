@@ -2,6 +2,9 @@ require File.join(File.dirname(__FILE__), "../spec_helper.rb")
 require File.join(File.dirname(__FILE__), "../../lib/game.rb")
 
 describe Game do
+  before(:each) do
+    Game.destroy_all!
+  end
   
   describe "when asked if it has tiles" do
     context "when it's an empty game" do
@@ -43,6 +46,18 @@ describe Game do
     end
     it "should not find games created using the new method" do
       Game.find(game_new).should be_nil
+    end
+  end
+  
+  describe "when asked to find all games" do
+    let!(:game_create1) { Game.create } 
+    let!(:game_create2) { Game.create } 
+    let!(:game_new) { Game.new } 
+    it "should find games created using the create method" do
+      Game.find_all.map {|game| game.id}.sort.should == [game_create1.id, game_create2.id].sort
+    end
+    it "should not find games created using the new method" do
+      Game.find_all.map {|game| game.id}.should_not include game_new.id
     end
   end
   

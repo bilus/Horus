@@ -23,6 +23,10 @@ class Game
     @games[id]
   end
   
+  def self.find_all
+    @games.values
+  end
+  
   def self.destroy_all!
     @games.clear
   end

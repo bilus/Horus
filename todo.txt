@@ -30,7 +30,7 @@
 	+ Rename HomePageAction to HomePageAction (also the file).
 	+ Rename index.haml to index.htm.haml.
 	+ Make everything work.
-- Story 4 - Two players can simultaneously play two separate games.
++ Story 4 - Two players can simultaneously play two separate games.
 	+ Figure out how to do it.
 	+ Figure out how to write a cucumber test with two browser windows.
 	+ Write cucumber test and see it fail.
@@ -71,9 +71,13 @@
 		+ Game.find
 			- should find Game objects based on id.
 		+ I extracted the JavaScript Horus API into a separate file (horus_api.js).
-		- All cucumber and rspec tests pass.
-		- Commit.
-- Story - Players can join games in progress.
+		+ All cucumber and rspec tests pass.
+		+ COMMIT.
++ Story 5 - Players can join games in progress.
+	+ The main page now lists all current games as links 
+	+ so I changed the title of new-game#button to "Start new game" to make it more consistent.
+	+ All rspec & cucumber tests pass.
+	+ COMMIT.
 - Push to heroku.
 - Package my rspec support for cramp.
 	- Write specs.

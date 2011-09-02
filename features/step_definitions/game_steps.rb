@@ -8,6 +8,15 @@ When /^the player starts a new game$/ do
   visit("/")
   find("#new-game").click
   wait_until { find("#board") }
+  @games ||= {}
+  @games[Capybara.session_name] = current_url
+end
+
+When /^(.*) joins (.*)'s game$/ do |player, game_owner| 
+  Capybara.session_name = player
+  visit "/"
+  url = File.basename(@games[game_owner])
+  find(:xpath, "//a[contains(@href, '#{url}')]").click
 end
 
 When /^the player adds tile "([^"]*)"$/ do |s|
@@ -16,8 +25,12 @@ When /^the player adds tile "([^"]*)"$/ do |s|
 end
 
 When /^(?!the player)(.*) starts a new game$/ do |player|
+  begin
     Capybara.session_name = player
     When "the player starts a new game"
+  rescue => e
+    puts e
+  end
 end
 
 When /^(?!the player)(.*) adds tile "([^"]*)"$/ do |player, tile|
