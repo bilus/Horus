@@ -11,8 +11,7 @@ def context_for_cramp_app(&example_group_block)
       @request = Rack::MockRequest.new(app)
     end
     
-    def get(path, options = {}, headers = {}, &block)
-      callback = options.delete(:callback) || block
+    def get(path, &callback)
       wrapped_callback = proc do |r|
         begin
           callback.call(r)
@@ -144,7 +143,7 @@ end
 
 # Matcher for all requeste
 #
-RSpec::Matchers.define :respond_with_body do |expected_body, options = {}|;
+RSpec::Matchers.define :respond_with_body do |expected_body, options = {}|
   on_each = options.delete(:on_each)
   method = options.delete(:method)
   headers = (last_event_id = options.delete(:last_event_id)) ? {"HTTP_LAST_EVENT_ID" => last_event_id} : {}

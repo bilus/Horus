@@ -78,26 +78,55 @@
 	+ so I changed the title of new-game#button to "Start new game" to make it more consistent.
 	+ All rspec & cucumber tests pass.
 	+ COMMIT.
-- Push to heroku.
++ Push to ec2 and make it run there.
 - Package my rspec support for cramp.
-	- Write specs.
+	- Write test-first:
+		- respond_with
+			- should support the GET method.
+			- should support the POST method.
+			- should support the PUT method.
+			- should support the DELETE method.
+			- should timeout when no response.
+			- should handle exception in callback (wrapped_callback).
+			- should handle sync errors e.g. 404
+			- support passing headers to get/post etc.
+			- passing {} as the second arg when there are no options should be unnecessary
+				- rename to as respond_with
+				- rewrite so for body it's used like this respond_with :body => "EUEUEU"
+					- exact match
+					- regex match
+				- add support for code: respond_with :code => 200
+					- number
+					- number as string
+					- symbol => :ok, :error
+					- regex
+				- add support for header: respond with :header => { "Last-Event-ID" => "234234", ... }
+					- exact match
+					- regex match
+		- rewrite get/post so there are two usages:
+			- get "/" do { }
+			- get("/").should respond_with :code => :ok
 	- Make them pass.
 	- Refactor the code.
 	- Make them pass.
 	- Make specs in Horus pass.
 	- Send the draft to lifo.
-- Create rudimentary graphics and animations.
+- Story - When joining/starting a game, the player enters a nickname visible to other players.
+- Story - Nicknames displayed during a game are updated in real-time as players join/leave the game.
 
 - Story - Players may only add tiles during their rounds.
 - Story - A player may only type single words.
-
 - Story - Player starting a new game can type up to 7 words to give the story a beginning.
+- Story - A player may skip his turn (pass). 
+- Story - When both players pass in a row, the game is over.
+
+- Story - Main page updates list of current games in real time.
+- Story - Main game shows current games' progress.
+- Story - Main game shows 5 current games per page.
 
 - Story - A game can have a maximum of 2 players.
+- Story - Click to add stops, exclamation marks, smileys etc. (does not finish the round).
 
-- Story - A player may skip his turn (pass). 
-
-- Story - When both players pass in a row, the game is over.
 
 - Story - Finished stories are listed.
 
