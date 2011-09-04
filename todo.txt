@@ -106,6 +106,8 @@
 			+ get "/" do { }
 			+ get("/").should respond_with :code => :ok
 		- better failure message
+			+ for exact match
+			- for regex match (see if the message looks ok)
 	- Write specs for get/post/put/delete w/o the matcher.
 	- Make them pass.
 	- Refactor the code.

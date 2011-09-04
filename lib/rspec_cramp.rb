@@ -25,8 +25,6 @@ module Cramp
         max_chunks = options.delete(:max_chunks) || 1
         result = []
         callback = lambda do |response|
-          pp response
-          puts response[-1].closed?
           result = [response[0], response[1], []]
           stopping = false
           if response[-1].is_a? String
@@ -59,8 +57,8 @@ module Cramp
     end
     
     RSpec::Matchers.define :respond_with do |options = {}|
-      def match?(actual, expected)
-        if expected.nil?
+      def match?(what, actual, expected)
+        result = if expected.nil?
           true  # No expectation set.
         elsif actual.nil?
           false
@@ -73,6 +71,12 @@ module Cramp
         else
           raise "Unsupported type"
         end
+        if !result
+          @what = what
+          @actual = actual
+          @expected = expected
+        end
+        result
       end
       def resolve_status(status)
         case status
@@ -82,24 +86,29 @@ module Cramp
         end
       end
       def match_status
-        match?(@actual_status, resolve_status(@expected_status))
+        match?(:status, @actual_status, resolve_status(@expected_status))
       end
       def match_headers
         @expected_header.nil? || @expected_header.find do |ek, ev| 
-          @actual_headers.find { |ak, av| ak == ek && !match?(av, ev) } != nil
+          @actual_headers.find { |ak, av| ak == ek && !match?(:header, av, ev) } != nil
         end == nil 
       end
       def match_body
-        match?(@actual_status, @expected_body)
+        match?(:body, @actual_body, @expected_body)
       end
+      
       match do |request_result|
         @expected_status = options.delete(:status)
         @actual_status = request_result[0]
         @expected_header = options.delete(:header)
         @actual_headers = request_result[1]
         @expected_body = options.delete(:body)
-        @actual_body = request_result[2]
+        @actual_body = request_result[2].is_a?(Array) ? request_result[2].join("") : request_result[2]
         match_status && match_headers && match_body
+      end
+      
+      failure_message_for_should do
+        "expected \"#{@expected}\" in #{@what.to_s} but got: \"#{actual}\""
       end
     end
   end
