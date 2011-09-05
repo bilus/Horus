@@ -5,17 +5,27 @@ module Cramp
       @request = Rack::MockRequest.new(app)
     end
     
+    around(:each) do |example|
+      EventMachine.run do
+        x = Fiber.new do
+          example.run
+          EventMachine.stop
+        end.resume
+      end    
+    end
+    
     def get(path, options = {}, &block)
+      f = Fiber.current
       async_request = proc do |method, path, options, callback|
         headers = {'async.callback' => callback}
         timeout_secs = options.delete(:timeout) || default_timeout
         timeout(timeout_secs) do
-          EM.run do
+          # EM.run do
             catch(:async) do
               result = @request.send(method, path, headers)
               callback.call([result.status, result.header, "Something went wrong"])
             end
-          end
+          # end
         end
       end
       
@@ -26,25 +36,29 @@ module Cramp
         result = []
         callback = lambda do |response|
           result = [response[0], response[1], []]
+          f.resume(response)
           stopping = false
           if response[-1].is_a? String
+            puts "!!!!!!!"
             result[2] << response[-1]
-            stop
+             f.resume(result) 
           elsif response[0].between?(200, 299)
             response[-1].each do |chunk| 
               result[2] << chunk unless stopping
               if result[2].count >= max_chunks
                 stopping = true
-                EM.next_tick { EM.stop }
+                EM.next_tick { f.resume(result) }
+                #EM.next_tick { EM.stop }
               end            
             end
           else
             result[2] = ["Error #{response[0]}"]
-            stop
+            f.resume(result)
           end
         end
         async_request.call(:get, path, options, callback)
-        result
+        puts "before yield"
+        return Fiber.yield
       end
     end
     
@@ -94,16 +108,23 @@ module Cramp
         end == nil 
       end
       def match_body
-        match?(:body, @actual_body, @expected_body)
+        if @expected_body.nil?
+          true
+        else
+          puts "yielding body"
+          @actual_body = Fiber.yield
+          match?(:body, @actual_body, @expected_body)
+        end
       end
       
       match do |request_result|
         @expected_status = options.delete(:status)
         @actual_status = request_result[0]
+        puts "status: #{@actual_status}"
         @expected_header = options.delete(:header)
         @actual_headers = request_result[1]
         @expected_body = options.delete(:body)
-        @actual_body = request_result[2].is_a?(Array) ? request_result[2].join("") : request_result[2]
+        @deferred_body = request_result[2]
         match_status && match_headers && match_body
       end
       

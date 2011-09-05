@@ -36,4 +36,5 @@ group :test do
 	# Development gems
 	gem 'ruby-debug19'
 	gem 'cucumber'
+	gem 'rspec-cramp'
 end

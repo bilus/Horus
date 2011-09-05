@@ -79,21 +79,21 @@
 	+ All rspec & cucumber tests pass.
 	+ COMMIT.
 + Push to ec2 and make it run there.
-- Package my rspec support for cramp.
-	- Write test-first:
-		- respond_with
++ Package my rspec support for cramp.
+	+ Write test-first:
+		+ respond_with
 			+ should support the GET method.
-			- should support the POST method.
-			- should support the PUT method.
-			- should support the DELETE method.
+			+ should support the POST method.
+			+ should support the PUT method.
+			+ should support the DELETE method.
 			+ should timeout when no response.
 			+ should handle sync errors e.g. 404
-			- support passing headers to get/post etc.
+			+ support passing headers to get/post etc.
 			+ passing {} as the second arg when there are no options should be unnecessary
 				+ rename to as respond_with
 				+ rewrite so for body it's used like this respond_with :body => "EUEUEU"
-					- exact match
-					- regex match
+					+ exact match
+					+ regex match
 				+ add support for code: respond_with :code => 200
 					+ number
 					+ number as string
@@ -105,17 +105,18 @@
 		+ rewrite get/post so there are two usages:
 			+ get "/" do { }
 			+ get("/").should respond_with :code => :ok
-		- better failure message
+		+ better failure message
 			+ for exact match
-			- for regex match (see if the message looks ok)
-	- Write specs for get/post/put/delete w/o the matcher.
-	- Make them pass.
-	- Refactor the code.
-	- Make them pass.
-	- Rewrite specs in Horus using the new matcher.
-	- Make specs in Horus pass.
-	- Write short documentation.
-	- Send the draft to lifo.
+			+ for regex match (see if the message looks ok)
+	+ Write specs for get/post/put/delete w/o the matcher.
+	+ Make them pass.
+	+ Refactor the code.
+	+ Make them pass.
+	+ Rewrite specs in Horus using the new matcher.
+	+ Make specs in Horus pass.
+	+ Write short documentation.
+	+ Send the draft to lifo.
+	+ Publish gem + source.
 - Story - When joining/starting a game, the player enters a nickname visible to other players.
 - Story - Nicknames displayed during a game are updated in real-time as players join/leave the game.
 
