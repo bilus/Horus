@@ -13,8 +13,16 @@ class Game
     @id.to_s
   end
   
-  def self.create
+  def owner_nick
+    @owner_nick
+  end  
+  def owner_nick=(nick)
+    @owner_nick = nick
+  end
+  
+  def self.create(nick)
     new_game = Game.new
+    new_game.owner_nick = nick
     @games[new_game.id] = new_game
     new_game
   end

@@ -6,6 +6,10 @@ describe Game do
     Game.destroy_all!
   end
   
+  def create_game
+    Game.create("nickname")
+  end
+  
   describe "when asked if it has tiles" do
     context "when it's an empty game" do
       subject { Game.new }
@@ -28,15 +32,20 @@ describe Game do
     end
   end
   
+  describe "when asked for its owner" do
+    let(:game1) { Game.create("Joe") }
+    specify { game1.owner_nick.should == "Joe" }
+  end
+  
   describe "when asked to create a game" do
     it "should create a new game" do
-      Game.create.should be_kind_of Game
+      create_game.should be_kind_of Game
     end
   end
   
   describe "when asked to find a game given its id" do
-    let(:game_create1) { Game.create } 
-    let(:game_create2) { Game.create } 
+    let(:game_create1) { create_game } 
+    let(:game_create2) { create_game } 
     let(:game_new) { Game.new } 
     it "should find games created using the create method" do
       # Note: in a future version, chances are that Game objects will be pulled out of a database
@@ -50,8 +59,8 @@ describe Game do
   end
   
   describe "when asked to find all games" do
-    let!(:game_create1) { Game.create } 
-    let!(:game_create2) { Game.create } 
+    let!(:game_create1) { create_game } 
+    let!(:game_create2) { create_game } 
     let!(:game_new) { Game.new } 
     it "should find games created using the create method" do
       Game.find_all.map {|game| game.id}.sort.should == [game_create1.id, game_create2.id].sort
@@ -62,8 +71,8 @@ describe Game do
   end
   
   describe "when asked to destroy all games" do
-    let!(:game_create1) { Game.create } 
-    let!(:game_create2) { Game.create }    
+    let!(:game_create1) { create_game } 
+    let!(:game_create2) { create_game }    
     it "should be unable to find any games afterwards" do
       Game.destroy_all!
       Game.find(game_create1.id).should be_nil

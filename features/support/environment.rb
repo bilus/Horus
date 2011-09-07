@@ -4,7 +4,32 @@ require 'capybara/rspec'
 require 'rspec/expectations'
 require 'rspec/matchers'
 require "selenium-webdriver"
+require "pp"
+require "ruby-debug"
 require File.join(File.dirname(__FILE__), "thin_support")
+require File.join(File.dirname(__FILE__), "helpers")
+
+
+# Monkey-patch cucumber formatter to avoid hanging on error/exception.
+require 'cucumber/formatter/console'
+module Cucumber
+  module Formatter
+    module Console
+      def print_exception(e, status, indent)
+        # Old:
+        # message = "#{e.message} (#{e.class})"  #hangs in call to 'class'.
+        # New:
+        message = e.inspect
+        if ENV['CUCUMBER_TRUNCATE_OUTPUT']
+          message = linebreaks(message, ENV['CUCUMBER_TRUNCATE_OUTPUT'].to_i)
+        end
+
+        string = "#{message}\n#{e.backtrace.join("\n")}".indent(indent)
+        @io.puts(format_string(string, status))
+      end
+    end
+  end
+end
 
 World do
   Capybara.app_host = "http://localhost:3000"

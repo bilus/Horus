@@ -46,7 +46,7 @@ Feature: Story composition game
 		And Tim's board should display "Hello world"
 		
 	@acceptance @story5
-	Scenario: Story $5 - players can join games in progress
+	Scenario: Story #5 - players can join games in progress
 		Given player "Joe"
 		And player "Tim"
 		When Joe starts a new game
@@ -56,7 +56,19 @@ Feature: Story composition game
 		And Joe adds tile "sit"
 		Then Joe's board should display "Lorem ipsum sit"
 		And Tim's board should display "Lorem ipsum sit"
-	
+		
+	@acceptance @story6
+	Scenario: Story #6 - when starting a game, player enters a nickname visible to other players
+		Given player "Joe"
+		And player "Tim"
+		When Joe starts a new game
+		And Tim joins Joe's game
+		Then Tim sees Joe on player list
+	# 	
+	# Scenario: Player is not able to start game without a nickname
+	# 	Given player "Joe"
+	# 	When Joe tries to start a new game but doesn't enter the nickname
+	# 	Then Joe cannot start the game
 
 	# TODO After game ends adding new tiles is impossible.
 	# TODO Adding a blank tile has no effect and doesn't end the player's turn.

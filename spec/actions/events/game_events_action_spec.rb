@@ -7,13 +7,13 @@ describe "/game_events", :cramp => true do
   end
   
   context "routes" do
-    let!(:game) { Horus::Application.start_new_game }
+    let!(:game) { Horus::Application.start_new_game("Joe") }
     specify { post("/game_events?id=#{game.id}").should_not respond_with :status => :ok }
   end
   
   context "game events for" do
     context "a single game" do
-      let!(:game) { Horus::Application.start_new_game }
+      let!(:game) { Horus::Application.start_new_game("Joe") }
     
       it "should respond with added tiles" do
         game.add_tile("Lorem")
@@ -39,8 +39,8 @@ describe "/game_events", :cramp => true do
     end
     
     context "multiple games" do
-      let!(:game1) { Horus::Application.start_new_game }
-      let!(:game2) { Horus::Application.start_new_game }
+      let!(:game1) { Horus::Application.start_new_game("Joe") }
+      let!(:game2) { Horus::Application.start_new_game("Joe") }
       
       it "should respond with a different story based on game id" do
         game1.add_tile("Lorem")

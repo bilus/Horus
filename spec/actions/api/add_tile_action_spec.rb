@@ -11,8 +11,8 @@ describe "Api for adding tiles to game", :cramp => true do
   end
       
   context "when POST request is sent" do
-    let!(:game1) { Horus::Application.start_new_game }
-    let!(:game2) { Horus::Application.start_new_game }
+    let!(:game1) { Horus::Application.start_new_game("Joe") }
+    let!(:game2) { Horus::Application.start_new_game("Joe") }
   
     it "should add tile to the game" do
       renderer = mock("renderer").as_null_object

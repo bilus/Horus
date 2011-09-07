@@ -12,7 +12,7 @@ describe "Home page", :cramp => true do
   end
   
   context "contents" do
-    let!(:games) { [Game.create, Game.create, Game.create] }
+    let!(:games) { [Game.create("John"), Game.create("Tim"), Game.create("Joe")] }
     it "should list all pages" do
       games.each do |game|
         get("/").should respond_with :body => /.*#{game.id}.*/

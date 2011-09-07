@@ -117,8 +117,19 @@
 	+ Write short documentation.
 	+ Send the draft to lifo.
 	+ Publish gem + source.
-- Story - When joining/starting a game, the player enters a nickname visible to other players.
+- Story - When starting a game, the player enters a nickname visible to other players.
+	+ UI for entering the nickname.
+	+ Set game owner.
+	+ Specs pass.
+	+ Cucumber pass except for story #6.
+	+ COMMIT
+	- Display the owner.
+		- game_events should respond with JSON - {"tile":"Lorem"}
+			- update spec and make it pass.
+			- 
+- Story - When joining a game, the player enters a nickname visible to other players.
 - Story - Nicknames displayed during a game are updated in real-time as players join/leave the game.
+- Story - Player cannot easily join other player's game.
 
 - Story - Players may only add tiles during their rounds.
 - Story - A player may only type single words.

@@ -7,25 +7,30 @@ describe "Api for creating new games", :cramp => true do
   end
   
   context "routes" do
-    specify { post("/game").should respond_with :status => :ok } 
+    specify { post("/game?nick=Joe").should respond_with :status => :ok } 
   end
       
-  context "game creation" do      
-    let(:new_game) { g = mock("game"); g.stub!(:id).and_return("sample game id"); g }
-    
-    it "should start a new game when invoked" do
-      Horus::Application.should_receive(:start_new_game).once
-      post "/game"
-    end
-    
-    it "should respond with new game id" do
-      Horus::Application.stub!(:start_new_game).and_return(new_game)
-      post("/game").should respond_with :body => /.*"id":"#{new_game.id}".*/
-    end
-    
-    it "should render error information if exception is raised" do
-      Horus::Application.stub!(:start_new_game).and_raise("an error")
-      post("/game").should respond_with :body => /.*an error.*/
-    end
+  let(:new_game) { g = mock("game"); g.stub!(:id).and_return("sample game id"); g }    
+  
+  it "should start a new game" do
+    Horus::Application.should_receive(:start_new_game).once
+    post "/game?nick=Joe"
+  end
+  
+  it "should start a new game passing the nick name" do
+    Horus::Application.should_receive(:start_new_game).with("Joe").once
+    post "/game?nick=Joe"
+  end
+  
+  it "should respond with new game id" do
+    Horus::Application.stub!(:start_new_game).and_return(new_game)
+    post("/game?nick=Joe").should respond_with :body => /.*"status":"ok".*/
+    post("/game?nick=Joe").should respond_with :body => /.*"id":"#{new_game.id}".*/
+  end
+  
+  it "should respond with an error if starting new game fails" do
+    Horus::Application.stub!(:start_new_game).and_raise("some error")
+    post("/game?nick=Joe").should respond_with :body => /.*"status":"error".*/
+    post("/game?nick=Joe").should respond_with :body => /.*"message":"some error".*/
   end
 end

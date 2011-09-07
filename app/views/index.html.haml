@@ -4,15 +4,34 @@
 		%script{:type => "text/javascript", :src => "javascripts/jquery-1.6.2.min.js"}
 		:javascript
 			function startNewGame() {
-				$.post('/game', function(data) {
+				$('#start #new-game').hide();
+				$('#start div#nickname').show();
+				$('#start input#nickname').focus();
+			};
+			function confirmStartNewGame() {
+				nick = $('#start input#nickname').val();
+				$.post('/game?nick=' + nick, function(data) {
 					window.location = '/game.html?id=' + jQuery.parseJSON(data).id;
-				});
+				});			
 			};
 			
 			$(document).ready(function() {
-			
-				$('#new-game').bind('click', function() {
+				$('#start #new-game').bind('click', function() {
 					startNewGame();
+				});
+				
+				$('#start #nickname #ok').bind('click', function() {
+					confirmStartNewGame();
+				});
+				
+				$('#start input#nickname').bind('keypress', function(e) {
+				        if (e.which == 13)
+							confirmStartNewGame();
+				});
+
+				$('#start #nickname #cancel').bind('click', function() {
+					$('#start #new-game').show();
+					$('#start div#nickname').hide();
 				});
 			});
 			
@@ -21,10 +40,23 @@
 				#new-game {
 					height: 25px;
 				}
+				#ok {
+					height: 21px;
+					width: 40px;
+				}
+				#start div#nickname {
+					display: none;
+				}
 			
 	%body
-		%button{:id => "new-game", :name => "new-game"}Start new game
-		%div
+		#start 
+			%button{:id => "new-game", :name => "new-game"}Start new game
+			#nickname
+				%span Enter a nickname to start
+				%input{:id => "nickname", :name => "nickname"}
+				%button{:id => "ok", :name => "ok"}OK
+				%a{:id => "cancel", :href => "#"}cancel
+		#games
 			%p Current games:
 			%ul
 			- @games.each do |game|

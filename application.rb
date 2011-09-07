@@ -25,8 +25,8 @@ module Horus
       Game.find(id)
     end
     
-    def self.start_new_game
-      Game.create
+    def self.start_new_game(nick)
+      Game.create(nick)
     end
   end
 end

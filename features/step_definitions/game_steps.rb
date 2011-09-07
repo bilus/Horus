@@ -6,31 +6,31 @@ end
 
 When /^the player starts a new game$/ do
   visit("/")
-  find("#new-game").click
-  wait_until { find("#board") }
-  @games ||= {}
-  @games[Capybara.session_name] = current_url
+  start_game
+  enter_nickname
+  confirm_start_game
 end
 
 When /^(.*) joins (.*)'s game$/ do |player, game_owner| 
   Capybara.session_name = player
   visit "/"
-  url = File.basename(@games[game_owner])
-  find(:xpath, "//a[contains(@href, '#{url}')]").click
+  join_game(game_owner)
 end
 
 When /^the player adds tile "([^"]*)"$/ do |s|
-  find("input#tile").set(s)
-  find("#add").click
+  add_tile(s)
 end
 
 When /^(?!the player)(.*) starts a new game$/ do |player|
-  begin
-    Capybara.session_name = player
-    When "the player starts a new game"
-  rescue => e
-    puts e
-  end
+  Capybara.session_name = player
+  When "the player starts a new game"
+end
+
+When /^(.*) tries to start a new game but doesn't enter the nickname$/ do |player|
+  Capybara.session_name = player
+  visit("/")
+  start_game
+  confirm_start_game
 end
 
 When /^(?!the player)(.*) adds tile "([^"]*)"$/ do |player, tile|
@@ -56,8 +56,16 @@ Then /^(.*)'s board should display "([^"]*)"$/ do |player, s|
 end
 
 Then /^(.*)'s board should not display "([^"]*)"$/ do |player, s|
-  # Capybara.session_name = player
-  # Then "the board should not display \"#{s}\""
+  Capybara.session_name = player
+  Then "the board should not display \"#{s}\""
+end
+
+Then /^(.*) sees (.*) on player list$/ do |player, other_player|
+  find("#players").should have_content(other_player)
+end
+
+Then /^(.*) cannot add tiles$/ do |player|
+  page.should_not have_css("input#tile")
 end
 
 
