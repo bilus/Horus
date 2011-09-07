@@ -36,7 +36,7 @@ class GameEventsAction < Cramp::Action
   def render_tile(tile, state)
     raise "State must be a number" unless state.kind_of? Integer
     @sse_event_id = state
-    render(tile)
+    render({:tile => tile}.to_json)
   end
   
   private

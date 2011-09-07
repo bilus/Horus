@@ -12,7 +12,13 @@ function __appendGameId(url, gameId) {
 
 function receiveGameEvents(gameId, onTile) {
 	// Global object -- this function cannot be used with multiple feeds.
-	this.gameEventSource = __receiveEvents(__appendGameId('/game', gameId), onTile);
+	this.gameEventSource = __receiveEvents(__appendGameId('/game', gameId), function(event) {
+		tile = jQuery.parseJSON(event).tile;
+		if (tile)
+			onTile(tile);
+		else
+			alert("invalid event");
+	});
 };
 
 function addTile(gameId, tile) {

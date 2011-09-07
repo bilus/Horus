@@ -6,6 +6,11 @@ describe "/game_events", :cramp => true do
     Horus::Application.routes
   end
   
+  def tiles(tiles)
+    # {:chunks => tiles.map {|tile| /.*#{tile}.*/}}
+    {:chunks => tiles.map {|tile| /.*"tile":"#{tile}".*/}}
+  end
+  
   context "routes" do
     let!(:game) { Horus::Application.start_new_game("Joe") }
     specify { post("/game_events?id=#{game.id}").should_not respond_with :status => :ok }
@@ -18,7 +23,7 @@ describe "/game_events", :cramp => true do
       it "should respond with added tiles" do
         game.add_tile("Lorem")
         game.add_tile("ipsum")
-        get("/game_events?id=#{game.id}", :max_chunks => 2).should respond_with :chunks => [/.*^data: Lorem$.*/, /.*^data: ipsum$.*/]
+        get("/game_events?id=#{game.id}", :max_chunks => 2).should respond_with tiles ["Lorem", "ipsum"]
       end
 
       it "should respond with a story if different since the last time based on last event id" do
@@ -34,7 +39,7 @@ describe "/game_events", :cramp => true do
         game.add_tile("sit")
         game.add_tile("amet")
         get("/game_events?id=#{game.id}", :max_chunks => 3, :headers => {"Last-Event-Id" => last_event_id}).
-          should respond_with :chunks => [/.*dolor.*/, /.*sit.*/, /.*amet.*/]
+          should respond_with tiles ["dolor", "sit", "amet"]
       end
     end
     
@@ -47,8 +52,8 @@ describe "/game_events", :cramp => true do
         game1.add_tile("ipsum")
         game2.add_tile("Hello")
         game2.add_tile("world")
-        get("/game_events?id=#{game1.id}", :max_chunks => 2).should respond_with :chunks => [/.*^data: Lorem$.*/, /.*^data: ipsum$.*/]
-        get("/game_events?id=#{game2.id}", :max_chunks => 2).should respond_with :chunks => [/.*^data: Hello$.*/, /.*^data: world$.*/]
+        get("/game_events?id=#{game1.id}", :max_chunks => 2).should respond_with tiles ["Lorem", "ipsum"]
+        get("/game_events?id=#{game2.id}", :max_chunks => 2).should respond_with tiles ["Hello", "world"]
       end
     end
   end

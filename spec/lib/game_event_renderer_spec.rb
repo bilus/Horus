@@ -3,6 +3,7 @@ require File.join(File.dirname(__FILE__), "../../lib/game_event_renderer.rb")
 describe GameEventRenderer do
   let(:surface) { mock("surface").as_null_object }
   
+  
   context "renderer with no previous state" do
     let(:renderer) { GameEventRenderer.new(surface) }
   
