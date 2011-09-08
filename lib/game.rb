@@ -40,7 +40,7 @@ class Game
   end
   
   def render(method)
-    method.render_tiles(@tiles) unless @tiles.empty?
+    method.render_events([{:owner => @owner_nick}] + @tiles.map {|tile| {:tile => tile}})
   end
   
   def add_tile(s)

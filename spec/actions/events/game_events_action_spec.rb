@@ -7,8 +7,11 @@ describe "/game_events", :cramp => true do
   end
   
   def tiles(tiles)
-    # {:chunks => tiles.map {|tile| /.*#{tile}.*/}}
     {:chunks => tiles.map {|tile| /.*"tile":"#{tile}".*/}}
+  end
+  
+  def owner(nick)
+    {:chunks => [/.*"owner":"#{nick}".*/]}
   end
   
   context "routes" do
@@ -20,17 +23,22 @@ describe "/game_events", :cramp => true do
     context "a single game" do
       let!(:game) { Horus::Application.start_new_game("Joe") }
     
+      it "should initially respond with game owner" do
+        get("/game_events?id=#{game.id}", :max_chunks => 1).should respond_with owner "Joe"
+      end
+    
       it "should respond with added tiles" do
         game.add_tile("Lorem")
         game.add_tile("ipsum")
-        get("/game_events?id=#{game.id}", :max_chunks => 2).should respond_with tiles ["Lorem", "ipsum"]
+        get("/game_events?id=#{game.id}", :max_chunks => 3).  # 1 owner + 2 tiles
+          should respond_with :chunks => (owner("Joe")[:chunks] + tiles(["Lorem", "ipsum"])[:chunks])
       end
 
       it "should respond with a story if different since the last time based on last event id" do
         game.add_tile("Lorem")
         game.add_tile("ipsum")
         last_event_id = ""
-        get("/game_events?id=#{game.id}", :max_chunks => 2).should respond_with(:chunks => lambda do |chunks|
+        get("/game_events?id=#{game.id}", :max_chunks => 3).should respond_with(:chunks => lambda do |chunks|
           chunks.last =~ /.*^id: (.*)$.*/
           last_event_id = $1
           true
@@ -52,8 +60,10 @@ describe "/game_events", :cramp => true do
         game1.add_tile("ipsum")
         game2.add_tile("Hello")
         game2.add_tile("world")
-        get("/game_events?id=#{game1.id}", :max_chunks => 2).should respond_with tiles ["Lorem", "ipsum"]
-        get("/game_events?id=#{game2.id}", :max_chunks => 2).should respond_with tiles ["Hello", "world"]
+        get("/game_events?id=#{game1.id}", :max_chunks => 3). # 1 owner + 2 tiles
+          should respond_with :chunks => (owner("Joe")[:chunks] + tiles(["Lorem", "ipsum"])[:chunks])
+        get("/game_events?id=#{game2.id}", :max_chunks => 3). # 1 owner + 2 tiles
+          should respond_with :chunks => (owner("Joe")[:chunks] + tiles(["Hello", "world"])[:chunks])
       end
     end
   end

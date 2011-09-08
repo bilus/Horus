@@ -33,10 +33,10 @@ class GameEventsAction < Cramp::Action
   # Renderer needs to preserve state between each call. Because this action object can be 
   # destroyed and re-created at any point, we cannot use an instance variable to preserve state.
   # But event id is ideal for this as long as the state is a number.
-  def render_tile(tile, state)
+  def render_event(event, state)
     raise "State must be a number" unless state.kind_of? Integer
     @sse_event_id = state
-    render({:tile => tile}.to_json)
+    render(event.to_json)
   end
   
   private

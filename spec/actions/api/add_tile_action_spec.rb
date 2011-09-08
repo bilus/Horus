@@ -18,7 +18,7 @@ describe "Api for adding tiles to game", :cramp => true do
       renderer = mock("renderer").as_null_object
       lorem_tile, ipsum_tile = %w{Lorem ipsum}
 
-      renderer.should_receive(:render_tiles).with([lorem_tile, ipsum_tile])
+      renderer.should_receive(:render_events).with([{:owner => "Joe"}, {:tile => lorem_tile}, {:tile => ipsum_tile}])
       post "/add_tile?id=#{game1.id}", :params => {:tile => lorem_tile}
       post "/add_tile?id=#{game1.id}", :params => {:tile => ipsum_tile}
       game1.render(renderer)
@@ -28,7 +28,7 @@ describe "Api for adding tiles to game", :cramp => true do
       renderer = mock("renderer").as_null_object
       lorem_tile, ipsum_tile = %w{Lorem ipsum}
 
-      renderer.should_receive(:render_tiles).with([lorem_tile])
+      renderer.should_receive(:render_events).with([{:owner => "Joe"}, {:tile => lorem_tile}])
       post "/add_tile?id=#{game1.id}", :params => {:tile => lorem_tile}
       post "/add_tile?id=#{game2.id}", :params => {:tile => ipsum_tile}
       game1.render(renderer)

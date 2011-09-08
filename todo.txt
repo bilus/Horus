@@ -123,12 +123,13 @@
 	+ Specs pass.
 	+ Cucumber pass except for story #6.
 	+ COMMIT
-	- Display the owner.
+	+ Display the owner.
 		+ game_events should respond with JSON - {"tile":"Lorem"}
-		- after player establishes the connection, respond with {"owner":"Joe"}
-			- write spec
-			- make it pass
-		
+		+ after player establishes the connection, respond with {"owner":"Joe"}
+			+ write spec
+			+ make it pass
+		+ show the owner on #players
+	+ COMMIT	
 - Story - When joining a game, the player enters a nickname visible to other players.
 - Story - Nicknames displayed during a game are updated in real-time as players join/leave the game.
 - Story - Player cannot easily join other player's game.

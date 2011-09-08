@@ -81,16 +81,14 @@ describe Game do
   end
   
   describe "when asked to render events" do
-    let(:game) {Game.new}
+    let(:game_owner) {"Joe"}
+    let(:game) {Game.create(game_owner)}
     let(:renderer) {mock("renderer")}
 
     context "with no tiles" do
-      it "should render nothing" do
-        renderer.should_not_receive(:render_tiles)
+      it "should render just owner" do
+        renderer.should_receive(:render_events).with([{:owner => game_owner}])
         game.render(renderer)
-      end
-      it "should return nil" do
-        game.render(renderer).should be_nil
       end
     end
 
@@ -101,15 +99,15 @@ describe Game do
         game.add_tile(lorem)
         game.add_tile(ipsum)
       end
-      it "should render all tiles" do
-        renderer.should_receive(:render_tiles).with([lorem, ipsum])
+      it "should render owner and all tiles" do
+        renderer.should_receive(:render_events).with([{:owner => game_owner}, {:tile => lorem}, {:tile => ipsum}])
         game.render(renderer)
       end
-      it "should pass on the return value from renderer" do
-        renderer.stub!(:render_tiles).and_return("return value")
-        game.render(renderer).should == "return value"
-      end
+    end
+
+    it "should pass on the return value from renderer" do
+      renderer.stub!(:render_events).and_return("return value")
+      game.render(renderer).should == "return value"
     end
   end
-  
 end
