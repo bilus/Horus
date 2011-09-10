@@ -13,6 +13,9 @@ class Game
     @id.to_s
   end
   
+  def join(nick)
+  end
+  
   def owner_nick
     @owner_nick
   end  

@@ -10,7 +10,7 @@ HttpRouter.new do
   add('/game').post.to(NewGameAction)
   add('/game.html').get.to(GamePageAction)
   add('/tile/:game_id').post.to(AddTileAction)
-  # add('/game').matching(:new => /^.+$/).request_method('PUT').to(HomePageAction)
+  add('game/:game_id').put.to(UpdateGameAction)
   add('/game/:game_id').get.to(GameEventsAction)
   
 end

@@ -1,8 +1,6 @@
 require File.join(File.dirname(__FILE__), "../game_action.rb")
 require File.join(File.dirname(__FILE__), "../../../lib/game_event_renderer")
 
-require "pp";
-
 class GameEventsAction < GameAction
   self.transport = :sse
   before_start :find_game

@@ -7,12 +7,12 @@ class UpdateGameAction < GameAction
   def update_game
     render_result do
       if params[:join]
-        @game.join(params[:nick])
-        {:status => :ok}
+        @game.join(params[:join])
+        {:status => :ok, :id => @game.id}
       else
         {:status => :error}
       end
-      finish
     end
+    finish
   end
 end

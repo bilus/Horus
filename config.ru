@@ -10,7 +10,7 @@ if Horus::Application.env == 'development'
 end
 
 # Serve assets from /public
-use Rack::Static, :urls => ["/javascripts"], :root => Horus::Application.root(:public)
+use Rack::Static, :urls => ["/javascripts", "/css"], :root => Horus::Application.root(:public)
 
 # Running thin :
 #

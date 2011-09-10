@@ -110,4 +110,12 @@ describe Game do
       game.render(renderer).should == "return value"
     end
   end
+  
+  describe "players may join the game" do
+    let(:game) {Game.create("Joe")}
+    
+    it "should support the join method" do
+      game.join("Tim")
+    end
+  end
 end

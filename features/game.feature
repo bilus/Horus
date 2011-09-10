@@ -70,6 +70,14 @@ Feature: Story composition game
 	# 	When Joe tries to start a new game but doesn't enter the nickname
 	# 	Then Joe cannot start the game
 
+	@acceptance @story7
+	Scenario: Story #7 - when joining a game, the player enters a nickname visible to other players
+		Given player "Joe"
+		And player "Tim"
+		When Joe starts a new game
+		And Tim joins Joe's game
+		Then Joe sees Tim on player list
+		
 	# TODO After game ends adding new tiles is impossible.
 	# TODO Adding a blank tile has no effect and doesn't end the player's turn.
 	# TODO Add a test to verify that the text box is cleared after adding the word.

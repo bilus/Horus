@@ -1,21 +1,22 @@
 def start_game
   find("#new-game").click
-  wait_until { find("#nickname") }
 end
 
-def confirm_start_game
-  find("#nickname #ok").click
+def open_game
+  find(".default_button").click
   wait_until { find("#game") }
   @games ||= {}
-  @games[Capybara.session_name] = current_url
+  raise "Oops! Url format for game page has changed?" unless current_url =~ /^.*game_id=(.*)$/
+  @games[Capybara.session_name] = $1
 end
 
 def join_game(game_owner)
-  url = File.basename(@games[game_owner])
-  find(:xpath, "//a[contains(@href, '#{url}')]").click
+  game_id = File.basename(@games[game_owner])
+  find(:css, "##{game_id}").click
 end
 
 def enter_nickname
+  wait_until { find("#nickname") }
   find("#nickname input#nickname").set(Capybara.session_name)
 end
 

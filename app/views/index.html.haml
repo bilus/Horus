@@ -2,64 +2,97 @@
 	%head
 		%title Horus
 		%script{:type => "text/javascript", :src => "/javascripts/jquery-1.6.2.min.js"}
+		%script{:type => "text/javascript", :src => "/javascripts/jquery-ui-1.8.16.custom.min.js"}
 		%script{:type => "text/javascript", :src => "/javascripts/horus_api.js"}
+		%link{:type => "text/css", :href => "css/blitzer/jquery-ui-1.8.16.custom.css", :rel => "stylesheet"}
 		:javascript
-			function startNewGame() {
-				$('#start #new-game').hide();
-				$('#start div#nickname').show();
-				$('#start input#nickname').focus();
+		
+			function openGameDialog(title, okBtnTitle, onOk) {
+				$('#nickname').dialog({
+					resizable: false,
+					modal: true,
+					title: title,
+					hide: "puff",
+					buttons: [{
+						text: okBtnTitle,
+						class: "default_button",
+						click: function() {
+							$(this).dialog("option", "close", function() {
+								var nick = $('input#nickname').val();
+								onOk(nick);
+							});
+							$(this).dialog("close");
+						}
+					}, {
+						text: "Cancel",
+						click: function() {
+							$(this).dialog("close");
+						}
+					}]
+				});			
 			};
-			function confirmStartNewGame() {
-				nick = $('#start input#nickname').val();
+		
+			function startNewGame() {
+				openGameDialog("Start New Game", "Start", function(nick) {
+					confirmStartNewGame(nick);
+				});
+			};
+			function confirmStartNewGame(nick) {
 				startGame(nick, function(gameId) {
 					window.location = linkToGame(gameId);
 				});
 			};
 			
+			function joinThisGame(gameId) {
+				openGameDialog("Join Game", "Join", function(nick) {
+					confirmJoinThisGame(gameId, nick);
+				});
+			};
+			function confirmJoinThisGame(gameId, nick) {
+				joinGame(gameId, nick, function(gameId) {
+					window.location = linkToGame(gameId);
+				});
+			};
+			
 			$(document).ready(function() {
-				$('#start #new-game').bind('click', function() {
+				$("button#new-game").button();
+				
+				$('#start #new-game').click(function() {
 					startNewGame();
 				});
 				
-				$('#start #nickname #ok').bind('click', function() {
-					confirmStartNewGame();
+				$('input#nickname').keypress(function(e) {
+					if (e.which == 13)
+						$('.default_button').click();
 				});
 				
-				$('#start input#nickname').bind('keypress', function(e) {
-				        if (e.which == 13)
-							confirmStartNewGame();
-				});
-
-				$('#start #nickname #cancel').bind('click', function() {
-					$('#start #new-game').show();
-					$('#start div#nickname').hide();
+				$('#games a.link-to-game').click(function() {
+					var gameId = $(this).attr('id');
+					joinThisGame(gameId);
 				});
 			});
 			
 		%style{:type => "text/css", :media => "screen"}
 			:plain
-				#new-game {
-					height: 25px;
-				}
-				#ok {
-					height: 21px;
-					width: 40px;
-				}
-				#start div#nickname {
+				div#nickname {
 					display: none;
+				}
+				div#nickname span.comment {
+					color: grey;
+					font-style: italic;
+					font-size: 12px;
+					margin-bottom: 5px;
 				}
 			
 	%body
+		%div#nickname
+			%span Your nickname:
+			%input#nickname
 		#start 
-			%button{:id => "new-game", :name => "new-game"}Start new game
-			#nickname
-				%span Enter a nickname to start
-				%input{:id => "nickname", :name => "nickname"}
-				%button{:id => "ok", :name => "ok"}OK
-				%a{:id => "cancel", :href => "#"}cancel
+			%button#new-game Start new game
 		#games
 			%p Current games:
 			%ul
 			- @games.each do |game|
 				%li
-					%a{:class => "link-to-game", :href => "/game.html?game_id=#{game.id}"}= game.id
+					%a{:class => "link-to-game", :id => "#{game.id}", :href => "#"}= "#{game.owner_nick}'s"

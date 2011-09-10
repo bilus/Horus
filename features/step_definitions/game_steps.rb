@@ -8,13 +8,15 @@ When /^the player starts a new game$/ do
   visit("/")
   start_game
   enter_nickname
-  confirm_start_game
+  open_game
 end
 
 When /^(.*) joins (.*)'s game$/ do |player, game_owner| 
   Capybara.session_name = player
   visit "/"
   join_game(game_owner)
+  enter_nickname
+  open_game
 end
 
 When /^the player adds tile "([^"]*)"$/ do |s|
