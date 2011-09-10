@@ -131,6 +131,21 @@
 		+ show the owner on #players
 	+ COMMIT	
 - Story - When joining a game, the player enters a nickname visible to other players.
+	+ Change all routers to .../:game_id
+	+ POST /tile/:game_id {:tile => "ABC"} to add a tile.
+	- I extracted common functionality for game actions into GameAction.
+	- PUT /game/:game_id {:join => "Joe"} to join a game.
+		- routes
+		- join game action - respond with {"status":"ok"}
+		- call Game::join(nickname)
+		- Game - when rendering, render events about joining.
+			- store @events and render them instead of @owner & @tiles.
+			- when player joins, create an event.
+		- GameEventsAction - when player joins, it renders an appropriate event.
+		- games.html - list players joining the game.
+		- COMMIT
+	- Get rid of owner -- use players for owner as well.
+		- separate game creation (POST /game) from joining the game (PUT /game)?
 - Story - Nicknames displayed during a game are updated in real-time as players join/leave the game.
 - Story - Player cannot easily join other player's game.
 

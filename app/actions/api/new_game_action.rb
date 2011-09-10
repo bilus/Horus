@@ -1,18 +1,13 @@
-require 'json'
-require File.join(File.dirname(__FILE__), "../../../application.rb")
+require File.join(File.dirname(__FILE__), "../game_action.rb")
 
-class NewGameAction < Cramp::Action
+class NewGameAction < GameAction
   on_start :create_game
   
   def create_game
-    response = 
-      begin
-        new_game = Horus::Application.start_new_game(params[:nick])
-        {:status => :ok, :id => new_game.id}
-      rescue => e
-        {:status => :error, :message => e}
-      end
-    render response.to_json
+    render_result do
+      new_game = Horus::Application.start_new_game(params[:nick])
+      {:status => :ok, :id => new_game.id}
+    end
     finish
   end
 end

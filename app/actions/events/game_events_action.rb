@@ -1,8 +1,9 @@
+require File.join(File.dirname(__FILE__), "../game_action.rb")
 require File.join(File.dirname(__FILE__), "../../../lib/game_event_renderer")
 
 require "pp";
 
-class GameEventsAction < Cramp::Action
+class GameEventsAction < GameAction
   self.transport = :sse
   before_start :find_game
   periodic_timer :relay_events, :every => 0.5
@@ -11,13 +12,6 @@ class GameEventsAction < Cramp::Action
     super
     preserve_last_event_id(@env, :default => GameEventRenderer.initial_state)
     # puts "initialize = #{sse_event_id}"
-  end
-  
-  # FIXME extract find_game into a base class for all game actions - GameAction.
-  def find_game
-    # puts "find_game = #{sse_event_id}"
-    @game = Horus::Application.find_game(params[:id])
-    yield
   end
   
   def relay_events
@@ -42,10 +36,6 @@ class GameEventsAction < Cramp::Action
   private
   
   def preserve_last_event_id(env, options = {})
-    @sse_event_id = request_headers(env)["last_event_id"] || options.delete(:default) || sse_event
-  end
-  
-  def request_headers(env)
-    env.inject({}){|acc, (k,v)| acc[$1.downcase] = v if k =~ /^http_(.*)/i; acc}
+    @sse_event_id = request_headers["last_event_id"] || options.delete(:default) || sse_event
   end
 end

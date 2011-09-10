@@ -1,18 +1,13 @@
 require 'haml'
 require 'tilt'
+require File.join(File.dirname(__FILE__), "../game_action.rb")
 
-class GamePageAction < Cramp::Action
+class GamePageAction < GameAction
   before_start :find_game
   on_start :render_page
   
-  def find_game
-    @game = Horus::Application.find_game(params[:id])
-    yield
-  end
-
   def render_page
     render Tilt::HamlTemplate.new('app/views/game.html.haml').render
     finish
   end
-
 end

@@ -6,13 +6,19 @@ function __receiveEvents(url, onmessage) {
 	return es;
 };
 
-function __appendGameId(url, gameId) {
-	return $.appendParams(url, 'id=' + gameId);
+function startGame(nick, onStarted) {
+	$.post('/game?nick=' + nick, function(data) {
+		onStarted(jQuery.parseJSON(data).id);
+	});
+};
+
+function linkToGame(gameId) {
+	return '/game.html?game_id=' + gameId;
 };
 
 function receiveGameEvents(gameId, onTile, onOwner) {
 	// Global object -- this function cannot be used with multiple feeds.
-	this.gameEventSource = __receiveEvents(__appendGameId('/game', gameId), function(event_json) {
+	this.gameEventSource = __receiveEvents('/game/' + gameId, function(event_json) {
 		var event = jQuery.parseJSON(event_json);
 		if (event.tile)
 			onTile(event.tile);
@@ -23,8 +29,8 @@ function receiveGameEvents(gameId, onTile, onOwner) {
 
 function addTile(gameId, tile) {
 	$.ajax({
-		url: __appendGameId('/game', gameId),
-		type: 'PUT',
+		url: '/tile/' + gameId,
+		type: 'POST',
 		data: {tile: tile}
 	});
 };

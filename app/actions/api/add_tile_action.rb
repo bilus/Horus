@@ -1,22 +1,19 @@
+require File.join(File.dirname(__FILE__), "../game_action.rb")
 require File.join(File.dirname(__FILE__), "../../../lib/game.rb")
 
-class AddTileAction < Cramp::Action
+class AddTileAction < GameAction
   before_start :find_game
   on_start :add_tile_to_game
-  
-  def find_game
-    @game = Horus::Application.find_game(params[:id])
-    yield
-  end
   
   # FIXME nil or empty tiles should not be accepted.
   # FIXME only single words should be accepted.
   # NOTE: Use a separate TilePolicy class.
   def add_tile_to_game
-    tile = params[:tile]
-    @game.add_tile(tile)
-    render "ok" # FIXME Exception handling
+    render_result do
+      tile = params[:tile]
+      @game.add_tile(tile)
+      {:status => :ok}
+    end
     finish
   end
-
 end

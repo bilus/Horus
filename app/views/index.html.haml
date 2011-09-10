@@ -1,7 +1,8 @@
 %html
 	%head
 		%title Horus
-		%script{:type => "text/javascript", :src => "javascripts/jquery-1.6.2.min.js"}
+		%script{:type => "text/javascript", :src => "/javascripts/jquery-1.6.2.min.js"}
+		%script{:type => "text/javascript", :src => "/javascripts/horus_api.js"}
 		:javascript
 			function startNewGame() {
 				$('#start #new-game').hide();
@@ -10,9 +11,9 @@
 			};
 			function confirmStartNewGame() {
 				nick = $('#start input#nickname').val();
-				$.post('/game?nick=' + nick, function(data) {
-					window.location = '/game.html?id=' + jQuery.parseJSON(data).id;
-				});			
+				startGame(nick, function(gameId) {
+					window.location = linkToGame(gameId);
+				});
 			};
 			
 			$(document).ready(function() {
@@ -61,4 +62,4 @@
 			%ul
 			- @games.each do |game|
 				%li
-					%a{:href => "/game.html?id=#{game.id}"}= game.id
+					%a{:class => "link-to-game", :href => "/game.html?game_id=#{game.id}"}= game.id

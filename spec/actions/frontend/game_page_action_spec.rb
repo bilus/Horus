@@ -7,6 +7,6 @@ describe "Game page", :cramp => true do
   end
 
   context "routes" do
-    specify { get("/game.html").should respond_with :status => :ok } 
+    specify { get("/game.html?game_id=1234").should respond_with :status => :ok } 
   end
 end

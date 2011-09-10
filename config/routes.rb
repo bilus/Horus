@@ -4,13 +4,13 @@ HttpRouter.new do
   add('/index.html').to(HomePageAction)
   
 # Legacy interface
-  add('/add_tile').request_method('POST').to(AddTileAction)
-  add('/game_events').request_method('GET').to(GameEventsAction)
+  add('/game_events').get.to(GameEventsAction)
 
 # RESTful interface
-  add('/game').request_method('POST').to(NewGameAction)
-  add('/game.html').request_method('GET').to(GamePageAction)
-  add('/game').request_method('PUT').to(AddTileAction)
-  add('/game').request_method('GET').to(GameEventsAction)
+  add('/game').post.to(NewGameAction)
+  add('/game.html').get.to(GamePageAction)
+  add('/tile/:game_id').post.to(AddTileAction)
+  # add('/game').matching(:new => /^.+$/).request_method('PUT').to(HomePageAction)
+  add('/game/:game_id').get.to(GameEventsAction)
   
 end
