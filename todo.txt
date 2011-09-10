@@ -134,7 +134,7 @@
 	+ Change all routers to .../:game_id
 	+ POST /tile/:game_id {:tile => "ABC"} to add a tile.
 	+ I extracted common functionality for game actions into GameAction.
-	- PUT /game/:game_id {:join => "Joe"} to join a game.
+	+ PUT /game/:game_id {:join => "Joe"} to join a game.
 		+ routes
 		+ join game action - respond with {"status":"ok"}
 		+ call Game::join(nickname)
@@ -146,14 +146,14 @@
 			+ Make it modal, non-resizable.
 			+ Use the dialog for new games as well.
 		+ Make previous acceptance tests pass.
-		- Make specs pass.
-		- COMMIT
-		- Game - when rendering, render events about joining.
-			- store @events and render them instead of @owner & @tiles.
-			- when player joins, create an event.
-		- GameEventsAction - when player joins, it renders an appropriate event.
-		- games.html - list players joining the game.
-		- COMMIT
+		+ Make specs pass.
+		+ COMMIT
+	+ Game - when rendering, render events about joining.
+		+ store @events and render them instead of @owner & @tiles.
+		+ when player joins, create an event.
+	+ GameEventsAction - when player joins, it renders an appropriate event.
+	+ games.html - list players joining the game.
+	+ COMMIT
 	- Get rid of owner -- use players for owner as well.
 	- Reloading a page should make the player leave/join.
 		- separate game creation (POST /game) from joining the game (PUT /game)

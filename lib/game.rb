@@ -7,6 +7,7 @@ class Game
     # FIXME Extract into UniqueGameId class.
     seed = UUIDTools::UUID.random_create
     @id = UUIDTools::UUID.md5_create(UUIDTools::UUID_DNS_NAMESPACE, "www.xtreeme.com/#{seed}")
+    @events = []
   end
   
   def id
@@ -14,6 +15,7 @@ class Game
   end
   
   def join(nick)
+    @events << {:join => nick}
   end
   
   def owner_nick
@@ -21,6 +23,7 @@ class Game
   end  
   def owner_nick=(nick)
     @owner_nick = nick
+    @events << {:owner => nick}
   end
   
   def self.create(nick)
@@ -43,11 +46,12 @@ class Game
   end
   
   def render(method)
-    method.render_events([{:owner => @owner_nick}] + @tiles.map {|tile| {:tile => tile}})
+    method.render_events(@events)
   end
   
   def add_tile(s)
     @tiles << s
+    @events << {:tile => s}
   end
   
   def has_tiles?

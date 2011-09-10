@@ -17,6 +17,10 @@
 				$('#tile').val('');
 			};
 			
+			function updatePlayers(nicks) {
+				$('#players').html(nicks.join("<br/>"))
+			};
+			
 			$(document).ready(function() {
 				$('#tile').bind('keypress', function(e) {
 				        if (e.which == 13)
@@ -27,12 +31,14 @@
 					onAddTile();
 				});
 
+				var players = [];
 				receiveGameEvents(currentGameId(), 
 					function(tile) {
 						$('#board').append(tile + ' ');
 					},
-					function(owner) {
-						$('#players').html("Game created by: " + owner)
+					function(join) {
+						players.push(join);
+						updatePlayers(players);
 					});
 				
 				$('#tile').focus();

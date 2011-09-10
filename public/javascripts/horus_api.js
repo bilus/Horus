@@ -14,7 +14,7 @@ function linkToGame(gameId) {
 	return '/game.html?game_id=' + gameId;
 };
 
-function receiveGameEvents(gameId, onTile, onOwner) {
+function receiveGameEvents(gameId, onTile, onJoin) {
 	if (this.gameEventSource) {
 		alert("The 'receiveGameEvents' function cannot be used with multiple feeds because it uses a global.");
 		return;
@@ -25,7 +25,9 @@ function receiveGameEvents(gameId, onTile, onOwner) {
 		if (event.tile)
 			onTile(event.tile);
 		if (event.owner)
-			onOwner(event.owner);
+			onJoin(event.owner);
+		if (event.join)
+			onJoin(event.join);
 	});
 };
 
