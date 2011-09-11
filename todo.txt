@@ -130,7 +130,7 @@
 			+ make it pass
 		+ show the owner on #players
 	+ COMMIT	
-- Story 7 - When joining a game, the player enters a nickname visible to other players.
++ Story 7 - When joining a game, the player enters a nickname visible to other players.
 	+ Change all routers to .../:game_id
 	+ POST /tile/:game_id {:tile => "ABC"} to add a tile.
 	+ I extracted common functionality for game actions into GameAction.
@@ -154,17 +154,16 @@
 	+ GameEventsAction - when player joins, it renders an appropriate event.
 	+ games.html - list players joining the game.
 	+ COMMIT
-	- Get rid of owner -- use players for owner as well.
-	- Reloading a page should make the player leave/join.
-		- separate game creation (POST /game) from joining the game (PUT /game)
-- Story - Nicknames displayed during a game are updated in real-time as players join/leave the game.
-- Story - Player cannot easily join other player's game.
-
 - Story - Players may only add tiles during their rounds.
 - Story - A player may only type single words.
-- Story - Player starting a new game can type up to 7 words to give the story a beginning.
 - Story - A player may skip his turn (pass). 
-- Story - When both players pass in a row, the game is over.
+- Story - A player who skips 3 turns in a row is kicked out.
+- Story - Turn is automatically passed after 1 minute.
+- Story - When all players pass in a row, the game is over.
+- Story - Nicknames displayed during a game are updated in real-time as players join/leave the game.
+- Story - Player cannot easily join other player's game.  # Private/public game ids.
+
+- Story - Player starting a new game can type up to 7 words to give the story a beginning.
 
 - Story - Main page updates list of current games in real time.
 - Story - Main game shows current games' progress.
@@ -173,15 +172,10 @@
 - Story - A game can have a maximum of 2 players.
 - Story - Click to add stops, exclamation marks, smileys etc. (does not finish the round).
 
-
 - Story - Finished stories are listed.
 
 - Story - Users can rank stories (both finished and being written).
-
 - Story - Two lists of finished stories: recent-first and rank-based.
-
-- Story - User cannot join 
-
 - Story - User can click a suggested word instead of typing (markov chains)
 
 You may distribute, publicly display, publicly perform,
