@@ -25,12 +25,10 @@ Feature: Story composition game
 		Given one player
 		When the player starts a new game
 		And the player adds tile "Lorem"
-		And the player adds tile "ipsum"
 		And the player starts a new game
 		And the player adds tile "Hello"
-		And the player adds tile "world"
-		Then the board should display "Hello world"
-		And the board should not display "Lorem ipsum"
+		Then the board should display "Hello"
+		And the board should not display "Lorem"
 		
 	@acceptance @story4
 	Scenario: Story #4 - two players can simultaneously play two separate games
@@ -39,11 +37,9 @@ Feature: Story composition game
 		When Joe starts a new game
 		And Tim starts a new game
 		And Joe adds tile "Lorem"
-		And Joe adds tile "ipsum"
 		And Tim adds tile "Hello"
-		And Tim adds tile "world"
-		Then Joe's board should display "Lorem ipsum"
-		And Tim's board should display "Hello world"
+		Then Joe's board should display "Lorem"
+		And Tim's board should display "Hello"
 		
 	@acceptance @story5
 	Scenario: Story #5 - players can join games in progress
@@ -77,6 +73,32 @@ Feature: Story composition game
 		When Joe starts a new game
 		And Tim joins Joe's game
 		Then Joe sees Tim on player list
+	
+	@acceptance @story8	
+	Scenario: Story #8 - the first turn is for the player who created the game
+		Given player "Joe"
+		And player "Tim"
+		When Joe starts a new game
+		And Tim joins Joe's game
+		Then Tim should be unable to add tile "Hello"
+		When Joe adds tile "Lorem"
+		Then Tim should be able to add tile "ipsum"
+		And Joe's board should display "Lorem ipsum"
+		And Tim's board should display "Lorem ipsum"
+		
+	@acceptance @story9
+	Scenario: Story #9 - visitors may watch game using the public game id
+		Given player "Joe"
+		And player "Tim"
+		And visitor "John"
+		When Joe starts a new game
+		And Tim joins Joe's game
+		And John starts watching Joe's game
+		And Joe adds tile "Lorem"
+		And Tim adds tile "ipsum"
+		Then John's board should display "Lorem ipsum"
+		And John should not be able to interact with the game
+		
 		
 	# TODO After game ends adding new tiles is impossible.
 	# TODO Adding a blank tile has no effect and doesn't end the player's turn.

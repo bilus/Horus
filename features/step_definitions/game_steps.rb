@@ -62,12 +62,34 @@ Then /^(.*)'s board should not display "([^"]*)"$/ do |player, s|
   Then "the board should not display \"#{s}\""
 end
 
+Then /^(.*)'s board should contain "([^"]*)"$/ do |player, s|
+  Capybara.session_name = player
+  wait_until { find("#board").has_content(s) }
+  find("#board").should have_content(s)
+end
+
+Then /^(.*)'s board should not contain "([^"]*)"$/ do |player, s|
+  Capybara.session_name = player
+  find("#board").should_not have_content(s)
+end
+
 Then /^(.*) sees (.*) on player list$/ do |player, other_player|
   find("#players").should have_content(other_player)
 end
 
 Then /^(.*) cannot add tiles$/ do |player|
   page.should_not have_css("input#tile")
+end
+
+Then /^(.*) should be unable to add tile "([^"]*)"$/ do |player, tile|
+  When "#{player} adds tile \"#{tile}\""
+  sleep(1)
+  Then "the board should not contain \"#{tile}\""
+end
+
+Then /^(.*) should be able to add tile "([^"]*)"$/ do |player, tile|
+  When "#{player} adds tile \"#{tile}\""
+  Then "the board should contain \"#{tile}\""
 end
 
 

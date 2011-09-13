@@ -154,7 +154,19 @@
 	+ GameEventsAction - when player joins, it renders an appropriate event.
 	+ games.html - list players joining the game.
 	+ COMMIT
-- Story - Players may only add tiles during their rounds.
+- Story - anonymous users may watch game using the public game id.
+	- Cucumber scenario.
+	- PUT /game should respond with a private game id.
+	- POST /game should respond with a private game id.
+	- When accessed via game.html with a public game id, it should hide the controls.
+- Story - the first turn is for the player who created the game.
+	+ Add cucumber scenario.
+	- POST /tile should only accept a tile from the owner right after the game starts.
+- Story - after the game creator's turn it's the other players turn.
+- Story - players may not play outside their turns (3 players)
+- Story - disable controls when it's not the player's turn.
+- Story - clearly indicate which player's turn it is 
+
 - Story - A player may only type single words.
 - Story - A player may skip his turn (pass). 
 - Story - A player who skips 3 turns in a row is kicked out.
