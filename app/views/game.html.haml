@@ -60,11 +60,19 @@
 				#players {
 					margin-top: 20px;
 				}
+		-unless @interactive # Visitor may only watch the game.
+			%style{:type => "text/css", :media => "screen"}
+				:plain
+					#controls {
+						display: none;
+					}
+					
 			
 	%body
 		#game
 			#board
-			%span Type a word:
-			%input{:id => "tile", :name => "tile", :type => "text"}
-			%button{:id => "add", :name => "add"}Add to board
+			#controls
+				%span Type a word:
+				%input{:id => "tile", :name => "tile", :type => "text"}
+				%button{:id => "add", :name => "add"}Add to board
 		#players

@@ -38,24 +38,25 @@
 				});
 			};
 			function confirmStartNewGame(nick) {
-				startGame(nick, function(gameId) {
-					window.location = linkToGame(gameId);
+				startGame(nick, function(game) {
+					window.location = linkToGame(game);
 				});
 			};
 			
-			function joinThisGame(gameId) {
+			function joinThisGame(publicGameId) {
 				openGameDialog("Join Game", "Join", function(nick) {
-					confirmJoinThisGame(gameId, nick);
+					confirmJoinThisGame(publicGameId, nick);
 				});
 			};
-			function confirmJoinThisGame(gameId, nick) {
-				joinGame(gameId, nick, function(gameId) {
-					window.location = linkToGame(gameId);
+			function confirmJoinThisGame(publicGameId, nick) {
+				joinGame(publicGameId, nick, function(game) {
+					window.location = linkToGame(game);
 				});
 			};
 			
 			$(document).ready(function() {
 				$("button#new-game").button();
+				$(".link-to-game").button();
 				
 				$('#start #new-game').click(function() {
 					startNewGame();
@@ -70,6 +71,10 @@
 					var gameId = $(this).attr('id');
 					joinThisGame(gameId);
 				});
+				$('#games a.link-to-watch').click(function() {
+					var gameId = $(this).attr('id');
+					window.location = linkToWatchGame(gameId);
+				});
 			});
 			
 		%style{:type => "text/css", :media => "screen"}
@@ -83,6 +88,9 @@
 					font-size: 12px;
 					margin-bottom: 5px;
 				}
+				div#games ul {
+					list-style-type: none;
+				}
 			
 	%body
 		%div#nickname
@@ -93,6 +101,8 @@
 		#games
 			%p Current games:
 			%ul
-			- @games.each do |game|
-				%li
-					%a{:class => "link-to-game", :id => "#{game.id}", :href => "#"}= "#{game.owner_nick}'s"
+				- @games.each do |game|
+					%li
+						%a{:class => "link-to-game", :id => "#{game.public_id}", :href => "#"}= "#{game.owner_nick}'s"
+						%a{:class => "link-to-watch", :id => "#{game.public_id}", :href => "#"} watch
+					

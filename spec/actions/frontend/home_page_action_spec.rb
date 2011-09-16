@@ -15,7 +15,7 @@ describe "Home page", :cramp => true do
     let!(:games) { [Game.create("John"), Game.create("Tim"), Game.create("Joe")] }
     it "should list all pages" do
       games.each do |game|
-        get("/").should respond_with :body => /.*#{game.id}.*/
+        get("/").should respond_with :body => /.*#{game.public_id}.*/
       end
     end
   end

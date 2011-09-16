@@ -4,6 +4,9 @@ end
 Given /^player "([^"]*)"$/ do |arg1|
 end
 
+Given /^visitor "([^"]*)"$/ do |visitor|
+end
+
 When /^the player starts a new game$/ do
   visit("/")
   start_game
@@ -40,6 +43,17 @@ When /^(?!the player)(.*) adds tile "([^"]*)"$/ do |player, tile|
   When "the player adds tile \"#{tile}\""
 end
 
+When /^(.*) starts watching (.*)'s game$/ do |visitor, game_owner|
+  Capybara.session_name = visitor
+  watch_game(game_owner)
+end
+
+Then /^(.*) should not be able to interact with the game$/ do |visitor|
+  Capybara.session_name = visitor
+  page.should_not have_css("#game input#tile", :visible => true)
+  page.should_not have_css("#game #add", :visible => true)
+end
+
 Then /^the board should display "([^"]*)"$/ do |s|
   # We need to wait here because I turned off resynchronization because there's always
   # at least one outstanding connection (EventSource).
@@ -68,8 +82,7 @@ Then /^(.*)'s board should contain "([^"]*)"$/ do |player, s|
   find("#board").should have_content(s)
 end
 
-Then /^(.*)'s board should not contain "([^"]*)"$/ do |player, s|
-  Capybara.session_name = player
+Then /^the board should not contain "([^"]*)"$/ do |s|
   find("#board").should_not have_content(s)
 end
 

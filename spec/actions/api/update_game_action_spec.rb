@@ -8,18 +8,18 @@ describe "Api for joining games", :cramp => true do
   let(:game) { Game.create("Tim")}
   
   context "routes" do
-    specify { put("/game/#{game.id}", :params => {:join => "Joe"}).should respond_with :status => :ok } 
+    specify { put("/game/#{game.public_id}", :params => {:join => "Joe"}).should respond_with :status => :ok } 
   end
   
   it "should join the game" do
     game.should_receive(:join).with("Joe")
-    put("/game/#{game.id}", :params => {:join => "Joe"})
+    put("/game/#{game.public_id}", :params => {:join => "Joe"})
   end
 
-  it "should respond with status and game id" do
-    put("/game/#{game.id}", :params => {:join => "Joe"}).should respond_with :body => (lambda do |body|
+  it "should respond with status and private game id" do
+    put("/game/#{game.public_id}", :params => {:join => "Joe"}).should respond_with :body => (lambda do |body|
       params = JSON.parse(body)
-      params["status"] == "ok" && params["id"] != nil
+      params["status"] == "ok" && params["id"] ==  game.private_id("Joe")
     end)
   end
 end

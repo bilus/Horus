@@ -155,19 +155,24 @@
 	+ games.html - list players joining the game.
 	+ COMMIT
 - Story - anonymous users may watch game using the public game id.
-	- Cucumber scenario.
-	- PUT /game should respond with a private game id.
-	- POST /game should respond with a private game id.
-	- When accessed via game.html with a public game id, it should hide the controls.
+	+ Cucumber scenario.
+		+ Pass public game id to game.html to make it easier to test.
+		+ POST /game should respond both with private and public game id.
+		+ Use the id on index.html
+	+ Make old stories pass.
+		+ PUT /game should respond with a private id.
+	+ POST /tile should only accept requests with a private id.
+	+ When accessed via game.html with a public game id, it should hide the controls.
+	+ "Watch" links on the main page.
 - Story - the first turn is for the player who created the game.
 	+ Add cucumber scenario.
-	- POST /tile should only accept a tile from the owner right after the game starts.
 - Story - after the game creator's turn it's the other players turn.
 - Story - players may not play outside their turns (3 players)
 - Story - disable controls when it's not the player's turn.
 - Story - clearly indicate which player's turn it is 
+- Story - player watching a game may try to join it.
 
-- Story - A player may only type single words.
+- Story - A player must type single words no blanks. (display errors somehow)
 - Story - A player may skip his turn (pass). 
 - Story - A player who skips 3 turns in a row is kicked out.
 - Story - Turn is automatically passed after 1 minute.

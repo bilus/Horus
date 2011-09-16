@@ -7,7 +7,8 @@ class GamePageAction < GameAction
   on_start :render_page
   
   def render_page
-    render Tilt::HamlTemplate.new('app/views/game.html.haml').render
+    @interactive = @game.interactive?(params[:game_id])
+    render Tilt::HamlTemplate.new('app/views/game.html.haml').render(self)
     finish
   end
 end

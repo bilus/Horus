@@ -11,7 +11,7 @@ class AddTileAction < GameAction
   def add_tile_to_game
     render_result do
       tile = params[:tile]
-      @game.add_tile(tile)
+      @game.add_tile(tile, params[:game_id])
       {:status => :ok}
     end
     finish

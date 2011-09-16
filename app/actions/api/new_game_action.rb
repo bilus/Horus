@@ -6,7 +6,7 @@ class NewGameAction < GameAction
   def create_game
     render_result do
       new_game = Horus::Application.start_new_game(params[:nick])
-      {:status => :ok, :id => new_game.id}
+      {:status => :ok, :id => new_game.private_id(params[:nick]), :public_id => new_game.public_id}
     end
     finish
   end
