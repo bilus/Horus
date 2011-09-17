@@ -6,17 +6,6 @@ describe Game do
     Game.destroy_all!
   end
   
-  describe "when asked if it has tiles" do
-    context "when it's an empty game" do
-      subject { Game.new }
-      it { should_not have_tiles }
-    end
-    context "when it's a non-empty game" do
-      subject { g = Game.new; g.add_tile("Lorem"); g }
-      it { should have_tiles }
-    end
-  end
-  
   describe "when asked for its public id" do
     let(:game1) { Game.new } 
     let(:game2) { Game.new } 
@@ -149,9 +138,8 @@ describe Game do
       @game = Game.create("Joe")
     end   
     context "given a private id" do
-      it "should add the tile" do
+      it "should allow this action" do
         lambda { @game.add_tile("Lorem", @game.private_id("Joe")) }.should_not raise_error
-        @game.should have_tiles
       end
       it "should notify events" do
         @events.should_receive(:on_add_tile).with("Lorem")
@@ -161,7 +149,6 @@ describe Game do
     context "given a public id" do
       it "should disallow the action" do
         lambda { @game.add_tile("Lorem", @game.public_id) }.should raise_error
-        @game.should_not have_tiles
       end
       it "should not notify events" do
         @events.should_not_receive(:on_add_tile).with("Lorem")

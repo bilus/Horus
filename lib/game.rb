@@ -1,28 +1,33 @@
-require 'uuidtools'
 require File.join(File.dirname(__FILE__), "game_events")
+require File.join(File.dirname(__FILE__), "player")
+require File.join(File.dirname(__FILE__), "unique_id")
 
 class Game
   @games = []
   def initialize
     @tiles = []
-    @ids = {}
-    @ids[:public] = generate_unique_id
+    @players = []
+    @public_id = UniqueId.new.to_s
     @events = GameEvents.new
   end
   
   def public_id
-    @ids[:public]
+    @public_id
   end
   
   def private_id(nick)
-    @ids[nick]
+    player = @players.find {|p| p.nick == nick }
+    raise "No such player: #{nick}" if player.nil?
+    
+    player.game_id
   end
   
   def join(nick)
-    private_id = generate_unique_id
-    @ids[nick] = private_id
+    new_player = Player.new(nick)
+    @players << new_player
     @events.on_join(nick)
-    private_id
+    
+    new_player.game_id
   end
   
   def owner_nick
@@ -30,30 +35,9 @@ class Game
   end  
   
   def owner_nick=(nick)
-    @ids[nick] = generate_unique_id
+    @players << Player.new(nick)
     @owner_nick = nick
     @events.on_owner(nick)
-  end
-  
-  def self.create(nick)
-    new_game = Game.new
-    new_game.owner_nick = nick
-    @games << new_game
-    new_game
-  end
-  
-  def self.find(id)
-    @games.find do |game|
-      game.all_ids.index(id)
-    end
-  end
-  
-  def self.find_all
-    @games
-  end
-  
-  def self.destroy_all!
-    @games.clear
   end
   
   def render(method)
@@ -66,27 +50,34 @@ class Game
     @events.on_add_tile(s)
   end
   
-  def has_tiles?
-    !@tiles.empty?
-  end
-  
-  def all_ids
-    @ids.values
+  def has_id?(game_id)
+    @public_id == game_id || @players.map {|p| p.game_id}.include?(game_id)
   end
 
   def interactive?(game_id)
-    @ids.values.include?(game_id) && !public_id?(game_id)
-  end
-
-  private  
-  
-  def public_id?(id)
-    @ids[:public] == id
+    @players.find {|p| p.game_id == game_id} != nil
   end
   
-  def generate_unique_id
-    # FIXME Extract into UniqueGameId class.
-    seed = UUIDTools::UUID.random_create
-    UUIDTools::UUID.md5_create(UUIDTools::UUID_DNS_NAMESPACE, "www.xtreeme.com/#{seed}").to_s
+  # Class methods.
+  #
+  def self.create(nick)
+    new_game = Game.new
+    new_game.owner_nick = nick
+    @games << new_game
+    new_game
+  end
+  
+  def self.find(id)
+    @games.find do |game|
+      game.has_id?(id)
+    end
+  end
+  
+  def self.find_all
+    @games
+  end
+  
+  def self.destroy_all!
+    @games.clear
   end
 end

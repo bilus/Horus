@@ -169,8 +169,8 @@
 	+ Add cucumber scenario.
 	- Clean up Game
 		+ Event-related code to GameEvents (incl. rendering).
-		- Get rid of owner.
-		- Player class.
+		+ Player class.
+		+ UniqueId class.
 		- can_interract? to GameInterraction.
 	- Rspec for Game::add_tile
 - Story - after the game creator's turn it's the other players turn.
