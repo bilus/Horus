@@ -154,7 +154,7 @@
 	+ GameEventsAction - when player joins, it renders an appropriate event.
 	+ games.html - list players joining the game.
 	+ COMMIT
-- Story - anonymous users may watch game using the public game id.
++ Story #8 - anonymous users may watch game using the public game id.
 	+ Cucumber scenario.
 		+ Pass public game id to game.html to make it easier to test.
 		+ POST /game should respond both with private and public game id.
@@ -164,8 +164,15 @@
 	+ POST /tile should only accept requests with a private id.
 	+ When accessed via game.html with a public game id, it should hide the controls.
 	+ "Watch" links on the main page.
+	COMMIT
 - Story - the first turn is for the player who created the game.
 	+ Add cucumber scenario.
+	- Clean up Game
+		+ Event-related code to GameEvents (incl. rendering).
+		- Get rid of owner.
+		- Player class.
+		- can_interract? to GameInterraction.
+	- Rspec for Game::add_tile
 - Story - after the game creator's turn it's the other players turn.
 - Story - players may not play outside their turns (3 players)
 - Story - disable controls when it's not the player's turn.

@@ -1,4 +1,5 @@
 require 'uuidtools'
+require File.join(File.dirname(__FILE__), "game_events")
 
 class Game
   @games = []
@@ -6,7 +7,7 @@ class Game
     @tiles = []
     @ids = {}
     @ids[:public] = generate_unique_id
-    @events = []
+    @events = GameEvents.new
   end
   
   def public_id
@@ -20,7 +21,7 @@ class Game
   def join(nick)
     private_id = generate_unique_id
     @ids[nick] = private_id
-    @events << {:join => nick}
+    @events.on_join(nick)
     private_id
   end
   
@@ -31,7 +32,7 @@ class Game
   def owner_nick=(nick)
     @ids[nick] = generate_unique_id
     @owner_nick = nick
-    @events << {:owner => nick}
+    @events.on_owner(nick)
   end
   
   def self.create(nick)
@@ -56,13 +57,13 @@ class Game
   end
   
   def render(method)
-    method.render_events(@events)
+    @events.render_using(method)
   end
   
   def add_tile(s, game_id = nil)
     raise "Not allowed to play" unless game_id.nil? || interactive?(game_id)
     @tiles << s
-    @events << {:tile => s}
+    @events.on_add_tile(s)
   end
   
   def has_tiles?

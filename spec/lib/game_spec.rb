@@ -103,40 +103,26 @@ describe Game do
   end
   
   describe "when asked to render events" do
-    let(:game_owner) {"Joe"}
-    let(:game) {Game.create(game_owner)}
-    let(:renderer) {mock("renderer")}
-
-    context "with no tiles" do
-      it "should render just owner" do
-        renderer.should_receive(:render_events).with([{:owner => game_owner}])
-        game.render(renderer)
-      end
+    before(:each) do
+      @events = mock("events").as_null_object
+      GameEvents.stub!(:new).and_return(@events)
+      @game = Game.create("Joe")
+      @renderer = mock("renderer")
     end
-
-    context "with some tiles" do
-      let(:lorem) {"Lorem"}
-      let(:ipsum) {"ipsum"}
-      before(:each) do
-        game.add_tile(lorem)
-        game.add_tile(ipsum)
-      end
-      it "should render owner and all tiles" do
-        renderer.should_receive(:render_events).with([{:owner => game_owner}, {:tile => lorem}, {:tile => ipsum}])
-        game.render(renderer)
-      end
+    it "should ask events to render themselves" do
+      @events.should_receive(:render_using).with(@renderer)
+      @game.render(@renderer)
     end
-
-    it "should pass on the return value from renderer" do
-      renderer.stub!(:render_events).and_return("return value")
-      game.render(renderer).should == "return value"
+    it "should pass on the return value from events" do
+      @events.stub!(:render_using).and_return("return value")
+      @game.render(@renderer).should == "return value"
     end
   end
   
-  describe "players may join the game" do
+  describe "when a player joins" do
     let(:game) {Game.create("Joe")}
     
-    it "should support respond with private game id" do
+    it "should return the player's private id" do
       game.join("Tim").should == game.private_id("Tim")
     end
   end
@@ -153,7 +139,7 @@ describe Game do
     end
   end
   
-  describe "when asked if can interract" do
+  describe "when asked if can interact" do
     subject { g = Game.create("Joe"); g.join("Tim"); g}
     it { should be_interactive(subject.private_id("Joe")) }
     it { should be_interactive(subject.private_id("Tim")) }
