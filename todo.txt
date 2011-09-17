@@ -165,7 +165,7 @@
 	+ When accessed via game.html with a public game id, it should hide the controls.
 	+ "Watch" links on the main page.
 	COMMIT
-- Story - the first turn is for the player who created the game.
+- Story #9 - the first turn is for the player who created the game.
 	+ Add cucumber scenario.
 	- Clean up Game
 		+ Event-related code to GameEvents (incl. rendering).

@@ -34,8 +34,16 @@ describe Game do
   end
   
   describe "when asked to create a game" do
+    before(:each) do
+      @events = mock("events").as_null_object
+      GameEvents.stub!(:new).and_return(@events)
+    end    
     it "should create a new game" do
       Game.create("Joe").should be_kind_of Game
+    end
+    it "should notify events" do
+      @events.should_receive(:on_owner).with("Joe")
+      Game.create("Joe")
     end
   end
   
@@ -120,22 +128,45 @@ describe Game do
   end
   
   describe "when a player joins" do
-    let(:game) {Game.create("Joe")}
-    
+    before(:each) do
+      @events = mock("events").as_null_object
+      GameEvents.stub!(:new).and_return(@events)
+      @game = Game.create("Joe")
+    end    
     it "should return the player's private id" do
-      game.join("Tim").should == game.private_id("Tim")
+      @game.join("Tim").should == @game.private_id("Tim")
+    end
+    it "should notify game events" do
+      @events.should_receive(:on_join).with("Tim")
+      @game.join("Tim")
     end
   end
   
   describe "when asked to add tiles given a game id" do
-    let(:game) {Game.create("Joe")}
-    it "should accept a private id" do
-      lambda { game.add_tile("Lorem", game.private_id("Joe")) }.should_not raise_error
-      game.should have_tiles
+    before(:each) do
+      @events = mock("events").as_null_object
+      GameEvents.stub!(:new).and_return(@events)
+      @game = Game.create("Joe")
+    end   
+    context "given a private id" do
+      it "should add the tile" do
+        lambda { @game.add_tile("Lorem", @game.private_id("Joe")) }.should_not raise_error
+        @game.should have_tiles
+      end
+      it "should notify events" do
+        @events.should_receive(:on_add_tile).with("Lorem")
+        @game.add_tile("Lorem", @game.private_id("Joe"))
+      end
     end
-    it "should not accept a public id" do
-      lambda { game.add_tile("Lorem", game.public_id) }.should raise_error
-      game.should_not have_tiles
+    context "given a public id" do
+      it "should disallow the action" do
+        lambda { @game.add_tile("Lorem", @game.public_id) }.should raise_error
+        @game.should_not have_tiles
+      end
+      it "should not notify events" do
+        @events.should_not_receive(:on_add_tile).with("Lorem")
+        lambda { @game.add_tile("Lorem", @game.public_id) }.should raise_error
+      end
     end
   end
   
