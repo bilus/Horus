@@ -78,7 +78,11 @@ end
 
 Then /^(.*)'s board should contain "([^"]*)"$/ do |player, s|
   Capybara.session_name = player
-  wait_until { find("#board").has_content(s) }
+  Then "the board should contain \"#{s}\""
+end
+
+Then /^the board should contain "([^"]*)"$/ do |s|
+  wait_until { find("#board").has_content?(s) }
   find("#board").should have_content(s)
 end
 

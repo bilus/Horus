@@ -48,7 +48,7 @@ Feature: Story composition game
 		When Joe starts a new game
 		And Joe adds tile "Lorem"
 		And Tim joins Joe's game
-		And Tim adds tile "ipsum"
+		And Joe adds tile "ipsum"
 		And Joe adds tile "sit"
 		Then Joe's board should display "Lorem ipsum sit"
 		And Tim's board should display "Lorem ipsum sit"
@@ -81,10 +81,7 @@ Feature: Story composition game
 		When Joe starts a new game
 		And Tim joins Joe's game
 		Then Tim should be unable to add tile "Hello"
-		When Joe adds tile "Lorem"
-		Then Tim should be able to add tile "ipsum"
-		And Joe's board should display "Lorem ipsum"
-		And Tim's board should display "Lorem ipsum"
+		And Joe should be able to add tile "Hello"
 		
 	@acceptance @story9
 	Scenario: Story #9 - visitors may watch game using the public game id
@@ -95,7 +92,7 @@ Feature: Story composition game
 		And Tim joins Joe's game
 		And John starts watching Joe's game
 		And Joe adds tile "Lorem"
-		And Tim adds tile "ipsum"
+		And Joe adds tile "ipsum"
 		Then John's board should display "Lorem ipsum"
 		And John should not be able to interact with the game
 		

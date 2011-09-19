@@ -165,7 +165,7 @@
 	+ When accessed via game.html with a public game id, it should hide the controls.
 	+ "Watch" links on the main page.
 	COMMIT
-- Story #8 - the first turn is for the player who created the game.
++ Story #8 - the first turn is for the player who created the game.
 	+ Add cucumber scenario.
 	+ Clean up Game
 		+ Event-related code to GameEvents (incl. rendering).
@@ -178,7 +178,9 @@
 		+ All specs pass.
 		+ Cucumber pass except for #8.
 		COMMIT
-	- Rspec for Game::add_tile
+	+ Rspec for Game::add_tile
+	+ Make it pass.
+	COMMIT
 - Story - after the game creator's turn it's the other players turn.
 - Story - players may not play outside their turns (3 players)
 - Story - disable controls when it's not the player's turn.

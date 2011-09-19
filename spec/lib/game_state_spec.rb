@@ -54,8 +54,8 @@ describe GameState do
     end
   end
   
-  describe "when asked to add tiles given a game id" do
-    let(:joe) { j = Player.new("Joe"); state.join(j); j }
+  describe "when asked to add tile" do
+    let(:joe) { j = Player.new("Joe"); state.join_owner(j); j }
     context "given a private id" do
       it "should allow this action" do
         lambda { state.add_tile("Lorem", joe.game_id) }.should_not raise_error
@@ -81,12 +81,22 @@ describe GameState do
         lambda { state.add_tile("Lorem", joe.game_id, &block.call) }.should raise_error
       end
     end
+    context "by players in turns" do
+      let(:owner) { joe }
+      let(:other_player) { p = Player.new("Owner"); state.join(p); p }
+      it "should allow the owner to add the first tile" do
+        lambda { state.add_tile("Lorem", owner.game_id) }.should_not raise_error
+      end
+      it "should not allow other players to add the first tile" do
+        lambda { state.add_tile("Lorem", other_player.game_id) }.should raise_error
+      end
+    end
   end
   
   describe "when asked if can interact" do
     let(:joe) { Player.new("Joe") }
     let(:tim) { Player.new("Tim") }
-    subject { s = GameState.new; s.join(tim); s.join(joe); s}
+    subject { s = GameState.new; s.join_owner(tim); s.join(joe); s}
     it { should be_interactive(joe.game_id) }
     it { should be_interactive(tim.game_id) }
     it { should_not be_interactive("bad id") }
