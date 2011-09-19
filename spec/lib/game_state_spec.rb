@@ -82,13 +82,29 @@ describe GameState do
       end
     end
     context "by players in turns" do
-      let(:owner) { joe }
-      let(:other_player) { p = Player.new("Owner"); state.join(p); p }
+      let!(:owner) { joe }
+      let!(:other_player) { p = Player.new("Owner"); state.join(p); p }
       it "should allow the owner to add the first tile" do
         lambda { state.add_tile("Lorem", owner.game_id) }.should_not raise_error
       end
       it "should not allow other players to add the first tile" do
         lambda { state.add_tile("Lorem", other_player.game_id) }.should raise_error
+      end
+      it "should not allow the owner to add two tiles in a row" do
+        state.add_tile("Lorem", owner.game_id)
+        lambda { state.add_tile("Lorem", owner.game_id) }.should raise_error
+      end
+      it "should be the other player's turn after the owner" do
+        state.add_tile("Lorem", owner.game_id)
+        lambda { state.add_tile("Lorem", other_player.game_id) }.should_not raise_error
+      end
+    end
+    context "given only one player" do
+      it "should allow the player to add tiles indefinitely" do
+        lambda { state.add_tile("Lorem", joe.game_id) }.should_not raise_error
+        lambda { state.add_tile("ipsum", joe.game_id) }.should_not raise_error
+        lambda { state.add_tile("sit", joe.game_id) }.should_not raise_error
+        lambda { state.add_tile("amet", joe.game_id) }.should_not raise_error
       end
     end
   end

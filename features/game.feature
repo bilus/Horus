@@ -49,7 +49,7 @@ Feature: Story composition game
 		And Joe adds tile "Lorem"
 		And Tim joins Joe's game
 		And Joe adds tile "ipsum"
-		And Joe adds tile "sit"
+		And Tim adds tile "sit"
 		Then Joe's board should display "Lorem ipsum sit"
 		And Tim's board should display "Lorem ipsum sit"
 		
@@ -92,10 +92,21 @@ Feature: Story composition game
 		And Tim joins Joe's game
 		And John starts watching Joe's game
 		And Joe adds tile "Lorem"
-		And Joe adds tile "ipsum"
+		And Tim adds tile "ipsum"
 		Then John's board should display "Lorem ipsum"
 		And John should not be able to interact with the game
-		
+	
+	@acceptance @story10
+	Scenario: Story #10 - after the game creator's turn it's the other players turn
+		Given player "Joe"
+		And player "Tim"
+		When Joe starts a new game
+		And Tim joins Joe's game
+		And Joe adds tile "Lorem"
+		Then Joe should be unable to add tile "Hello"
+		And Tim should be able to add tile "ipsum"
+		And Joe's board should display "Lorem ipsum"
+		And Tim's board should display "Lorem ipsum"
 		
 	# TODO After game ends adding new tiles is impossible.
 	# TODO Adding a blank tile has no effect and doesn't end the player's turn.

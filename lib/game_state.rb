@@ -24,6 +24,7 @@ class GameState
     raise "Not your turn" unless turn_of?(game_id)
     block.call if block
     @events.on_add_tile(t)
+    @current_player = next_player(@current_player)
   end
   
   def interactive?(game_id)
@@ -35,8 +36,17 @@ class GameState
   end
   
   private
-  
+    
   def turn_of?(game_id)
     @current_player.game_id == game_id
+  end
+  
+  def next_player(player)
+    index = @players.index(player)
+    if index
+      @players[(index + 1) % @players.size]
+    else
+      @players.first
+    end
   end
 end

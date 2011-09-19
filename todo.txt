@@ -181,11 +181,14 @@
 	+ Rspec for Game::add_tile
 	+ Make it pass.
 	COMMIT
-- Story - after the game creator's turn it's the other players turn.
++ Story #10 - after the game creator's turn it's the other players turn.
+- Story - should display errors from the server.
 - Story - players may not play outside their turns (3 players)
 - Story - disable controls when it's not the player's turn.
 - Story - clearly indicate which player's turn it is 
 - Story - player watching a game may try to join it.
+
+- Story - when the number of players is incorrect, do not allow anyone to play.
 
 - Story - A player must type single words no blanks. (display errors somehow)
 - Story - A player may skip his turn (pass). 
