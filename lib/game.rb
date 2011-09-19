@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), "game_events")
+require File.join(File.dirname(__FILE__), "game_state")
 require File.join(File.dirname(__FILE__), "player")
 require File.join(File.dirname(__FILE__), "unique_id")
 
@@ -8,7 +8,7 @@ class Game
     @tiles = []
     @players = []
     @public_id = UniqueId.new.to_s
-    @events = GameEvents.new
+    @state = GameState.new
   end
   
   def public_id
@@ -24,9 +24,9 @@ class Game
   
   def join(nick)
     new_player = Player.new(nick)
-    @players << new_player
-    @events.on_join(nick)
-    
+    @state.join(new_player) do
+      @players << new_player
+    end
     new_player.game_id
   end
   
@@ -35,29 +35,35 @@ class Game
   end  
   
   def owner_nick=(nick)
-    @players << Player.new(nick)
-    @owner_nick = nick
-    @events.on_owner(nick)
+    new_player = Player.new(nick)
+    @state.join_owner(new_player) do
+      @players << new_player
+      @owner_nick = nick
+    end
   end
   
   def render(method)
-    @events.render_using(method)
+    @state.render_using(method)
   end
   
   def add_tile(s, game_id = nil)
-    raise "Not allowed to play" unless game_id.nil? || interactive?(game_id)
-    @tiles << s
-    @events.on_add_tile(s)
+    @state.add_tile(s, game_id) do
+      @tiles << s
+    end
+  end
+  
+  def has_tile?(s)  # Testing only.
+    @tiles.include?(s)
   end
   
   def has_id?(game_id)
     @public_id == game_id || @players.map {|p| p.game_id}.include?(game_id)
   end
-
-  def interactive?(game_id)
-    @players.find {|p| p.game_id == game_id} != nil
-  end
   
+  def interactive?(game_id)
+    @state.interactive?(game_id)
+  end
+
   # Class methods.
   #
   def self.create(nick)

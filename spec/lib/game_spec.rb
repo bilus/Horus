@@ -24,14 +24,14 @@ describe Game do
   
   describe "when asked to create a game" do
     before(:each) do
-      @events = mock("events").as_null_object
-      GameEvents.stub!(:new).and_return(@events)
+      @state = GameState.new
+      GameState.stub!(:new).once.and_return(@state)
     end    
     it "should create a new game" do
       Game.create("Joe").should be_kind_of Game
     end
-    it "should notify events" do
-      @events.should_receive(:on_owner).with("Joe")
+    it "should notify events" do 
+      @state.should_receive(:join_owner)
       Game.create("Joe")
     end
   end
@@ -99,68 +99,44 @@ describe Game do
     end
   end
   
-  describe "when asked to render events" do
+  describe "when asked to render" do
     before(:each) do
-      @events = mock("events").as_null_object
-      GameEvents.stub!(:new).and_return(@events)
+      @state = mock("state").as_null_object
+      GameState.stub!(:new).and_return(@state)
       @game = Game.create("Joe")
       @renderer = mock("renderer")
     end
-    it "should ask events to render themselves" do
-      @events.should_receive(:render_using).with(@renderer)
+    it "should ask state to render itself" do
+      @state.should_receive(:render_using).with(@renderer)
       @game.render(@renderer)
     end
-    it "should pass on the return value from events" do
-      @events.stub!(:render_using).and_return("return value")
+    it "should pass on the return value from state" do
+      @state.stub!(:render_using).and_return("return value")
       @game.render(@renderer).should == "return value"
     end
   end
   
   describe "when a player joins" do
-    before(:each) do
-      @events = mock("events").as_null_object
-      GameEvents.stub!(:new).and_return(@events)
-      @game = Game.create("Joe")
-    end    
+    let(:game) { Game.create("Joe") }
     it "should return the player's private id" do
-      @game.join("Tim").should == @game.private_id("Tim")
-    end
-    it "should notify game events" do
-      @events.should_receive(:on_join).with("Tim")
-      @game.join("Tim")
+      game.join("Tim").should == game.private_id("Tim")
     end
   end
   
   describe "when asked to add tiles given a game id" do
-    before(:each) do
-      @events = mock("events").as_null_object
-      GameEvents.stub!(:new).and_return(@events)
-      @game = Game.create("Joe")
-    end   
-    context "given a private id" do
-      it "should allow this action" do
-        lambda { @game.add_tile("Lorem", @game.private_id("Joe")) }.should_not raise_error
-      end
-      it "should notify events" do
-        @events.should_receive(:on_add_tile).with("Lorem")
-        @game.add_tile("Lorem", @game.private_id("Joe"))
-      end
+    # I'm not using let here because the second game needs to have its game state stubbed.
+    it "should ask game state to change" do
+      game = Game.create("Joe")
+      game.add_tile("Lorem", game.private_id("Joe"))
+      game.should have_tile("Lorem")
     end
-    context "given a public id" do
-      it "should disallow the action" do
-        lambda { @game.add_tile("Lorem", @game.public_id) }.should raise_error
-      end
-      it "should not notify events" do
-        @events.should_not_receive(:on_add_tile).with("Lorem")
-        lambda { @game.add_tile("Lorem", @game.public_id) }.should raise_error
-      end
+    it "should not add tiles if game state is not allowed" do
+      state = GameState.new
+      GameState.stub!(:new).once.and_return(state)
+      game = Game.create("Joe")
+      state.stub!(:add_tile).and_raise("this state not allowed")
+      lambda { game.add_tile("Lorem", game.private_id("Joe")) }.should raise_error
+      game.should_not have_tile("Lorem")
     end
-  end
-  
-  describe "when asked if can interact" do
-    subject { g = Game.create("Joe"); g.join("Tim"); g}
-    it { should be_interactive(subject.private_id("Joe")) }
-    it { should be_interactive(subject.private_id("Tim")) }
-    it { should_not be_interactive(subject.public_id) }
   end
 end
