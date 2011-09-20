@@ -43,6 +43,15 @@ When /^(?!the player)(.*) adds tile "([^"]*)"$/ do |player, tile|
   When "the player adds tile \"#{tile}\""
 end
 
+When /^(?!the player)(.*) tries to add tile "([^"]*)"$/ do |player, tile|
+  Capybara.session_name = player
+  When "the player tries to add tile \"#{tile}\""
+end
+
+When /^the player tries to add tile "([^"]*)"$/ do |s|
+  add_tile(s)
+end
+
 When /^(.*) starts watching (.*)'s game$/ do |visitor, game_owner|
   Capybara.session_name = visitor
   watch_game(game_owner)
@@ -109,4 +118,7 @@ Then /^(.*) should be able to add tile "([^"]*)"$/ do |player, tile|
   Then "the board should contain \"#{tile}\""
 end
 
+Then /^game should respond with an error "([^"]*)"$/ do |status|
+  find("#error").should have_content(status)
+end
 

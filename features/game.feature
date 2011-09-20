@@ -108,6 +108,15 @@ Feature: Story composition game
 		And Joe's board should display "Lorem ipsum"
 		And Tim's board should display "Lorem ipsum"
 		
+	@acceptance @story11
+	Scenario: Story #11 - should display errors from the server
+		Given player "Joe"
+		And player "Tim"
+		When Joe starts a new game
+		And Tim joins Joe's game
+		And Tim tries to add tile "Hello"
+		Then game should respond with an error "Not your turn"
+		
 	# TODO After game ends adding new tiles is impossible.
 	# TODO Adding a blank tile has no effect and doesn't end the player's turn.
 	# TODO Add a test to verify that the text box is cleared after adding the word.

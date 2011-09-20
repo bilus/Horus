@@ -31,3 +31,7 @@ def add_tile(s)
   find("#game #add").click
 end
 
+def pause
+  print "Press Return to continue..."
+  STDIN.getc
+end

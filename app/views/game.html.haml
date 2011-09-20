@@ -4,7 +4,9 @@
 		%script{:type => "text/javascript", :src => "/javascripts/jquery-1.6.2.min.js"}
 		%script{:type => "text/javascript", :src => "/javascripts/EventSource.js"}
 		%script{:type => "text/javascript", :src => "/javascripts/helpers.js"}
+		%script{:type => "text/javascript", :src => "/javascripts/jquery-ui-1.8.16.custom.min.js"}
 		%script{:type => "text/javascript", :src => "/javascripts/horus_api.js"}
+		%link{:type => "text/css", :href => "css/blitzer/jquery-ui-1.8.16.custom.css", :rel => "stylesheet"}
 		:javascript
 
 			function currentGameId() {
@@ -13,7 +15,16 @@
 
 			function onAddTile() {
 				var tile = $('input#tile').val();
-				addTile(currentGameId(), tile);
+				addTile(currentGameId(), tile, function() {
+				
+				}, function(errorMessage) {
+					$("#error p").html(errorMessage);
+					$("#error").show("bounce", {}, 500, function() {
+						setTimeout(function() {
+					 		$("#error:visible").removeAttr("style").fadeOut();
+					 	}, 1000);
+					});
+				});
 				$('#tile').val('');
 			};
 			
@@ -42,23 +53,32 @@
 					});
 				
 				$('#tile').focus();
+				$('#controls button').button();
 			});
 			
 		%style{:type => "text/css", :media => "screen"}
 			:plain
+				body { 
+					font-size: 110%; 
+				}
 				#board {
 					border: 1px solid green;
 					padding: 10px;
 					margin-bottom: 10px;
 				}
-				#add {
-					height: 25px;
-				}
-				#tile {
-					height: 25px;
-				}
 				#players {
 					margin-top: 20px;
+				}
+				#error {
+					display: none;
+					padding: 0.4em;
+				}
+				#error h3 {
+					margin: 0;
+					padding: 0.4em;
+				}
+				#controls input {
+					font-size: 120%;
 				}
 		-unless @interactive # Visitor may only watch the game.
 			%style{:type => "text/css", :media => "screen"}
@@ -71,8 +91,11 @@
 	%body
 		#game
 			#board
+			#error{:class => "ui-widget-content ui-corner-all"}
+				%h3{:class => "ui-widget-header ui-corner-all"} Oops!
+				%p
 			#controls
 				%span Type a word:
-				%input{:id => "tile", :name => "tile", :type => "text"}
+				%input{:id => "tile", :name => "tile", :type => "text", :class => "text ui-widget-content ui-corner-all"}
 				%button{:id => "add", :name => "add"}Add to board
 		#players
