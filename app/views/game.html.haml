@@ -29,7 +29,11 @@
 			};
 			
 			function updatePlayers(nicks) {
-				$('#players').html(nicks.join("<br/>"))
+				var players = $('#players');
+				players.html("");
+				$.each(nicks, function(index, nick) {
+					$("<div></div>").text(nick).appendTo(players);
+				});
 			};
 			
 			$(document).ready(function() {

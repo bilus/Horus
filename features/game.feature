@@ -136,6 +136,21 @@ Feature: Story composition game
 		And Tim's board should display "Lorem ipsum sit amet ditto"
 		And Greg's board should display "Lorem ipsum sit amet ditto"
 		
+	@acceptance @story13
+	Scenario: Story #13 - clearly indicate which player's turn it is 
+		Given player "Joe"
+		And player "Tim"
+		When Joe starts a new game
+		And Tim joins Joe's game
+		Then Joe should see that it's Joe's turn
+		And Tim should see that it's Joe's turn
+		When Joe adds tile "Hello"
+		Then Joe should see that it's Tim's turn
+		And Tim should see that it's Tim's turn
+		When Tim adds tile "world"
+		Then Joe should see that it's Joe's turn
+		And Tim should see that it's Joe's turn
+		
 	# TODO After game ends adding new tiles is impossible.
 	# TODO Adding a blank tile has no effect and doesn't end the player's turn.
 	# TODO Add a test to verify that the text box is cleared after adding the word.
