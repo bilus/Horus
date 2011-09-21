@@ -183,7 +183,7 @@
 	COMMIT
 + Story #10 - after the game creator's turn it's the other players turn.
 + Story #11 - should display errors from the server.
-- Story - players may not play outside their turns (3 players)
+- Story #12 - players may not play outside their turns (3 players)
 - Story - disable controls when it's not the player's turn.
 - Story - clearly indicate which player's turn it is 
 - Story - player watching a game may try to join it.

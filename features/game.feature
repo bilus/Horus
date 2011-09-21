@@ -117,6 +117,25 @@ Feature: Story composition game
 		And Tim tries to add tile "Hello"
 		Then game should respond with an error "Not your turn"
 		
+	@acceptance @story12
+	Scenario: Story #12 - players may not play outside their turns (3 players)
+		Given player "Joe"
+		And player "Tim"
+		And player "Greg"
+		When Joe starts a new game
+		And Tim joins Joe's game
+		And Greg joins Joe's game
+		Then Tim should be unable to add tile "Hello"
+		When Joe adds tile "Lorem"
+		And Tim adds tile "ipsum"
+		Then Tim should be unable to add tile "Hello"
+		When Greg adds tile "sit"
+		And Joe adds tile "amet"
+		Then Tim should be able to add tile "ditto"
+		And Joe's board should display "Lorem ipsum sit amet ditto"
+		And Tim's board should display "Lorem ipsum sit amet ditto"
+		And Greg's board should display "Lorem ipsum sit amet ditto"
+		
 	# TODO After game ends adding new tiles is impossible.
 	# TODO Adding a blank tile has no effect and doesn't end the player's turn.
 	# TODO Add a test to verify that the text box is cleared after adding the word.
