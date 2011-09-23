@@ -20,7 +20,7 @@ function linkToWatchGame(publicGameId) {
 
 
 // TODO: Use game handle.
-function receiveGameEvents(gameId, onTile, onJoin) {
+function receiveGameEvents(gameId, handlers) {
 	if (this.gameEventSource) {
 		alert("The 'receiveGameEvents' function cannot be used with multiple feeds because it uses a global.");
 		return;
@@ -28,12 +28,14 @@ function receiveGameEvents(gameId, onTile, onJoin) {
 
 	this.gameEventSource = __receiveEvents('/game/' + gameId, function(event_json) {
 		var event = jQuery.parseJSON(event_json);
-		if (event.tile)
-			onTile(event.tile);
-		if (event.owner)
-			onJoin(event.owner);
-		if (event.join)
-			onJoin(event.join);
+		if (event.tile && handlers.onTile)
+			handlers.onTile(event.tile);
+		if (event.owner && handlers.onJoin)
+			handlers.onJoin(event.owner);
+		if (event.join && handlers.onJoin)
+			handlers.onJoin(event.join);
+		if (event.next_turn && handlers.onNextTurn)
+			handlers.onNextTurn(event.next_turn);
 	});
 };
 

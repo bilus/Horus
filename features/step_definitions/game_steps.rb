@@ -67,12 +67,12 @@ Then /^the board should display "([^"]*)"$/ do |s|
   # We need to wait here because I turned off resynchronization because there's always
   # at least one outstanding connection (EventSource).
   # See environment.rb (:resynchronize option).
-  wait_until { find("#board").text == s }
-  find("#board").text.should == s
+  wait_until { board_displays?(s) }
+  board_should_display(s)
 end
 
 Then /^the board should not display "([^"]*)"$/ do |s|
-  find("#board").should_not have_content(s)
+  board_should_not_display(s)
 end
 
 Then /^(.*)'s board should display "([^"]*)"$/ do |player, s|
@@ -91,12 +91,12 @@ Then /^(.*)'s board should contain "([^"]*)"$/ do |player, s|
 end
 
 Then /^the board should contain "([^"]*)"$/ do |s|
-  wait_until { find("#board").has_content?(s) }
-  find("#board").should have_content(s)
+  wait_until { board_contains?(s) }
+  board_should_contain(s)
 end
 
 Then /^the board should not contain "([^"]*)"$/ do |s|
-  find("#board").should_not have_content(s)
+  board_should_not_contain(s)
 end
 
 Then /^(.*) sees (.*) on player list$/ do |player, other_player|

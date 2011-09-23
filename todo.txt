@@ -184,7 +184,10 @@
 + Story #10 - after the game creator's turn it's the other players turn.
 + Story #11 - should display errors from the server.
 + Story #12 - players may not play outside their turns (3 players)
-- Story - clearly indicate which player's turn it is 
+- Story #13 - clearly indicate which player's turn it is 
+	+ Create cucumber test.
+	+ GameState should create event after a player's turn.
+	+ Handle the event in horus api and update the player list.
 - Story - player watching a game may try to join it.
 
 - Story - when the number of players is incorrect, do not allow anyone to play.

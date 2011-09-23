@@ -15,46 +15,62 @@
 
 			function onAddTile() {
 				var tile = $('input#tile').val();
-				addTile(currentGameId(), tile, function() {
-				
-				}, function(errorMessage) {
-					$("#error p").html(errorMessage);
-					$("#error").show("bounce", {}, 500, function() {
-						setTimeout(function() {
-					 		$("#error:visible").removeAttr("style").fadeOut();
-					 	}, 1000);
-					});
-				});
+				addTile(currentGameId(), tile, 
+					function() { 
+					}, 
+					function(errorMessage) {
+						$("#error p").html(errorMessage);
+						$("#error").show("bounce", {}, 500, function() {
+							setTimeout(function() {
+						 		$("#error:visible").removeAttr("style").fadeOut();
+						 	}, 1000);
+						});
+					}
+				);
 				$('#tile').val('');
 			};
 			
-			function updatePlayers(nicks) {
+			function renderPlayers() {
 				var players = $('#players');
 				players.html("");
-				$.each(nicks, function(index, nick) {
-					$("<div></div>").text(nick).appendTo(players);
+				$.each($.players, function(index, nick) {
+					var elem;
+					if (nick == $.currentPlayer)
+						elem = $("<div id=\"" + nick + "\" class=\"current\"/>");
+					else
+						elem = $("<div id=\"" + nick + "\"/>");
+					elem.text(nick).appendTo(players);
 				});
 			};
 			
 			$(document).ready(function() {
 				$('#tile').bind('keypress', function(e) {
-				        if (e.which == 13)
-							onAddTile();
+					if (e.which == 13)
+						onAddTile();
 				});
 			
 				$('#add').bind('click', function() {
 					onAddTile();
 				});
-
-				var players = [];
-				receiveGameEvents(currentGameId(), 
-					function(tile) {
-						$('#board').append(tile + ' ');
+				
+				// Globals.
+				$.players = [];
+				$.currentPlayer = "";
+				
+				// Handle events sent by the server.
+				receiveGameEvents(currentGameId(), {
+					onTile: function(tile) {
+						$("<span class=\"tile\"/>").text(tile).appendTo('#board');
 					},
-					function(join) {
-						players.push(join);
-						updatePlayers(players);
-					});
+					onJoin: function(nick) {
+						$.players.push(nick);
+						renderPlayers();
+					},
+					onNextTurn: function(nick) {
+						$.currentPlayer = nick;
+						renderPlayers();
+					}
+				});
 				
 				$('#tile').focus();
 				$('#controls button').button();
@@ -70,6 +86,11 @@
 					padding: 10px;
 					margin-bottom: 10px;
 				}
+				#board .tile {
+					border: 1px solid gray;
+					padding: 2px;
+					margin: 1px;
+				}
 				#players {
 					margin-top: 20px;
 				}
@@ -83,6 +104,9 @@
 				}
 				#controls input {
 					font-size: 120%;
+				}
+				#players .current {
+					font-weight: bold;
 				}
 		-unless @interactive # Visitor may only watch the game.
 			%style{:type => "text/css", :media => "screen"}

@@ -35,3 +35,31 @@ def pause
   print "Press Return to continue..."
   STDIN.getc
 end
+
+def board_text(s)
+  s.split(" ").join
+end
+
+def board_displays?(s)
+  find("#board").text == board_text(s)
+end
+
+def board_should_display(s)
+  find("#board").text.should == board_text(s)
+end
+
+def board_should_not_display(s)
+  find("#board").text.should_not == board_text(s)
+end
+
+def board_contains?(s)
+  find("#board").has_content?(board_text(s))
+end
+
+def board_should_contain(s)
+  find("#board").should have_content(board_text(s))
+end
+
+def board_should_not_contain(s)
+  find("#board").should_not have_content(board_text(s))
+end

@@ -33,6 +33,7 @@ describe GameState do
     end
     it "should update events" do
       events.should_receive(:on_owner)
+      events.should_receive(:on_next_turn).with(joe.nick)
       state.join_owner(joe)
     end
     it "should make game interactive for the player" do
@@ -83,7 +84,7 @@ describe GameState do
     end
     context "by players in turns" do
       let!(:owner) { joe }
-      let!(:other_player) { p = Player.new("Owner"); state.join(p); p }
+      let!(:other_player) { p = Player.new("Tim"); state.join(p); p }
       it "should allow the owner to add the first tile" do
         lambda { state.add_tile("Lorem", owner.game_id) }.should_not raise_error
       end
@@ -97,6 +98,10 @@ describe GameState do
       it "should be the other player's turn after the owner" do
         state.add_tile("Lorem", owner.game_id)
         lambda { state.add_tile("Lorem", other_player.game_id) }.should_not raise_error
+      end
+      it "should update events" do
+        events.should_receive(:on_next_turn).with(other_player.nick)
+        state.add_tile("Lorem", owner.game_id)
       end
     end
     context "given only one player" do

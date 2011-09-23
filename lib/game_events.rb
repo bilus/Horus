@@ -15,6 +15,10 @@ class GameEvents
     @events << {:tile => tile}
   end
   
+  def on_next_turn(nick)
+    @events << {:next_turn => nick}
+  end
+  
   def render_using(method)
     method.render_events(@events)
   end
