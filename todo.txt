@@ -192,16 +192,15 @@
 - Story #14 - A player may skip his turn. 
 	+ Cucumber test.
 	+ HTML + JS.
-	- Clean up routes:
-		- POST /move/:game_id --> add tile
-		- DELETE /move/:game_id --> skip turn
-		(in the future: PUT /move - modify last move, GET /move - get info about the current move)
-		- Make it work.
-		- Update JS.
-		- Make cucumber pass.
-		- Remove old routes.
-		- Old cucumber & rspec pass.
 	COMMIT
+	+ Clean up routes:
+		+ POST /move/:game_id --> add tile
+		(in the future: PUT /move - modify last move, GET /move - get info about the current move)
+		+ Make it work.
+		+ Update JS.
+		+ Old cucumber & rspec pass.
+	COMMIT
+	- DELETE /move/:game_id --> skip turn
 	- pass_turn_action_spec.rb.
 - Story - A player who skips 3 turns in a row is kicked out.
 - Story - Turn is automatically passed after 1 minute.

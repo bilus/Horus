@@ -18,8 +18,8 @@ describe "Api for adding tiles to game", :cramp => true do
         events.should include :tile => lorem_tile
         events.should include :tile => ipsum_tile
       end
-      post "/tile/#{game1.private_id('Joe')}", :params => {:tile => lorem_tile}
-      post "/tile/#{game1.private_id('Joe')}", :params => {:tile => ipsum_tile}
+      post "/move/#{game1.private_id('Joe')}", :params => {:tile => lorem_tile}
+      post "/move/#{game1.private_id('Joe')}", :params => {:tile => ipsum_tile}
       game1.render(renderer)
     end
 
@@ -30,8 +30,8 @@ describe "Api for adding tiles to game", :cramp => true do
       renderer.should_receive(:render_events) do |events|
         events.should include :tile => lorem_tile
       end
-      post "/tile/#{game1.private_id('Joe')}", :params => {:tile => lorem_tile}
-      post "/tile/#{game2.private_id('Joe')}", :params => {:tile => ipsum_tile}
+      post "/move/#{game1.private_id('Joe')}", :params => {:tile => lorem_tile}
+      post "/move/#{game2.private_id('Joe')}", :params => {:tile => ipsum_tile}
       game1.render(renderer)
     end
   end
@@ -46,12 +46,12 @@ describe "Api for adding tiles to game", :cramp => true do
     # Interaction testing.
     it "should add tile to the game" do
       game.should_receive(:add_tile).with("Lorem", "1234")
-      post "/tile/1234", :params => {:tile => "Lorem"}
+      post "/move/1234", :params => {:tile => "Lorem"}
     end
     
     it "should handle exception" do
       game.should_receive(:add_tile).with("Lorem", "1234").and_raise("some error")
-      lambda { post("/tile/1234", :params => {:tile => "Lorem"}).should respond_with :body => /.*"status":"error".*/ }.should_not raise_error
+      lambda { post("/move/1234", :params => {:tile => "Lorem"}).should respond_with :body => /.*"status":"error".*/ }.should_not raise_error
     end
   end
 end

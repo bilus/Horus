@@ -40,7 +40,7 @@ function linkToWatchGame(publicGameId) {
 
 // TODO: Use game handle.
 function addTile(privateGameId, tile, success, failure) {
-	__horusRequest('/tile/' + privateGameId, "POST", {tile: tile}, success, failure);
+	__horusRequest('/move/' + privateGameId, "POST", {tile: tile}, success, failure);
 };
 
 function passTurn(privateGameId) {

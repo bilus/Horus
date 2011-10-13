@@ -129,5 +129,5 @@ end
 
 Then /^(.*) should see that it's (.*)'s turn$/ do |watcher, player|
   Capybara.session_name = player
-  page.should have_xpath("//div[@id = 'players']/*[contains(text(), '#{player}') and contains(@class, 'current')]")
+  page.should have_xpath("//div[@id = 'players']//*[contains(text(), '#{player}') and contains(@class, 'current')]")
 end
