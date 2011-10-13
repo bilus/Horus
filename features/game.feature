@@ -150,6 +150,16 @@ Feature: Story composition game
 		When Tim adds tile "world"
 		Then Joe should see that it's Joe's turn
 		And Tim should see that it's Joe's turn
+	
+	@acceptance @story14
+	Scenario: Story #14 - A player may skip his turn
+		Given player "Joe"
+		And player "Tim"
+		When Joe starts a new game
+		And Tim joins Joe's game
+		When Joe adds tile "Hello"
+		And Tim skips the turn
+		Then Joe should be able to add tile "world"
 		
 	# TODO After game ends adding new tiles is impossible.
 	# TODO Adding a blank tile has no effect and doesn't end the player's turn.

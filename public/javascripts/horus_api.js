@@ -1,24 +1,3 @@
-function startGame(nick, onStarted, failure) {
-	__horusRequest("/game?nick=" + nick, "POST", {}, function(data) {
-		onStarted(__makeGameHandle(data.id, data.public_id));	
-	}, failure);
-};
-
-function joinGame(publicGameId, nick, onJoined, failure) {
-	__horusRequest('/game/' + publicGameId, "PUT", {join: nick}, function(data) {
-		onJoined(__makeGameHandle(data.id, publicGameId));	
-	}, failure);
-};
-
-function linkToGame(gameHandle) {
-	return '/game.html?game_id=' + gameHandle.privateId + '&public=' + gameHandle.publicId;
-};
-
-function linkToWatchGame(publicGameId) {
-	return '/game.html?game_id=' + publicGameId;
-};
-
-
 // TODO: Use game handle.
 function receiveGameEvents(gameId, handlers) {
 	if (this.gameEventSource) {
@@ -39,9 +18,33 @@ function receiveGameEvents(gameId, handlers) {
 	});
 };
 
+function startGame(nick, onStarted, failure) {
+	__horusRequest("/game?nick=" + nick, "POST", {}, function(data) {
+		onStarted(__makeGameHandle(data.id, data.public_id));	
+	}, failure);
+};
+
+function joinGame(publicGameId, nick, onJoined, failure) {
+	__horusRequest('/game/' + publicGameId, "PUT", {join: nick}, function(data) {
+		onJoined(__makeGameHandle(data.id, publicGameId));	
+	}, failure);
+};
+
+function linkToGame(gameHandle) {
+	return '/game.html?game_id=' + gameHandle.privateId + '&public=' + gameHandle.publicId;
+};
+
+function linkToWatchGame(publicGameId) {
+	return '/game.html?game_id=' + publicGameId;
+};
+
 // TODO: Use game handle.
-function addTile(gameId, tile, success, failure) {
-	__horusRequest('/tile/' + gameId, "POST", {tile: tile}, success, failure);
+function addTile(privateGameId, tile, success, failure) {
+	__horusRequest('/tile/' + privateGameId, "POST", {tile: tile}, success, failure);
+};
+
+function passTurn(privateGameId) {
+	__horusRequest('/move/' + privateGameId, "DELETE");
 };
 
 ////////////////////////////////////////////////////////////////////////////////

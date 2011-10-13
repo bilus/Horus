@@ -57,6 +57,11 @@ When /^(.*) starts watching (.*)'s game$/ do |visitor, game_owner|
   watch_game(game_owner)
 end
 
+When /^(.*) skips the turn$/ do |player|
+  Capybara.session_name = player
+  find("#pass").click
+end
+
 Then /^(.*) should not be able to interact with the game$/ do |visitor|
   Capybara.session_name = visitor
   page.should_not have_css("#game input#tile", :visible => true)

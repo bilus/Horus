@@ -30,8 +30,12 @@
 				$('#tile').val('');
 			};
 			
+			function onPassTurn() {
+				passTurn(currentGameId());
+			};
+			
 			function renderPlayers() {
-				var players = $('#players');
+				var players = $('#players #list');
 				players.html("");
 				$.each($.players, function(index, nick) {
 					var elem;
@@ -53,6 +57,10 @@
 					onAddTile();
 				});
 				
+				$('#pass').bind('click', function() {
+					onPassTurn();
+				});
+				
 				// Globals.
 				$.players = [];
 				$.currentPlayer = "";
@@ -60,7 +68,7 @@
 				// Handle events sent by the server.
 				receiveGameEvents(currentGameId(), {
 					onTile: function(tile) {
-						$("<span class=\"tile\"/>").text(tile).appendTo('#board');
+						$("<span class=\"tile ui-corner-all\"/>").text(tile).appendTo('#board');
 					},
 					onJoin: function(nick) {
 						$.players.push(nick);
@@ -82,14 +90,16 @@
 					font-size: 110%; 
 				}
 				#board {
-					border: 1px solid green;
+					border: 1px solid lightgrey;
+					background-color: lightblue;
 					padding: 10px;
 					margin-bottom: 10px;
 				}
 				#board .tile {
 					border: 1px solid gray;
-					padding: 2px;
+					padding: 2px 4px 2px 4px;
 					margin: 1px;
+					background: white;
 				}
 				#players {
 					margin-top: 20px;
@@ -118,12 +128,15 @@
 			
 	%body
 		#game
-			#board
+			#board{:class => "ui-corner-all"}
 			#error{:class => "ui-widget-content ui-corner-all"}
 				%h3{:class => "ui-widget-header ui-corner-all"} Oops!
 				%p
 			#controls
 				%span Type a word:
-				%input{:id => "tile", :name => "tile", :type => "text", :class => "text ui-widget-content ui-corner-all"}
-				%button{:id => "add", :name => "add"}Add to board
+				%input#tile{:type => "text", :class => "text ui-widget-content ui-corner-all"}
+				%button#add Add to board
+				%button#pass Pass
 		#players
+			%div Players:
+			%div#list
