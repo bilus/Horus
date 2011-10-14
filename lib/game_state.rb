@@ -20,10 +20,14 @@ class GameState
   end
   
   def add_tile(t, game_id, &block)
-    raise "Not allowed to play" unless interactive?(game_id)
-    raise "Not your turn" unless turn_of?(game_id)
+    raise_if_unauthorized(game_id)
     block.call if block
     @events.on_add_tile(t)
+    next_turn(next_player(@current_player))
+  end
+  
+  def pass_turn(game_id)
+    raise_if_unauthorized(game_id)
     next_turn(next_player(@current_player))
   end
   
@@ -36,6 +40,11 @@ class GameState
   end
   
   private
+  
+  def raise_if_unauthorized(game_id)
+    raise "Not allowed to play" unless interactive?(game_id)
+    raise "Not your turn" unless turn_of?(game_id)
+  end
     
   def turn_of?(game_id)
     @current_player.game_id == game_id

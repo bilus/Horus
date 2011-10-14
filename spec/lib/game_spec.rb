@@ -139,4 +139,16 @@ describe Game do
       game.should_not have_tile("Lorem")
     end
   end
+  
+  describe "when asked to pass turn" do
+    before(:each) do 
+      @state = GameState.new
+      GameState.stub!(:new).once.and_return(@state)
+      @game = Game.create("Joe")
+    end
+    it "should update the state" do
+      @state.should_receive(:pass_turn).with("123")
+      @game.pass_turn("123")
+    end
+  end
 end

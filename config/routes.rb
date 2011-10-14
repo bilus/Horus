@@ -9,8 +9,10 @@ HttpRouter.new do
 # RESTful interface
   add('/game').post.to(NewGameAction)
   add('/game.html').get.to(GamePageAction)
-  add('/move/:game_id').post.to(AddTileAction)
-  add('game/:game_id').put.to(UpdateGameAction)
+  add('/game/:game_id').put.to(UpdateGameAction)
   add('/game/:game_id').get.to(GameEventsAction)
+  
+  add('/move/:game_id').post.to(AddTileAction)
+  add('/move/:game_id').delete.to(PassTurnAction)
   
 end

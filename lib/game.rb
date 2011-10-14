@@ -52,6 +52,10 @@ class Game
     end
   end
   
+  def pass_turn(game_id)
+    @state.pass_turn(game_id)
+  end
+  
   def has_tile?(s)  # Testing only.
     @tiles.include?(s)
   end

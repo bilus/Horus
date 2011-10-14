@@ -200,8 +200,41 @@
 		+ Update JS.
 		+ Old cucumber & rspec pass.
 	COMMIT
-	- DELETE /move/:game_id --> skip turn
-	- pass_turn_action_spec.rb.
+	+ DELETE /move/:game_id --> skip turn
+	+ pass_turn_action_spec.rb - interaction with Game
+	+ Game - pass on to GameState
+	+ GameState
+		+ Write specs
+		+ Make them pass
+	+ All specs pass.
+	+ All cucumber tests pass.
+	COMMIT
+	- It should show an error when a player try to pass while it's somebody else's turn.
+- Some clean up.
+	- Write spec for routes and put all routes specs there.
+	- Do not use explicit routes in specs for actions, use the action classes instead.
+	- Look for ways to break up Game and GameState.
+		- Extract @current_player to CurrentPlayer.
+		- Extract authorization code to AllowedMoveChecker using CurrentPlayer.
+		- Remove the unnecessary yield code (game.rb and game_state.rb) 
+		- See if there is anything left in GameState and break it up into separate classes.
+		- Write new Game
+			- Remove interaction specs.
+			- Spec - include only concrete tests from game_spec.rb and game_state_spec.rb
+			- Make them pass.
+			- Refactor @tiles into Board.
+			- See if getting rid of owner is at all possible. If it is - get rid of it.
+			- Extract @players into PlayerList.
+			- Write spec for SimpleGame and implement them in terms of Game (using dependency injection).
+				- Use concrete tests for Game.
+				- Add more tests if necessary.
+				- Make them pass.
+					- Add interaction tests to game_spec.rb
+					- Make it pass.
+		- All specs pass.
+		- All cucumber pass.
+		COMMIT
+- Story - When all players pass in a row, the game is over.
 - Story - A player who skips 3 turns in a row is kicked out.
 - Story - Turn is automatically passed after 1 minute.
 
@@ -213,7 +246,6 @@
 
 - Story - A player must type single words no blanks
 - Story - Bad words are now allowed.
-- Story - When all players pass in a row, the game is over.
 - Story - Nicknames displayed during a game are updated in real-time as players join/leave the game.
 
 - Story - Player starting a new game can type up to 7 words to give the story a beginning.

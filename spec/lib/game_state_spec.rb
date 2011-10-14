@@ -114,6 +114,40 @@ describe GameState do
     end
   end
   
+  describe "when asked to pass turn" do
+    context "with one player" do
+      # TODO
+      # it "should end the turn"
+    end
+    context "with two players" do
+      let(:joe) { Player.new("Joe") }
+      let(:tim) { Player.new("Tim") }
+      before(:each) do
+        state.join_owner(joe)
+        state.join(tim)
+      end
+      context "by the current player" do
+        it "pass the turn to the other player" do
+          state.pass_turn(joe.game_id)
+          lambda { state.add_tile("Lorem", tim.game_id) }.should_not raise_error
+        end
+        it "should update events" do
+          events.should_receive(:on_next_turn).with("Tim")
+          state.pass_turn(joe.game_id)
+        end
+      end
+      context "by a player other than the current"
+        it "should raise an error" do
+          lambda { state.pass_turn(tim.game_id) }.should raise_error
+        end
+    end
+    context "given an invalid id" do
+      it "should raise an error" do
+        lambda { state.pass_turn("invalid id") }.should raise_error
+      end
+    end
+  end
+  
   describe "when asked if can interact" do
     let(:joe) { Player.new("Joe") }
     let(:tim) { Player.new("Tim") }
