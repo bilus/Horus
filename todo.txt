@@ -211,6 +211,10 @@
 	COMMIT
 	- It should show an error when a player try to pass while it's somebody else's turn.
 - Some clean up.
+	- Put scripts into scripts/
+	- Remove lib/rspec_cramp.rb.fibers
+	- Remove Gemfile.lock from git and ignore it.
+	- Get rid of Horus::Application::find_game and start_new_game.
 	- Write spec for routes and put all routes specs there.
 	- Do not use explicit routes in specs for actions, use the action classes instead.
 	- Look for ways to break up Game and GameState.
@@ -237,17 +241,11 @@
 - Story - When all players pass in a row, the game is over.
 - Story - A player who skips 3 turns in a row is kicked out.
 - Story - Turn is automatically passed after 1 minute.
-
-
-
 - Story - player watching a game may try to join it.
-
 - Story - when the number of players is incorrect, do not allow anyone to play.
-
 - Story - A player must type single words no blanks
-- Story - Bad words are now allowed.
+- Story - Bad words are not allowed.
 - Story - Nicknames displayed during a game are updated in real-time as players join/leave the game.
-
 - Story - Player starting a new game can type up to 7 words to give the story a beginning.
 
 ---------
